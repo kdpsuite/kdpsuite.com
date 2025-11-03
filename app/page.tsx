@@ -146,11 +146,11 @@ export default function Home() {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-extrabold leading-tight text-neutral font-heading">
-            Best KDP Publishing Tools & Amazon KDP Software for Creators
+            Amazon KDP Software & Professional KDP Publishing Tools
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-body">
-            The ultimate KDP publishing tools suite and professional Amazon KDP software for creators. Convert PDF to coloring book with AI-powered technology, ensure KDP compliance, and automate your publishing workflow. Our advanced KDP publishing tools are designed for professional creators who want to streamline their Amazon KDP publishing process.
+            The ultimate Amazon KDP software suite with professional kdp publishing tools for digital book publishing. Convert PDF to coloring book with AI-powered publishing tools, validate kdp compliance validation, and automate your kdp workflow. Our advanced kdp conversion software features batch image processing, kdp integration, kdp analytics, and kdp revenue analytics. Self-publishing tools designed for creators who want automated kdp workflow and publishing performance metrics.
           </p>
 
           {/* Email Capture Form */}
@@ -235,21 +235,21 @@ export default function Home() {
       <section id="features" className="container mx-auto px-4 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-neutral mb-4 font-heading">
-            Complete KDP Publishing Tools Suite for Amazon Success
+            Complete Amazon KDP Software & KDP Publishing Tools Suite
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto font-body">
-            Professional-grade KDP publishing tools and Amazon KDP software designed specifically for creators. From PDF to coloring book conversion to full Amazon KDP publishing automation.
+            Professional kdp publishing tools and Amazon KDP software with AI-powered publishing tools for digital book publishing. Features include pdf to coloring book conversion, kdp compliance validation, batch image processing, kdp integration, kdp analytics, and kdp revenue analytics for automated kdp workflow.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {[
-            { icon: '📚', title: 'PDF to Coloring Book Converter', desc: 'Advanced AI-powered PDF to coloring book conversion from any PDF or image to professional KDP-compliant coloring books with customizable line art and filters. Our PDF to coloring book tool is the fastest in the industry.' },
-            { icon: '✅', title: 'KDP Compliance Validation', desc: 'Automatic validation of margins, bleed, trim sizes, and DPI requirements. Our KDP publishing tools ensure your books meet all Amazon KDP requirements. Never get rejected by Amazon again.' },
-            { icon: '⚡', title: 'Batch Processing for KDP', desc: 'Process hundreds of images at once with real-time progress tracking. Our KDP publishing tools save hours of manual work with batch PDF to coloring book conversion.' },
-            { icon: '🔗', title: 'Direct Amazon KDP Integration', desc: 'Seamlessly publish to Amazon KDP with automated workflow. Our Amazon KDP software integrates directly with your Amazon KDP account. From creation to publication in minutes.' },
-            { icon: '📊', title: 'KDP Publishing Analytics', desc: 'Track your KDP publishing performance, revenue analytics, and conversion metrics in real-time dashboards. Monitor your Amazon KDP success with advanced analytics.' },
-            { icon: '📱', title: 'Cross-Platform KDP Tools', desc: 'Work anywhere with mobile app, web dashboard, and cloud sync. Access your KDP publishing tools and Amazon KDP software from any device. Your projects always at your fingertips.' },
+            { icon: '📚', title: 'PDF to Coloring Book Converter', desc: 'Advanced AI-powered pdf to coloring book conversion with our kdp conversion software. Convert any PDF or image to professional KDP-compliant coloring books with customizable line art and filters. Our pdf to coloring book tool is the fastest in the industry for digital book publishing.' },
+            { icon: '✅', title: 'KDP Compliance Validation', desc: 'Automatic kdp compliance validation of margins, bleed, trim sizes, and DPI requirements. Our kdp publishing tools ensure your books meet all Amazon KDP requirements. Advanced validation for digital book publishing compliance.' },
+            { icon: '⚡', title: 'Batch Image Processing', desc: 'Process hundreds of images at once with real-time progress tracking. Our batch image processing features save hours of manual work with automated kdp workflow and batch pdf to coloring book conversion.' },
+            { icon: '🔗', title: 'Direct KDP Integration', desc: 'Seamless kdp integration with automated kdp workflow. Our Amazon KDP software integrates directly with your Amazon KDP account. Automated kdp workflow from creation to publication in minutes.' },
+            { icon: '📊', title: 'KDP Analytics & Revenue Tracking', desc: 'Advanced kdp analytics with kdp revenue analytics and publishing performance metrics. Track your KDP publishing performance in real-time dashboards. Monitor your Amazon KDP success with kdp analytics and revenue tracking.' },
+            { icon: '📱', title: 'Cross-Platform KDP Tools', desc: 'Access kdp publishing tools and Amazon KDP software from any device. Mobile app, web dashboard, and cloud sync for seamless automated kdp workflow. Your projects always at your fingertips.' },
           ].map((feature, idx) => (
             <div key={idx} className="p-8 rounded-3xl bg-gray-50 border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
               <div className="text-5xl mb-4">{feature.icon}</div>
@@ -311,10 +311,10 @@ export default function Home() {
       <section className="bg-primary text-white py-20">
         <div className="container mx-auto px-4 text-center max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading">
-            Ready to Transform Your KDP Business with Professional KDP Publishing Tools?
+            Ready to Transform Your KDP Business with Amazon KDP Software?
           </h2>
           <p className="text-xl mb-8 opacity-90 font-body">
-            Join thousands of creators who are waiting for early access to the most powerful Amazon KDP software and KDP publishing tools ever built. Our PDF to coloring book converter and complete KDP publishing tools suite will revolutionize your Amazon KDP publishing workflow.
+            Join thousands of creators using our professional kdp publishing tools and Amazon KDP software. Our AI-powered publishing tools include pdf to coloring book conversion, kdp compliance validation, batch image processing, kdp integration, kdp analytics, and kdp revenue analytics. Experience automated kdp workflow and publishing performance metrics with our self-publishing tools.
           </p>
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
             <input

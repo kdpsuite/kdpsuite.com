@@ -190,10 +190,10 @@ export default function FeaturesPage() {
       <section className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-neutral mb-6 font-heading">
-            Complete KDP Publishing Tools Suite
+            Complete Amazon KDP Software & KDP Publishing Tools Suite
           </h1>
           <p className="text-xl text-gray-600 mb-8 font-body">
-            Discover all the powerful features of our professional Amazon KDP software and KDP publishing tools designed to transform your publishing workflow.
+            Discover all the powerful features of our professional Amazon KDP software with advanced kdp publishing tools. Our AI-powered publishing tools include pdf to coloring book conversion, kdp compliance validation, batch image processing, kdp integration, kdp analytics, and kdp revenue analytics for digital book publishing and automated kdp workflow.
           </p>
         </div>
       </section>
@@ -230,7 +230,7 @@ export default function FeaturesPage() {
       <section className="container mx-auto px-4 py-20 bg-gray-50 rounded-3xl my-20">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-neutral mb-12 text-center font-heading">
-            Plan Comparison
+            Amazon KDP Software Plans & Pricing
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full">
