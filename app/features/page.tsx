@@ -1,153 +1,40 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function FeaturesPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const features = [
+    { icon: '📚', title: 'PDF to Coloring Book Converter', desc: 'Advanced AI-powered pdf to coloring book conversion with our kdp conversion software. Convert any PDF or image to professional KDP-compliant coloring books with customizable line art and filters. Our pdf to coloring book tool is the fastest in the industry for digital book publishing.' },
+    { icon: '✅', title: 'KDP Compliance Validation', desc: 'Automatic kdp compliance validation of margins, bleed, trim sizes, and DPI requirements. Our kdp publishing tools ensure your books meet all Amazon KDP requirements. Advanced validation for digital book publishing compliance.' },
+    { icon: '⚡', title: 'Batch Image Processing', desc: 'Process hundreds of images at once with real-time progress tracking. Our batch image processing features save hours of manual work with automated kdp workflow and batch pdf to coloring book conversion.' },
+    { icon: '🔗', title: 'Direct KDP Integration', desc: 'Seamless kdp integration with automated kdp workflow. Our Amazon KDP software integrates directly with your Amazon KDP account. Automated kdp workflow from creation to publication in minutes.' },
+    { icon: '📊', title: 'KDP Analytics & Revenue Tracking', desc: 'Advanced kdp analytics with kdp revenue analytics and publishing performance metrics. Track your KDP publishing performance in real-time dashboards. Monitor your Amazon KDP success with kdp analytics and revenue tracking.' },
+    { icon: '📱', title: 'Cross-Platform KDP Tools', desc: 'Access kdp publishing tools and Amazon KDP software from any device. Mobile app, web dashboard, and cloud sync for seamless automated kdp workflow. Your projects always at your fingertips.' },
+  ];
+
+  const pricingPlans = [
     {
-      icon: '📚',
-      title: 'PDF to Coloring Book Converter',
-      description: 'Advanced AI-powered PDF to coloring book conversion from any PDF or image to professional KDP-compliant coloring books with customizable line art and filters. Our PDF to coloring book tool is the fastest in the industry.',
-      details: [
-        'Automatic line detection and enhancement',
-        'Customizable line thickness and darkness',
-        'Support for color and black & white conversions',
-        'Batch processing for multiple files',
-        'High-resolution output (300 DPI)',
-      ]
+      name: 'Starter',
+      price: '$29',
+      period: '/month',
+      features: ['PDF to Coloring Book Converter', 'Basic KDP Compliance Validation', 'Up to 50 images/month', 'Email Support'],
     },
     {
-      icon: '✅',
-      title: 'KDP Compliance Validation',
-      description: 'Automatic validation of margins, bleed, trim sizes, and DPI requirements. Our KDP publishing tools ensure your books meet all Amazon KDP requirements. Never get rejected by Amazon again.',
-      details: [
-        'Real-time compliance checking',
-        'Automatic margin correction',
-        'Bleed and trim validation',
-        'DPI and color space verification',
-        'Detailed error reports with fixes',
-      ]
+      name: 'Professional',
+      price: '$79',
+      period: '/month',
+      features: ['Everything in Starter', 'Batch Image Processing', 'Unlimited images/month', 'KDP Analytics', 'Priority Support', 'Direct KDP Integration'],
+      highlighted: true,
     },
     {
-      icon: '⚡',
-      title: 'Batch Processing for KDP',
-      description: 'Process hundreds of images at once with real-time progress tracking. Our KDP publishing tools save hours of manual work with batch PDF to coloring book conversion.',
-      details: [
-        'Process up to 1000 files simultaneously',
-        'Real-time progress tracking',
-        'Automatic error handling',
-        'Batch export to multiple formats',
-        'Scheduled batch processing',
-      ]
-    },
-    {
-      icon: '🔗',
-      title: 'Direct Amazon KDP Integration',
-      description: 'Seamlessly publish to Amazon KDP with automated workflow. Our Amazon KDP software integrates directly with your Amazon KDP account. From creation to publication in minutes.',
-      details: [
-        'One-click Amazon KDP publishing',
-        'Automatic metadata population',
-        'Direct account integration',
-        'Pricing optimization suggestions',
-        'Real-time publication status tracking',
-      ]
-    },
-    {
-      icon: '📊',
-      title: 'KDP Publishing Analytics',
-      description: 'Track your KDP publishing performance, revenue analytics, and conversion metrics in real-time dashboards. Monitor your Amazon KDP success with advanced analytics.',
-      details: [
-        'Real-time sales tracking',
-        'Revenue analytics and forecasting',
-        'Competitor price monitoring',
-        'Keyword performance metrics',
-        'Custom report generation',
-      ]
-    },
-    {
-      icon: '📱',
-      title: 'Cross-Platform KDP Tools',
-      description: 'Work anywhere with mobile app, web dashboard, and cloud sync. Access your KDP publishing tools and Amazon KDP software from any device. Your projects always at your fingertips.',
-      details: [
-        'iOS and Android mobile apps',
-        'Web-based dashboard',
-        'Real-time cloud synchronization',
-        'Offline mode support',
-        'Cross-device project sync',
-      ]
-    },
-    {
-      icon: '🎨',
-      title: 'Advanced Image Processing',
-      description: 'Professional-grade image processing tools for perfect coloring books. Enhance, adjust, and optimize your images for KDP publishing.',
-      details: [
-        'Contrast and brightness adjustment',
-        'Noise reduction and smoothing',
-        'Edge detection and enhancement',
-        'Color to grayscale conversion',
-        'Watermark and signature support',
-      ]
-    },
-    {
-      icon: '🔒',
-      title: 'Secure Cloud Storage',
-      description: 'Your projects are safely stored in our secure cloud infrastructure with automatic backups and version control.',
-      details: [
-        'Military-grade encryption',
-        'Automatic daily backups',
-        'Version history and rollback',
-        'Unlimited storage (Pro plan)',
-        'GDPR and CCPA compliant',
-      ]
-    },
-    {
-      icon: '👥',
-      title: 'Team Collaboration',
-      description: 'Collaborate with team members in real-time. Share projects, assign tasks, and manage workflows efficiently.',
-      details: [
-        'Real-time collaborative editing',
-        'User role management',
-        'Project sharing and permissions',
-        'Team activity logs',
-        'Comment and feedback system',
-      ]
-    },
-    {
-      icon: '📚',
-      title: 'Template Library',
-      description: 'Access hundreds of professionally designed templates to jumpstart your coloring book projects.',
-      details: [
-        '500+ professional templates',
-        'Customizable layouts',
-        'Category-based organization',
-        'Monthly new template additions',
-        'User-created template sharing',
-      ]
-    },
-    {
-      icon: '🎯',
-      title: 'Keyword Research & SEO',
-      description: 'Built-in keyword research tools to optimize your book titles and descriptions for maximum Amazon visibility.',
-      details: [
-        'Amazon keyword research',
-        'Search volume analysis',
-        'Competition analysis',
-        'SEO score calculation',
-        'Title and description optimization',
-      ]
-    },
-    {
-      icon: '💡',
-      title: 'AI-Powered Suggestions',
-      description: 'Get intelligent recommendations for pricing, categories, keywords, and marketing strategies based on market data.',
-      details: [
-        'Pricing optimization',
-        'Category recommendations',
-        'Keyword suggestions',
-        'Marketing strategy insights',
-        'Trend analysis and predictions',
-      ]
+      name: 'Studio',
+      price: '$199',
+      period: '/month',
+      features: ['Everything in Professional', 'Advanced KDP Revenue Analytics', 'Custom Workflows', 'API Access', 'Dedicated Account Manager', 'White-label Options'],
     },
   ];
 
@@ -167,8 +54,11 @@ export default function FeaturesPage() {
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/#features" className="text-neutral hover:text-primary transition-colors font-body">
+            <Link href="/features" className="text-primary font-semibold font-body">
               Features
+            </Link>
+            <Link href="/blog" className="text-neutral hover:text-primary transition-colors font-body">
+              Blog
             </Link>
             <Link href="/#pricing" className="text-neutral hover:text-primary transition-colors font-body">
               Pricing
@@ -183,7 +73,42 @@ export default function FeaturesPage() {
               Dashboard
             </a>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden flex flex-col gap-1.5 p-2"
+            aria-label="Toggle menu"
+          >
+            <span className={`h-0.5 w-6 bg-neutral transition-all ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+            <span className={`h-0.5 w-6 bg-neutral transition-all ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`h-0.5 w-6 bg-neutral transition-all ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200 p-4 space-y-4">
+            <Link href="/features" className="block text-primary font-semibold font-body">
+              Features
+            </Link>
+            <Link href="/blog" className="block text-neutral hover:text-primary transition-colors font-body">
+              Blog
+            </Link>
+            <Link href="/#pricing" className="block text-neutral hover:text-primary transition-colors font-body">
+              Pricing
+            </Link>
+            <Link href="/contact" className="block text-neutral hover:text-primary transition-colors font-body">
+              Contact
+            </Link>
+            <a href="https://app.kdpsuite.com/login" className="block px-6 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all font-body font-semibold text-center">
+              Login
+            </a>
+            <a href="https://dashboard.kdpsuite.com" className="block px-6 py-2 bg-primary text-white rounded-full hover:bg-opacity-90 transition-all font-body font-semibold text-center">
+              Dashboard
+            </a>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -200,27 +125,12 @@ export default function FeaturesPage() {
 
       {/* Features Grid */}
       <section className="container mx-auto px-4 py-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {features.map((feature, idx) => (
-            <div
-              key={idx}
-              className="p-8 rounded-3xl bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-            >
-              <div className="text-6xl mb-4">{feature.icon}</div>
-              <h3 className="text-2xl font-bold text-neutral mb-3 font-heading">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 mb-6 leading-relaxed font-body">
-                {feature.description}
-              </p>
-              <ul className="space-y-2 mb-6">
-                {feature.details.map((detail, didx) => (
-                  <li key={didx} className="flex items-start gap-3 text-sm text-gray-700 font-body">
-                    <span className="text-primary font-bold mt-1">✓</span>
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
+            <div key={idx} className="p-8 rounded-3xl bg-gray-50 border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="text-5xl mb-4">{feature.icon}</div>
+              <h3 className="text-2xl font-bold text-neutral mb-3 font-heading">{feature.title}</h3>
+              <p className="text-gray-600 leading-relaxed font-body">{feature.desc}</p>
             </div>
           ))}
         </div>
@@ -236,35 +146,100 @@ export default function FeaturesPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b-2 border-gray-300">
-                  <th className="text-left py-4 px-6 font-heading font-bold text-neutral">Feature</th>
-                  <th className="text-center py-4 px-6 font-heading font-bold text-neutral">Free</th>
-                  <th className="text-center py-4 px-6 font-heading font-bold text-primary">Pro</th>
-                  <th className="text-center py-4 px-6 font-heading font-bold text-neutral">Studio</th>
+                  <th className="text-left py-4 px-6 font-bold text-neutral font-heading">Feature</th>
+                  <th className="text-center py-4 px-6 font-bold text-neutral font-heading">Starter</th>
+                  <th className="text-center py-4 px-6 font-bold text-neutral font-heading">Professional</th>
+                  <th className="text-center py-4 px-6 font-bold text-neutral font-heading">Studio</th>
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { feature: 'Monthly Conversions', free: '10', pro: 'Unlimited', studio: 'Unlimited' },
-                  { feature: 'PDF to Coloring Book', free: '✓', pro: '✓', studio: '✓' },
-                  { feature: 'KDP Compliance Check', free: '✓', pro: '✓', studio: '✓' },
-                  { feature: 'Batch Processing', free: '—', pro: '✓', studio: '✓' },
-                  { feature: 'Amazon KDP Integration', free: '—', pro: '✓', studio: '✓' },
-                  { feature: 'Analytics Dashboard', free: '—', pro: '✓', studio: '✓' },
-                  { feature: 'Team Collaboration', free: '—', pro: '—', studio: '✓' },
-                  { feature: 'API Access', free: '—', pro: '—', studio: '✓' },
-                  { feature: 'Priority Support', free: '—', pro: '✓', studio: '✓' },
-                  { feature: 'Custom Integrations', free: '—', pro: '—', studio: '✓' },
-                ].map((row, idx) => (
-                  <tr key={idx} className="border-b border-gray-200 hover:bg-white transition-colors">
-                    <td className="py-4 px-6 font-body text-neutral">{row.feature}</td>
-                    <td className="text-center py-4 px-6 font-body text-gray-600">{row.free}</td>
-                    <td className="text-center py-4 px-6 font-body text-primary font-semibold">{row.pro}</td>
-                    <td className="text-center py-4 px-6 font-body text-neutral">{row.studio}</td>
-                  </tr>
-                ))}
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 font-body">PDF to Coloring Book Converter</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 font-body">KDP Compliance Validation</td>
+                  <td className="text-center py-4 px-6 font-body">Basic</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 font-body">Batch Image Processing</td>
+                  <td className="text-center py-4 px-6 font-body">-</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 font-body">KDP Integration</td>
+                  <td className="text-center py-4 px-6 font-body">-</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 font-body">KDP Analytics & Revenue Tracking</td>
+                  <td className="text-center py-4 px-6 font-body">-</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-6 font-body">API Access</td>
+                  <td className="text-center py-4 px-6 font-body">-</td>
+                  <td className="text-center py-4 px-6 font-body">-</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                </tr>
               </tbody>
             </table>
           </div>
+        </div>
+      </section>
+
+      {/* Pricing Cards */}
+      <section className="container mx-auto px-4 py-20">
+        <h2 className="text-4xl font-bold text-neutral mb-12 text-center font-heading">
+          Simple, Transparent Pricing
+        </h2>
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {pricingPlans.map((plan, idx) => (
+            <div
+              key={idx}
+              className={`rounded-3xl p-8 transition-all duration-300 ${
+                plan.highlighted
+                  ? 'bg-primary text-white shadow-2xl transform scale-105'
+                  : 'bg-gray-50 border border-gray-200 shadow-lg hover:shadow-xl'
+              }`}
+            >
+              <h3 className={`text-2xl font-bold mb-2 font-heading ${plan.highlighted ? 'text-white' : 'text-neutral'}`}>
+                {plan.name}
+              </h3>
+              <div className="mb-6">
+                <span className={`text-4xl font-bold font-heading ${plan.highlighted ? 'text-white' : 'text-primary'}`}>
+                  {plan.price}
+                </span>
+                <span className={`text-sm ml-2 ${plan.highlighted ? 'text-white text-opacity-80' : 'text-gray-600'}`}>
+                  {plan.period}
+                </span>
+              </div>
+              <ul className={`space-y-3 mb-8 font-body ${plan.highlighted ? 'text-white text-opacity-90' : 'text-gray-700'}`}>
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-lg">✓</span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <button
+                className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 font-heading ${
+                  plan.highlighted
+                    ? 'bg-white text-primary hover:bg-opacity-90'
+                    : 'bg-primary text-white hover:bg-opacity-90'
+                }`}
+              >
+                Get Started
+              </button>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -272,25 +247,17 @@ export default function FeaturesPage() {
       <section className="bg-primary text-white py-20">
         <div className="container mx-auto px-4 text-center max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading">
-            Ready to Get Started?
+            Ready to Transform Your KDP Business with Amazon KDP Software?
           </h2>
           <p className="text-xl mb-8 opacity-90 font-body">
-            Join thousands of KDP creators using our professional KDP publishing tools and Amazon KDP software.
+            Join thousands of creators using our professional kdp publishing tools and Amazon KDP software. Our AI-powered publishing tools include pdf to coloring book conversion, kdp compliance validation, batch image processing, kdp integration, kdp analytics, and kdp revenue analytics. Experience automated kdp workflow and publishing performance metrics with our self-publishing tools.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/"
-              className="px-8 py-4 bg-white text-primary rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-heading"
-            >
-              Join Waitlist
-            </Link>
-            <a
-              href="https://app.kdpsuite.com/login"
-              className="px-8 py-4 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-primary transition-all duration-300 font-heading"
-            >
-              Login to App
-            </a>
-          </div>
+          <Link
+            href="/"
+            className="inline-block px-8 py-4 bg-white text-primary rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-heading"
+          >
+            Join Waitlist
+          </Link>
         </div>
       </section>
 
@@ -309,8 +276,8 @@ export default function FeaturesPage() {
           </div>
 
           <div className="flex justify-center gap-6 text-sm mb-8 font-body">
-            <Link href="/" className="hover:text-primary transition-colors">Home</Link>
             <Link href="/features" className="hover:text-primary transition-colors">Features</Link>
+            <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
             <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
             <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>

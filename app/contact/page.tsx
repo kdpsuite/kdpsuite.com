@@ -69,6 +69,9 @@ export default function ContactPage() {
             <Link href="/features" className="text-neutral hover:text-primary transition-colors font-body">
               Features
             </Link>
+            <Link href="/blog" className="text-neutral hover:text-primary transition-colors font-body">
+              Blog
+            </Link>
             <Link href="/#pricing" className="text-neutral hover:text-primary transition-colors font-body">
               Pricing
             </Link>
@@ -100,6 +103,9 @@ export default function ContactPage() {
           <div className="md:hidden bg-white border-t border-gray-200 p-4 space-y-4">
             <Link href="/features" className="block text-neutral hover:text-primary transition-colors font-body">
               Features
+            </Link>
+            <Link href="/blog" className="block text-neutral hover:text-primary transition-colors font-body">
+              Blog
             </Link>
             <Link href="/#pricing" className="block text-neutral hover:text-primary transition-colors font-body">
               Pricing

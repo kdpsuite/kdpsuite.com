@@ -89,9 +89,12 @@ export default function Home() {
             <Link href="/features" className="text-neutral hover:text-primary transition-colors font-body">
               Features
             </Link>
-            <a href="#pricing" className="text-neutral hover:text-primary transition-colors font-body">
+            <Link href="/blog" className="text-neutral hover:text-primary transition-colors font-body">
+              Blog
+            </Link>
+            <Link href="/#pricing" className="text-neutral hover:text-primary transition-colors font-body">
               Pricing
-            </a>
+            </Link>
             <Link href="/contact" className="text-neutral hover:text-primary transition-colors font-body">
               Contact
             </Link>
@@ -120,10 +123,13 @@ export default function Home() {
               <Link href="/features" className="block text-neutral hover:text-primary transition-colors font-body">
                 Features
               </Link>
-              <a href="#pricing" className="block text-neutral hover:text-primary transition-colors font-body">
+              <Link href="/blog" className="block text-neutral hover:text-primary transition-colors font-body">
+                Blog
+              </Link>
+              <Link href="/#pricing" className="block text-neutral hover:text-primary transition-colors font-body">
                 Pricing
-              </a>
-              <Link href="/contact" className="block text-neutral hover:text-primary transition-colors font-body">
+              </Link>
+              <Link href="/contact" className="block text-primary font-semibold font-body">
                 Contact
               </Link>
               <a href="https://app.kdpsuite.com/login" className="block px-6 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all font-body font-semibold text-center">
