@@ -7,6 +7,16 @@ import Link from 'next/link';
 // Sample blog posts - these would typically come from Supabase in production
 const blogPosts = [
   {
+    slug: 'all-in-one-publishing-platform',
+    title: 'The Ultimate Guide to Using an All In One Publishing Platform KDP Creator Suite',
+    excerpt: 'Discover how the all in one publishing platform KDP Creator Suite helps authors streamline their workflow, save money, and eliminate the need for multiple separate publishing tools and subscriptions.',
+    date: 'November 11, 2024',
+    author: 'KDP Creator Suite',
+    category: 'Guide',
+    readTime: '15 min read',
+    image: '📚',
+  },
+  {
     slug: 'kdp-formatting-guide',
     title: 'How to Format Your Book for KDP: A Beginner\'s Guide to Kindle eBooks and Paperbacks',
     excerpt: 'Learn how to format your book for Kindle eBooks and paperbacks with our comprehensive KDP formatting guide. Discover trim sizes, margins, fonts, and best practices for professional book formatting using KDP Creator Suite.',
