@@ -99,12 +99,12 @@ export default function PricingPage() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
                   {plan.name}
                 </h3>
-                <p className="text-gray-600 text-sm mb-4">{plan.description}</p>
+                <p className="text-gray-800 text-sm mb-4">{plan.description}</p>
                 <div className="flex items-baseline">
                   <span className="text-4xl font-bold text-[#E91E63]">
                     ${plan.price}
                   </span>
-                  <span className="text-gray-600 ml-2">
+                  <span className="text-gray-800 ml-2">
                     /{plan.interval === 'month' ? 'month' : 'year'}
                   </span>
                 </div>
@@ -116,7 +116,7 @@ export default function PricingPage() {
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start">
                       <span className="text-[#E91E63] mr-3 font-bold">✓</span>
-                      <span className="text-gray-700">{feature}</span>
+                      <span className="text-gray-900">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -149,7 +149,7 @@ export default function PricingPage() {
               <h3 className="font-bold text-lg mb-2 text-gray-900">
                 Can I change plans?
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-900">
                 Yes! You can upgrade or downgrade your plan at any time. Changes
                 take effect on your next billing cycle.
               </p>
@@ -158,7 +158,7 @@ export default function PricingPage() {
               <h3 className="font-bold text-lg mb-2 text-gray-900">
                 Is there a free trial?
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-900">
                 We offer a 14-day free trial for all plans. No credit card
                 required to start.
               </p>
@@ -167,7 +167,7 @@ export default function PricingPage() {
               <h3 className="font-bold text-lg mb-2 text-gray-900">
                 What payment methods do you accept?
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-900">
                 We accept all major credit cards (Visa, Mastercard, American
                 Express) through Stripe.
               </p>
@@ -176,7 +176,7 @@ export default function PricingPage() {
               <h3 className="font-bold text-lg mb-2 text-gray-900">
                 Can I cancel anytime?
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-900">
                 Yes! Cancel your subscription anytime with no questions asked.
                 You&apos;ll have access until the end of your billing period.
               </p>

@@ -155,7 +155,7 @@ export default function Home() {
             Amazon KDP Software & Professional KDP Publishing Tools
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-body">
+          <p className="text-xl md:text-2xl text-gray-800 max-w-3xl mx-auto leading-relaxed font-body">
             The ultimate Amazon KDP software suite with professional kdp publishing tools for digital book publishing. Convert PDF to coloring book with AI-powered publishing tools, validate kdp compliance validation, and automate your kdp workflow. Our advanced kdp conversion software features batch image processing, kdp integration, kdp analytics, and kdp revenue analytics. Self-publishing tools designed for creators who want automated kdp workflow and publishing performance metrics.
           </p>
 
@@ -205,7 +205,7 @@ export default function Home() {
               </div>
             )}
 
-            <p className="text-sm text-gray-500 mt-4 font-body">
+            <p className="text-sm text-gray-700 mt-4 font-body">
               Join 1,000+ creators waiting for early access. No spam, unsubscribe anytime.
             </p>
           </div>
@@ -243,7 +243,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold text-neutral mb-4 font-heading">
             Complete Amazon KDP Software & KDP Publishing Tools Suite
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto font-body">
+          <p className="text-xl text-gray-800 max-w-2xl mx-auto font-body">
             Professional kdp publishing tools and Amazon KDP software with AI-powered publishing tools for digital book publishing. Features include pdf to coloring book conversion, kdp compliance validation, batch image processing, kdp integration, kdp analytics, and kdp revenue analytics for automated kdp workflow.
           </p>
         </div>
@@ -260,7 +260,7 @@ export default function Home() {
             <div key={idx} className="p-8 rounded-3xl bg-gray-50 border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
               <div className="text-5xl mb-4">{feature.icon}</div>
               <h3 className="text-2xl font-bold text-neutral mb-3 font-heading">{feature.title}</h3>
-              <p className="text-gray-600 leading-relaxed font-body">{feature.desc}</p>
+              <p className="text-gray-800 leading-relaxed font-body">{feature.desc}</p>
             </div>
           ))}
         </div>
@@ -271,7 +271,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-neutral mb-4 font-heading">Choose Your Plan</h2>
-            <p className="text-xl text-gray-600 font-body">From hobbyists to professional studios</p>
+            <p className="text-xl text-gray-800 font-body">From hobbyists to professional studios</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -297,9 +297,9 @@ export default function Home() {
                   {plan.name}
                 </h3>
                 <div className={`text-4xl font-bold mb-6 font-heading ${plan.popular ? 'text-white' : 'text-neutral'}`}>
-                  {plan.price}<span className={`text-lg ${plan.popular ? 'text-white/80' : 'text-gray-500'}`}>/mo</span>
+                  {plan.price}<span className={`text-lg ${plan.popular ? 'text-white/80' : 'text-gray-700'}`}>/mo</span>
                 </div>
-                <ul className={`space-y-3 mb-8 font-body ${plan.popular ? 'text-white' : 'text-gray-600'}`}>
+                <ul className={`space-y-3 mb-8 font-body ${plan.popular ? 'text-white' : 'text-gray-800'}`}>
                   {plan.features.map((feature, fidx) => (
                     <li key={fidx} className="flex items-start gap-2">
                       <span className={plan.popular ? 'text-white' : 'text-primary'}>✓</span>
@@ -352,7 +352,7 @@ export default function Home() {
               height={50}
               className="mx-auto mb-4"
             />
-            <p className="text-sm text-gray-300 font-body">A product of Unloved Productions</p>
+            <p className="text-sm text-gray-700 font-body">A product of Unloved Productions</p>
           </div>
 
           <div className="flex justify-center gap-6 text-sm mb-8 font-body">
@@ -361,7 +361,7 @@ export default function Home() {
             <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
 
-          <div className="text-center text-gray-400 text-sm font-body">
+          <div className="text-center text-gray-700 text-sm font-body">
             <p>© 2025 KDP Creator Suite. All rights reserved.</p>
           </div>
         </div>

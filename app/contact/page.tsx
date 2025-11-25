@@ -130,7 +130,7 @@ export default function ContactPage() {
             <h1 className="text-5xl md:text-6xl font-bold text-neutral mb-4 font-heading">
               Get in Touch
             </h1>
-            <p className="text-xl text-gray-600 font-body">
+            <p className="text-xl text-gray-800 font-body">
               Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
             </p>
           </div>
@@ -251,7 +251,7 @@ export default function ContactPage() {
             </div>
             <div className="text-center">
               <h3 className="text-2xl font-bold text-neutral mb-2 font-heading">Response Time</h3>
-              <p className="text-gray-600 font-body">We typically respond within 24 hours</p>
+              <p className="text-gray-800 font-body">We typically respond within 24 hours</p>
             </div>
           </div>
         </div>
@@ -268,7 +268,7 @@ export default function ContactPage() {
               height={50}
               className="mx-auto mb-4"
             />
-            <p className="text-sm text-gray-300 font-body">A product of Unloved Productions</p>
+            <p className="text-sm text-gray-100 font-body">A product of Unloved Productions</p>
           </div>
 
           <div className="flex justify-center gap-6 text-sm mb-8 font-body">
@@ -278,7 +278,7 @@ export default function ContactPage() {
             <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
 
-          <div className="text-center text-gray-400 text-sm font-body">
+          <div className="text-center text-gray-200 text-sm font-body">
             <p>© 2025 KDP Creator Suite. All rights reserved.</p>
           </div>
         </div>
