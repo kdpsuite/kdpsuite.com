@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { GoogleAdsenseBanner, NativeAd } from '@/components/ads';
 
 export default function FeaturesPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -134,6 +135,10 @@ export default function FeaturesPage() {
             </div>
           ))}
         </div>
+        {/* Ad Banner */}
+        <div className="mt-12">
+          <GoogleAdsenseBanner slot="FEATURES_BANNER_SLOT" format="horizontal" />
+        </div>
       </section>
 
       {/* Feature Comparison Table */}
@@ -193,6 +198,11 @@ export default function FeaturesPage() {
             </table>
           </div>
         </div>
+      </section>
+
+      {/* Native Ad */}
+      <section className="container mx-auto px-4 py-12">
+        <NativeAd />
       </section>
 
       {/* Pricing Cards */}

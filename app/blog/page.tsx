@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { GoogleAdsenseBanner } from '@/components/ads';
 
 // Sample blog posts - these would typically come from Supabase in production
 const blogPosts = [
@@ -215,6 +216,10 @@ export default function BlogPage() {
               </div>
             </Link>
           ))}
+        </div>
+        {/* Ad Banner */}
+        <div className="mt-12">
+          <GoogleAdsenseBanner slot="BLOG_BANNER_SLOT" format="horizontal" />
         </div>
       </section>
 

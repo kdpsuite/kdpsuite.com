@@ -3,6 +3,7 @@
 import { useState, FormEvent, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { GoogleAdsenseBanner, NativeAd } from '@/components/ads';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -264,6 +265,15 @@ export default function Home() {
             </div>
           ))}
         </div>
+        {/* Ad Banner */}
+        <div className="mt-12">
+          <GoogleAdsenseBanner slot="HOME_BANNER_SLOT" format="horizontal" />
+        </div>
+      </section>
+
+      {/* Native Ad Section */}
+      <section className="container mx-auto px-4 py-12">
+        <NativeAd />
       </section>
 
       {/* Pricing Section */}

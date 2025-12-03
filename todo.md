@@ -23,3 +23,12 @@
 - [x] Build and test the authentication system
 - [x] Create dashboard page for authenticated users
 
+## v0.7.0 (Completed)
+- [x] Integrate Google AdSense with placeholder configuration
+- [x] Create reusable ad components (Banner, Native, Sidebar)
+- [x] Add ad service configuration utility
+- [x] Integrate ads into homepage, features, and blog pages
+- [x] Support multiple ad networks (Mediavine, AdThrive, Propeller Ads, Amazon Associates)
+- [x] Create comprehensive ad monetization guide
+- [x] Build and test ad integration
+
