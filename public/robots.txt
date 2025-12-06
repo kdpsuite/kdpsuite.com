@@ -1,6 +1,15 @@
-# https://www.robotstxt.org/robotstxt.html
+# KDP Creator Suite - robots.txt
+# Search engine crawling directives
+
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /private
+Disallow: /dashboard
 
-Sitemap: https://kdp-creator-suite.com/sitemap.xml
+# Sitemap location
+Sitemap: https://www.kdpsuite.com/sitemap.xml
 
+# Crawl delay (optional - adjust based on server capacity)
+# Crawl-delay: 1
