@@ -1,0 +1,7 @@
+19:12  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+./app/contact/page.tsx
+47:14  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
+./app/layout.tsx
+99:9  Warning: Prefer `next/script` component when using the inline script for Google Analytics. See: https://nextjs.org/docs/messages/next-script-for-ga  @next/next/next-script-for-ga
+./app/page.tsx
+66:14  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
