@@ -5,3 +5,16 @@
 99:9  Warning: Prefer `next/script` component when using the inline script for Google Analytics. See: https://nextjs.org/docs/messages/next-script-for-ga  @next/next/next-script-for-ga
 ./app/page.tsx
 66:14  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+part 2
+Error: Missing Supabase environment variables
+    at __TURBOPACK__module__evaluation__ (.next/server/chunks/[root-of-the-server]__93e74295._.js:1:2024)
+    at instantiateModule (.next/server/chunks/[turbopack]_runtime.js:702:9)
+    at instantiateRuntimeModule (.next/server/chunks/[turbopack]_runtime.js:730:12)
+    at getOrInstantiateRuntimeModule (.next/server/chunks/[turbopack]_runtime.js:743:12)
+    at Object.m (.next/server/chunks/[turbopack]_runtime.js:752:18)
+    at Object.<anonymous> (.next/server/app/api/auth/login/route.js:7:3)
+> Build error occurred
+[Error: Failed to collect page data for /api/auth/login] {
+  type: 'Error'
+}
+Error: Command "npm run build" exited with 1

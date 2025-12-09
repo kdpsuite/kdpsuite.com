@@ -13,8 +13,12 @@
     "@stripe/stripe-js": "^8.5.1",
     "@supabase/supabase-js": "^2.78.0",
     "@vercel/analytics": "^1.5.0",
+<<<<<<< Updated upstream
     "ci": "^2.3.0",
     "next": "^15.5.7",
+=======
+    "next": "15.5.7",
+>>>>>>> Stashed changes
     "nodemailer": "^7.0.10",
     "react": "19.1.0",
     "react-dom": "19.1.0",
