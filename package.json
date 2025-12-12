@@ -13,17 +13,11 @@
     "@stripe/stripe-js": "^8.5.1",
     "@supabase/supabase-js": "^2.78.0",
     "@vercel/analytics": "^1.5.0",
-<<<<<<< Updated upstream
-    "ci": "^2.3.0",
-    "next": "^15.5.7",
-=======
-    "next": "15.5.7",
->>>>>>> Stashed changes
+    "next": "15.5.5",
     "nodemailer": "^7.0.10",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "stripe": "^19.3.1",
-    "test": "^3.3.0"
+    "stripe": "^19.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
