@@ -84,14 +84,20 @@ export default function PricingPage() {
         </div>
 
         {/* Plans Grid */}
+<<<<<<< HEAD
         <div className="grid md:grid-cols-3 gap-8 mb-16 items-center">
           {pricingPlans.map((plan, index) => (
+=======
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {pricingPlans.map((plan) => (
+>>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
             <div
               key={plan.id}
               className={`rounded-lg border-2 transition-all ${
                 selectedPlan === plan.id
                   ? 'border-[#E91E63] shadow-lg'
                   : 'border-gray-200 hover:border-gray-300'
+<<<<<<< HEAD
               } ${
                 index === 1 ? 'md:scale-105 md:shadow-2xl' : ''
               }`}
@@ -125,6 +131,24 @@ export default function PricingPage() {
                 {index === 1 && (
                   <p className="text-pink-100 text-xs mt-2 font-semibold">MOST POPULAR</p>
                 )}
+=======
+              }`}
+            >
+              {/* Plan Header */}
+              <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 border-b-2 border-gray-200">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  {plan.name}
+                </h3>
+                <p className="text-gray-800 text-sm mb-4">{plan.description}</p>
+                <div className="flex items-baseline">
+                  <span className="text-4xl font-bold text-[#E91E63]">
+                    ${plan.price}
+                  </span>
+                  <span className="text-gray-800 ml-2">
+                    /{plan.interval === 'month' ? 'month' : 'year'}
+                  </span>
+                </div>
+>>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
               </div>
 
               {/* Features */}
@@ -145,11 +169,15 @@ export default function PricingPage() {
                     handleCheckout(plan.stripePriceId);
                   }}
                   disabled={loading}
+<<<<<<< HEAD
                   className={`w-full py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                     index === 1
                       ? 'bg-[#E91E63] text-white hover:bg-pink-700'
                       : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                   }`}
+=======
+                  className="w-full bg-[#E91E63] text-white py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+>>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
                 >
                   {loading && selectedPlan === plan.id
                     ? 'Processing...'
@@ -162,7 +190,11 @@ export default function PricingPage() {
 
         {/* FAQ Section */}
         <div className="bg-gray-50 rounded-lg p-8 mt-16">
+<<<<<<< HEAD
           <h2 className="text-3xl font-bold mb-8 text-center text-gray-900">
+=======
+          <h2 className="text-3xl font-bold mb-8 text-center">
+>>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
             Frequently Asked Questions
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
@@ -208,3 +240,7 @@ export default function PricingPage() {
     </main>
   );
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
