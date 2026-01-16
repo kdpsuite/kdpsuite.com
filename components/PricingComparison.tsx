@@ -6,6 +6,8 @@
  * Expected impact: +10-15% conversion increase
  */
 
+import Link from 'next/link';
+
 export default function PricingComparison() {
   const features = [
     { name: 'PDF Conversions/Month', free: '10', pro: 'Unlimited', studio: 'Unlimited' },
@@ -78,12 +80,12 @@ export default function PricingComparison() {
           <p className="text-gray-600 mb-6 font-body">
             All plans include basic KDP publishing tools and community support
           </p>
-          <a
+          <Link
             href="/#pricing"
             className="inline-block bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all font-heading"
           >
             View Pricing
-          </a>
+          </Link>
         </div>
       </div>
     </section>
