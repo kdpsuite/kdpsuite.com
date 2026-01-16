@@ -84,47 +84,30 @@ export default function PricingPage() {
         </div>
 
         {/* Plans Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16 items-center">
-          {pricingPlans.map((plan, index) => (
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {pricingPlans.map((plan) => (
             <div
               key={plan.id}
               className={`rounded-lg border-2 transition-all ${
                 selectedPlan === plan.id
                   ? 'border-[#E91E63] shadow-lg'
                   : 'border-gray-200 hover:border-gray-300'
-              } ${
-                index === 1 ? 'md:scale-105 md:shadow-2xl' : ''
               }`}
             >
               {/* Plan Header */}
-              <div className={`p-6 border-b-2 ${
-                index === 1
-                  ? 'bg-gradient-to-r from-[#E91E63] to-pink-600'
-                  : 'bg-gradient-to-r from-gray-50 to-gray-100 border-gray-200'
-              }`}>
-                <h3 className={`text-2xl font-bold mb-2 ${
-                  index === 1 ? 'text-white' : 'text-gray-900'
-                }`}>
+              <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 border-b-2 border-gray-200">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
                   {plan.name}
                 </h3>
-                <p className={`text-sm mb-4 ${
-                  index === 1 ? 'text-pink-100' : 'text-gray-800'
-                }`}>{plan.description}</p>
+                <p className="text-gray-600 text-sm mb-4">{plan.description}</p>
                 <div className="flex items-baseline">
-                  <span className={`text-4xl font-bold ${
-                    index === 1 ? 'text-white' : 'text-[#E91E63]'
-                  }`}>
+                  <span className="text-4xl font-bold text-[#E91E63]">
                     ${plan.price}
                   </span>
-                  <span className={`ml-2 ${
-                    index === 1 ? 'text-pink-100' : 'text-gray-800'
-                  }`}>
+                  <span className="text-gray-600 ml-2">
                     /{plan.interval === 'month' ? 'month' : 'year'}
                   </span>
                 </div>
-                {index === 1 && (
-                  <p className="text-pink-100 text-xs mt-2 font-semibold">MOST POPULAR</p>
-                )}
               </div>
 
               {/* Features */}
@@ -133,7 +116,7 @@ export default function PricingPage() {
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start">
                       <span className="text-[#E91E63] mr-3 font-bold">✓</span>
-                      <span className="text-gray-900">{feature}</span>
+                      <span className="text-gray-700">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -145,11 +128,7 @@ export default function PricingPage() {
                     handleCheckout(plan.stripePriceId);
                   }}
                   disabled={loading}
-                  className={`w-full py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-                    index === 1
-                      ? 'bg-[#E91E63] text-white hover:bg-pink-700'
-                      : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                  }`}
+                  className="w-full bg-[#E91E63] text-white py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading && selectedPlan === plan.id
                     ? 'Processing...'
@@ -162,7 +141,7 @@ export default function PricingPage() {
 
         {/* FAQ Section */}
         <div className="bg-gray-50 rounded-lg p-8 mt-16">
-          <h2 className="text-3xl font-bold mb-8 text-center text-gray-900">
+          <h2 className="text-3xl font-bold mb-8 text-center">
             Frequently Asked Questions
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
@@ -170,7 +149,7 @@ export default function PricingPage() {
               <h3 className="font-bold text-lg mb-2 text-gray-900">
                 Can I change plans?
               </h3>
-              <p className="text-gray-900">
+              <p className="text-gray-700">
                 Yes! You can upgrade or downgrade your plan at any time. Changes
                 take effect on your next billing cycle.
               </p>
@@ -179,7 +158,7 @@ export default function PricingPage() {
               <h3 className="font-bold text-lg mb-2 text-gray-900">
                 Is there a free trial?
               </h3>
-              <p className="text-gray-900">
+              <p className="text-gray-700">
                 We offer a 14-day free trial for all plans. No credit card
                 required to start.
               </p>
@@ -188,7 +167,7 @@ export default function PricingPage() {
               <h3 className="font-bold text-lg mb-2 text-gray-900">
                 What payment methods do you accept?
               </h3>
-              <p className="text-gray-900">
+              <p className="text-gray-700">
                 We accept all major credit cards (Visa, Mastercard, American
                 Express) through Stripe.
               </p>
@@ -197,7 +176,7 @@ export default function PricingPage() {
               <h3 className="font-bold text-lg mb-2 text-gray-900">
                 Can I cancel anytime?
               </h3>
-              <p className="text-gray-900">
+              <p className="text-gray-700">
                 Yes! Cancel your subscription anytime with no questions asked.
                 You&apos;ll have access until the end of your billing period.
               </p>
@@ -208,3 +187,4 @@ export default function PricingPage() {
     </main>
   );
 }
+

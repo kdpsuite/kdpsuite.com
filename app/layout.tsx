@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Lato } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { AuthProvider } from "@/lib/auth-context";
-import { AdScriptLoader } from "@/components/ads";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -141,10 +139,7 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${lato.variable} antialiased font-body`}
       >
-        <AdScriptLoader />
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        {children}
         <Analytics />
       </body>
     </html>

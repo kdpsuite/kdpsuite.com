@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { GoogleAdsenseBanner } from '@/components/ads';
 
 // Sample blog posts - these would typically come from Supabase in production
 const blogPosts = [
@@ -195,19 +194,19 @@ export default function BlogPage() {
                     <span className="text-xs font-semibold text-primary bg-pink-50 px-3 py-1 rounded-full font-body">
                       {post.category}
                     </span>
-                    <span className="text-xs text-gray-700 font-body">{post.readTime}</span>
+                    <span className="text-xs text-gray-500 font-body">{post.readTime}</span>
                   </div>
 
                   <h3 className="text-xl font-bold text-neutral mb-3 line-clamp-2 font-heading hover:text-primary transition-colors">
                     {post.title}
                   </h3>
 
-                  <p className="text-gray-800 mb-4 line-clamp-3 font-body">
+                  <p className="text-gray-600 mb-4 line-clamp-3 font-body">
                     {post.excerpt}
                   </p>
 
                   <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                    <span className="text-sm text-gray-700 font-body">{post.date}</span>
+                    <span className="text-sm text-gray-500 font-body">{post.date}</span>
                     <span className="text-primary font-semibold text-sm hover:underline font-body">
                       Read More →
                     </span>
@@ -216,10 +215,6 @@ export default function BlogPage() {
               </div>
             </Link>
           ))}
-        </div>
-        {/* Ad Banner */}
-        <div className="mt-12">
-          <GoogleAdsenseBanner slot="BLOG_BANNER_SLOT" format="horizontal" />
         </div>
       </section>
 
@@ -234,7 +229,7 @@ export default function BlogPage() {
               height={50}
               className="mx-auto mb-4"
             />
-            <p className="text-sm text-gray-100 font-body">A product of Unloved Productions</p>
+            <p className="text-sm text-gray-300 font-body">A product of Unloved Productions</p>
           </div>
 
           <div className="flex justify-center gap-6 text-sm mb-8 font-body">
@@ -245,7 +240,7 @@ export default function BlogPage() {
             <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
 
-          <div className="text-center text-gray-200 text-sm font-body">
+          <div className="text-center text-gray-400 text-sm font-body">
             <p>© 2025 KDP Creator Suite. All rights reserved.</p>
           </div>
         </div>

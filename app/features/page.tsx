@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { GoogleAdsenseBanner, NativeAd } from '@/components/ads';
 
 export default function FeaturesPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -118,7 +117,7 @@ export default function FeaturesPage() {
           <h1 className="text-5xl md:text-6xl font-bold text-neutral mb-6 font-heading">
             Complete Amazon KDP Software & KDP Publishing Tools Suite
           </h1>
-          <p className="text-xl text-gray-800 mb-8 font-body">
+          <p className="text-xl text-gray-600 mb-8 font-body">
             Discover all the powerful features of our professional Amazon KDP software with advanced kdp publishing tools. Our AI-powered publishing tools include pdf to coloring book conversion, kdp compliance validation, batch image processing, kdp integration, kdp analytics, and kdp revenue analytics for digital book publishing and automated kdp workflow.
           </p>
         </div>
@@ -131,13 +130,9 @@ export default function FeaturesPage() {
             <div key={idx} className="p-8 rounded-3xl bg-gray-50 border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
               <div className="text-5xl mb-4">{feature.icon}</div>
               <h3 className="text-2xl font-bold text-neutral mb-3 font-heading">{feature.title}</h3>
-              <p className="text-gray-800 leading-relaxed font-body">{feature.desc}</p>
+              <p className="text-gray-600 leading-relaxed font-body">{feature.desc}</p>
             </div>
           ))}
-        </div>
-        {/* Ad Banner */}
-        <div className="mt-12">
-          <GoogleAdsenseBanner slot="FEATURES_BANNER_SLOT" format="horizontal" />
         </div>
       </section>
 
@@ -200,11 +195,6 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* Native Ad */}
-      <section className="container mx-auto px-4 py-12">
-        <NativeAd />
-      </section>
-
       {/* Pricing Cards */}
       <section className="container mx-auto px-4 py-20">
         <h2 className="text-4xl font-bold text-neutral mb-12 text-center font-heading">
@@ -227,11 +217,11 @@ export default function FeaturesPage() {
                 <span className={`text-4xl font-bold font-heading ${plan.highlighted ? 'text-white' : 'text-primary'}`}>
                   {plan.price}
                 </span>
-                <span className={`text-sm ml-2 ${plan.highlighted ? 'text-white text-opacity-80' : 'text-gray-800'}`}>
+                <span className={`text-sm ml-2 ${plan.highlighted ? 'text-white text-opacity-80' : 'text-gray-600'}`}>
                   {plan.period}
                 </span>
               </div>
-              <ul className={`space-y-3 mb-8 font-body ${plan.highlighted ? 'text-white text-opacity-90' : 'text-gray-900'}`}>
+              <ul className={`space-y-3 mb-8 font-body ${plan.highlighted ? 'text-white text-opacity-90' : 'text-gray-700'}`}>
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <span className="text-lg">✓</span>
