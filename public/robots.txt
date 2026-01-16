@@ -1,24 +1,6 @@
-<<<<<<< HEAD
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
 
 Sitemap: https://kdp-creator-suite.com/sitemap.xml
 
-=======
-# KDP Creator Suite - robots.txt
-# Search engine crawling directives
-
-User-agent: *
-Allow: /
-Disallow: /admin
-Disallow: /api
-Disallow: /private
-Disallow: /dashboard
-
-# Sitemap location
-Sitemap: https://www.kdpsuite.com/sitemap.xml
-
-# Crawl delay (optional - adjust based on server capacity)
-# Crawl-delay: 1
->>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx

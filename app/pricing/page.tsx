@@ -33,6 +33,7 @@ export default function PricingPage() {
         return;
       }
 
+      // Redirect to Stripe checkout URL
       if (data.url) {
         window.location.href = data.url;
       } else {
@@ -72,8 +73,7 @@ export default function PricingPage() {
           {message && (
             <p
               className={`mt-2 text-sm ${
-                message.toLowerCase().includes('error') ||
-                message.toLowerCase().includes('failed')
+                message.includes('error') || message.includes('failed')
                   ? 'text-red-600'
                   : 'text-green-600'
               }`}
@@ -92,50 +92,38 @@ export default function PricingPage() {
                 selectedPlan === plan.id
                   ? 'border-[#E91E63] shadow-lg'
                   : 'border-gray-200 hover:border-gray-300'
-              } ${index === 1 ? 'md:scale-105 md:shadow-2xl' : ''}`}
+              } ${
+                index === 1 ? 'md:scale-105 md:shadow-2xl' : ''
+              }`}
             >
               {/* Plan Header */}
-              <div
-                className={`p-6 border-b-2 ${
-                  index === 1
-                    ? 'bg-gradient-to-r from-[#E91E63] to-pink-600'
-                    : 'bg-gradient-to-r from-gray-50 to-gray-100 border-gray-200'
-                }`}
-              >
-                <h3
-                  className={`text-2xl font-bold mb-2 ${
-                    index === 1 ? 'text-white' : 'text-gray-900'
-                  }`}
-                >
+              <div className={`p-6 border-b-2 ${
+                index === 1
+                  ? 'bg-gradient-to-r from-[#E91E63] to-pink-600'
+                  : 'bg-gradient-to-r from-gray-50 to-gray-100 border-gray-200'
+              }`}>
+                <h3 className={`text-2xl font-bold mb-2 ${
+                  index === 1 ? 'text-white' : 'text-gray-900'
+                }`}>
                   {plan.name}
                 </h3>
-                <p
-                  className={`text-sm mb-4 ${
-                    index === 1 ? 'text-pink-100' : 'text-gray-800'
-                  }`}
-                >
-                  {plan.description}
-                </p>
+                <p className={`text-sm mb-4 ${
+                  index === 1 ? 'text-pink-100' : 'text-gray-800'
+                }`}>{plan.description}</p>
                 <div className="flex items-baseline">
-                  <span
-                    className={`text-4xl font-bold ${
-                      index === 1 ? 'text-white' : 'text-[#E91E63]'
-                    }`}
-                  >
+                  <span className={`text-4xl font-bold ${
+                    index === 1 ? 'text-white' : 'text-[#E91E63]'
+                  }`}>
                     ${plan.price}
                   </span>
-                  <span
-                    className={`ml-2 ${
-                      index === 1 ? 'text-pink-100' : 'text-gray-800'
-                    }`}
-                  >
+                  <span className={`ml-2 ${
+                    index === 1 ? 'text-pink-100' : 'text-gray-800'
+                  }`}>
                     /{plan.interval === 'month' ? 'month' : 'year'}
                   </span>
                 </div>
                 {index === 1 && (
-                  <p className="text-pink-100 text-xs mt-2 font-semibold">
-                    MOST POPULAR
-                  </p>
+                  <p className="text-pink-100 text-xs mt-2 font-semibold">MOST POPULAR</p>
                 )}
               </div>
 
@@ -183,7 +171,7 @@ export default function PricingPage() {
                 Can I change plans?
               </h3>
               <p className="text-gray-900">
-                Yes. You can upgrade or downgrade your plan at any time. Changes
+                Yes! You can upgrade or downgrade your plan at any time. Changes
                 take effect on your next billing cycle.
               </p>
             </div>
@@ -201,7 +189,8 @@ export default function PricingPage() {
                 What payment methods do you accept?
               </h3>
               <p className="text-gray-900">
-                We accept all major credit cards through Stripe.
+                We accept all major credit cards (Visa, Mastercard, American
+                Express) through Stripe.
               </p>
             </div>
             <div>
@@ -209,8 +198,8 @@ export default function PricingPage() {
                 Can I cancel anytime?
               </h3>
               <p className="text-gray-900">
-                Yes. Cancel anytime and retain access until the end of your
-                billing period.
+                Yes! Cancel your subscription anytime with no questions asked.
+                You&apos;ll have access until the end of your billing period.
               </p>
             </div>
           </div>
