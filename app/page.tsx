@@ -52,7 +52,6 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
->>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
         body: JSON.stringify({ email }),
       });
 
@@ -74,12 +73,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-neutral">
-<<<<<<< HEAD
       {/* IndieGoGo Campaign Banner - PROMINENT PLACEMENT AT TOP */}
       <IndieGoGoCampaign />
-
-=======
->>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
+	  
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -126,7 +122,6 @@ export default function Home() {
           </button>
         </div>
 
-<<<<<<< HEAD
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-200 p-4 space-y-4">
@@ -234,7 +229,6 @@ export default function Home() {
                 <p className="text-4xl mb-4">{feature.icon}</p>
                 <h3 className="text-xl font-bold mb-2 text-neutral">{feature.title}</h3>
                 <p className="text-gray-700">{feature.desc}</p>
-=======
           {/* Mobile Menu */}
           {mobileMenuOpen && (
             <div className="md:hidden bg-white border-t border-gray-200 p-4 space-y-4">
@@ -434,14 +428,12 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
->>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
               </div>
             ))}
           </div>
         </div>
       </section>
 
-<<<<<<< HEAD
       {/* Ad Banner */}
       <div className="py-8 bg-gray-50">
         <GoogleAdsenseBanner slot="HOME_BANNER_SLOT" format="horizontal" />
@@ -477,7 +469,6 @@ export default function Home() {
           >
             View All Plans
           </Link>
-=======
       {/* CTA Section */}
       <section className="bg-primary text-white py-20">
         <div className="container mx-auto px-4 text-center max-w-4xl mx-auto">
@@ -549,7 +540,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-=======
           <div className="text-center mb-8">
             <Image
               src="/unlovedproductions_logo.png"
@@ -589,7 +579,6 @@ export default function Home() {
           animation: slide-up 0.4s ease-out;
         }
       `}</style>
->>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
     </div>
   );
 }
