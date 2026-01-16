@@ -10,7 +10,9 @@ import { useState } from 'react';
 
 export default function WebinarSignup() {
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>(
+    'idle'
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ export default function WebinarSignup() {
       } else {
         setStatus('error');
       }
-    } catch (error) {
+    } catch (_error) {
       setStatus('error');
     }
   };
@@ -42,7 +44,8 @@ export default function WebinarSignup() {
           Free Live Demo
         </h2>
         <p className="text-primary-light mb-8 font-body">
-          See KDP Creator Suite in action. Learn how to publish your first book in 30 minutes.
+          See KDP Creator Suite in action. Learn how to publish your first book in
+          30 minutes.
         </p>
 
         {/* Demo Details */}
@@ -57,7 +60,9 @@ export default function WebinarSignup() {
           </div>
           <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
             <p className="text-2xl font-bold font-heading">Free</p>
-            <p className="text-primary-light text-sm font-body">No credit card</p>
+            <p className="text-primary-light text-sm font-body">
+              No credit card
+            </p>
           </div>
         </div>
 
@@ -94,11 +99,15 @@ export default function WebinarSignup() {
           )}
         </form>
 
-        {/* What You'll Learn */}
+        {/* What You&apos;ll Learn */}
         <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm text-left">
-          <h3 className="font-semibold mb-4 font-heading">What You'll Learn:</h3>
+          <h3 className="font-semibold mb-4 font-heading">
+            What You&apos;ll Learn:
+          </h3>
           <ul className="space-y-2 text-sm font-body">
-            <li>✓ How to convert PDFs to KDP-compliant coloring books in seconds</li>
+            <li>
+              ✓ How to convert PDFs to KDP-compliant coloring books in seconds
+            </li>
             <li>✓ Batch processing to publish 10+ books per day</li>
             <li>✓ Compliance validation to avoid Amazon rejections</li>
             <li>✓ Direct KDP integration for seamless publishing</li>
