@@ -13,11 +13,7 @@
     "@stripe/stripe-js": "^8.5.1",
     "@supabase/supabase-js": "^2.78.0",
     "@vercel/analytics": "^1.5.0",
-<<<<<<< HEAD
-    "next": "15.5.5",
-=======
-    "next": "15.5.7",
->>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
+    "next": "15.5.9",
     "nodemailer": "^7.0.10",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -31,11 +27,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-<<<<<<< HEAD
-    "eslint-config-next": "15.5.5",
-=======
     "eslint-config-next": "15.5.7",
->>>>>>> origin/vercel/dependencies-for-react-flight-bw3ltx
     "tailwindcss": "^4",
     "typescript": "^5"
   }
