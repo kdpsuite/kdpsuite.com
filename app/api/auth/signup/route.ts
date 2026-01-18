@@ -1,16 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-if (!supabaseUrl || !supabaseServiceKey) {
-  throw new Error('Missing Supabase environment variables');
-}
-
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
 export async function POST(request: NextRequest) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    return NextResponse.json(
+      { error: 'Supabase not configured' },
+      { status: 500 }
+    );
+  }
+
+  const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
   try {
     const { email, password, fullName } = await request.json();
 
@@ -39,15 +42,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Sign up user with Supabase Auth
-    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
-      email,
-      password,
-      email_confirm: false, // Require email confirmation
-      user_metadata: {
-        full_name: fullName,
-      },
-    });
+    // Create user
+    const { data: authData, error: authError } =
+      await supabase.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: false,
+        user_metadata: {
+          full_name: fullName,
+        },
+      });
 
     if (authError || !authData.user) {
       console.error('Auth signup error:', authError);
@@ -57,35 +61,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create user profile (trigger should handle this, but we'll do it explicitly)
+    // Create profile
     const { error: profileError } = await supabase
       .from('user_profiles')
       .insert({
         id: authData.user.id,
-        email: email,
+        email,
         full_name: fullName,
       });
 
     if (profileError) {
       console.error('Profile creation error:', profileError);
-      // Don't fail the signup if profile creation fails, user can update later
     }
-
-    // Create a simple session object (in production, use proper JWT tokens)
-    const sessionToken = {
-      access_token: `token_${authData.user.id}`,
-      refresh_token: `refresh_${authData.user.id}`,
-      expires_in: 3600,
-    };
 
     return NextResponse.json(
       {
         user: {
           id: authData.user.id,
           email: authData.user.email,
-          fullName: fullName,
+          fullName,
         },
-        session: sessionToken,
       },
       { status: 201 }
     );
@@ -97,4 +92,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
