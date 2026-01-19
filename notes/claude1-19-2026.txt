@@ -1,0 +1,29 @@
+I found the following potential conflicts:
+
+CONFLICT 1: Pricing Information
+
+Existing pricing may be mentioned in the pricing/page.tsx or other related files.
+
+Your decision needed: Should we keep existing pricing or update to the new landing page pricing ($99, $249, $499, $9,999)?
+
+CONFLICT 2: Feature Descriptions
+
+Existing features may be described in the features/page.tsx or other relevant files.
+
+Your decision needed: Should we keep both existing features and the new landing page features, or update existing content to match the new landing page?
+
+CONFLICT 3: Founder Story
+
+Existing "about" content may conflict with the new landing page's founder story.
+
+Your decision needed: Which version should appear across the site?
+
+CONFLICT 4: Navigation/Site Structure
+
+Current site structure includes various pages.
+
+Your decision needed: Should we replace the homepage entirely with the new landing page or keep the existing homepage and add the new landing page at a different route?
+
+Please provide your decisions on these conflicts so we can proceed with the integration.
+
+but make sure there isnt any other pricing conflicts once it understands the early bird campaign stuff
