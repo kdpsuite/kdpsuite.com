@@ -1,21 +1,14 @@
 'use client';
 
-import { useState, FormEvent, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { foundingCampaignPlans } from '@/lib/stripe';
 
-export default function Home() {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [message, setMessage] = useState('');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
+export default function FoundingCampaignPage() {
+  const stripeLinks = {
+    starter: foundingCampaignPlans[0].stripePriceId,
+    professional: foundingCampaignPlans[1].stripePriceId,
+    enterprise: foundingCampaignPlans[2].stripePriceId,
+    foundersCircle: foundingCampaignPlans[3].stripePriceId,
+  };
   // Calculate countdown timer
   useEffect(() => {
     const calculateCountdown = () => {
