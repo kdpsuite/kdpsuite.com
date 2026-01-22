@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
-
-// Simple file-based storage for waitlist (will work on Vercel with serverless functions)
-const DATA_DIR = '/tmp';
-const WAITLIST_FILE = path.join(DATA_DIR, 'waitlist.json');
+import { createClient } from '@supabase/supabase-js';
 
 interface WaitlistEntry {
   id: string;
@@ -12,18 +7,17 @@ interface WaitlistEntry {
   created_at: string;
 }
 
-async function readWaitlist(): Promise<WaitlistEntry[]> {
-  try {
-    const data = await fs.readFile(WAITLIST_FILE, 'utf-8');
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
+// Create Supabase client with service role for API routes
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || '',
+  {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
   }
-}
-
-async function writeWaitlist(entries: WaitlistEntry[]): Promise<void> {
-  await fs.writeFile(WAITLIST_FILE, JSON.stringify(entries, null, 2));
-}
+);
 
 export async function POST(request: NextRequest) {
   try {
@@ -49,27 +43,46 @@ export async function POST(request: NextRequest) {
 
     const normalizedEmail = email.toLowerCase().trim();
 
-    // Read existing waitlist
-    const waitlist = await readWaitlist();
+    // Check if email already exists in waitlist
+    const { data: existing, error: checkError } = await supabase
+      .from('waitlist_signups')
+      .select('email')
+      .eq('email', normalizedEmail)
+      .single();
 
-    // Check for duplicates
-    const exists = waitlist.some(entry => entry.email === normalizedEmail);
-    if (exists) {
+    if (checkError && checkError.code !== 'PGRST116') {
+      // PGRST116 = no rows found (expected for new emails)
+      console.error('Error checking waitlist:', checkError);
+      return NextResponse.json(
+        { error: 'An error occurred while processing your request' },
+        { status: 500 }
+      );
+    }
+
+    if (existing) {
       return NextResponse.json(
         { error: 'This email is already on the waitlist' },
         { status: 409 }
       );
     }
 
-    // Add new entry
-    const newEntry: WaitlistEntry = {
-      id: Date.now().toString(),
-      email: normalizedEmail,
-      created_at: new Date().toISOString(),
-    };
+    // Insert new entry
+    const { data: newEntry, error: insertError } = await supabase
+      .from('waitlist_signups')
+      .insert({
+        email: normalizedEmail,
+        source: 'landing_page',
+      })
+      .select()
+      .single();
 
-    waitlist.push(newEntry);
-    await writeWaitlist(waitlist);
+    if (insertError) {
+      console.error('Error adding to waitlist:', insertError);
+      return NextResponse.json(
+        { error: 'Failed to add email to waitlist' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       {
@@ -93,16 +106,28 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const action = searchParams.get('action');
 
-    const waitlist = await readWaitlist();
+    // Get all waitlist entries
+    const { data: entries, error } = await supabase
+      .from('waitlist_signups')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching waitlist:', error);
+      return NextResponse.json(
+        { error: 'Failed to fetch waitlist' },
+        { status: 500 }
+      );
+    }
 
     if (action === 'count') {
-      return NextResponse.json({ count: waitlist.length });
+      return NextResponse.json({ count: entries?.length || 0 });
     }
 
     // Return all entries
-    return NextResponse.json({ 
-      entries: waitlist.reverse(), 
-      total: waitlist.length 
+    return NextResponse.json({
+      entries: entries || [],
+      total: entries?.length || 0,
     });
   } catch (error) {
     console.error('Waitlist API error:', error);

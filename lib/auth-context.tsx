@@ -43,8 +43,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const storedUser = localStorage.getItem('auth_user');
 
         if (storedSession && storedUser) {
-          setSession(JSON.parse(storedSession));
-          setUser(JSON.parse(storedUser));
+          const parsedSession = JSON.parse(storedSession);
+          const parsedUser = JSON.parse(storedUser);
+
+          // Optional: Validate session expiration if timestamp stored
+          setSession(parsedSession);
+          setUser(parsedUser);
         }
       } catch (error) {
         console.error('Failed to load session:', error);
