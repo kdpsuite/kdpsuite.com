@@ -8,12 +8,12 @@ export default function FeaturesPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const features = [
-    { icon: '📚', title: 'PDF to Coloring Book Converter', desc: 'Advanced AI-powered pdf to coloring book conversion with our kdp conversion software. Convert any PDF or image to professional KDP-compliant coloring books with customizable line art and filters. Our pdf to coloring book tool is the fastest in the industry for digital book publishing.' },
-    { icon: '✅', title: 'KDP Compliance Validation', desc: 'Automatic kdp compliance validation of margins, bleed, trim sizes, and DPI requirements. Our kdp publishing tools ensure your books meet all Amazon KDP requirements. Advanced validation for digital book publishing compliance.' },
-    { icon: '⚡', title: 'Batch Image Processing', desc: 'Process hundreds of images at once with real-time progress tracking. Our batch image processing features save hours of manual work with automated kdp workflow and batch pdf to coloring book conversion.' },
-    { icon: '🔗', title: 'Direct KDP Integration', desc: 'Seamless kdp integration with automated kdp workflow. Our Amazon KDP software integrates directly with your Amazon KDP account. Automated kdp workflow from creation to publication in minutes.' },
-    { icon: '📊', title: 'KDP Analytics & Revenue Tracking', desc: 'Advanced kdp analytics with kdp revenue analytics and publishing performance metrics. Track your KDP publishing performance in real-time dashboards. Monitor your Amazon KDP success with kdp analytics and revenue tracking.' },
-    { icon: '📱', title: 'Cross-Platform KDP Tools', desc: 'Access kdp publishing tools and Amazon KDP software from any device. Mobile app, web dashboard, and cloud sync for seamless automated kdp workflow. Your projects always at your fingertips.' },
+    { icon: '🎨', title: 'AI Coloring Book Converter', desc: 'Transform any image into print-ready line art. Upload a photo, get publication-ready coloring pages in seconds. No manual tracing. No expensive artists. Perfect for high-volume publishers.' },
+    { icon: '📚', title: '500+ KDP-Compliant Templates', desc: 'Journals, planners, coloring books, activity books, and more. Every template is pre-formatted for Amazon KDP specifications. Just customize and export. Built by publishing professionals who know KDP inside-out.' },
+    { icon: '⚡', title: 'Smart Formatting Engine', desc: 'Automatic bleed, trim, and margin calculations. No more rejected uploads. No more manual adjustments. Perfect KDP specs every time. Ensures compliance on first submission.' },
+    { icon: '🚀', title: 'Batch Processing', desc: 'Process multiple books simultaneously. Export dozens of projects in one click. Built for high-volume publishers who need speed. Scale your business without hiring a team.' },
+    { icon: '💰', title: 'Royalty Calculator', desc: 'Instant profit projections. Input your pricing, see your royalties across different markets. Make informed decisions before you publish. Know your exact earnings potential upfront.' },
+    { icon: '👥', title: 'Team Collaboration', desc: 'Share projects with designers, editors, and partners. Team tier includes multi-user workspaces for publishing teams. Work together seamlessly in one platform.' },
   ];
 
   const pricingPlans = [
@@ -154,39 +154,39 @@ export default function FeaturesPage() {
               </thead>
               <tbody>
                 <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 font-body">PDF to Coloring Book Converter</td>
+                  <td className="py-4 px-6 font-body">AI Coloring Book Converter</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
                 </tr>
                 <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 font-body">KDP Compliance Validation</td>
-                  <td className="text-center py-4 px-6 font-body">Basic</td>
+                  <td className="py-4 px-6 font-body">500+ KDP-Compliant Templates</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
-                  <td className="text-center py-4 px-6 font-body">✅</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 font-body">Batch Image Processing</td>
-                  <td className="text-center py-4 px-6 font-body">-</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
                 </tr>
                 <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 font-body">KDP Integration</td>
-                  <td className="text-center py-4 px-6 font-body">-</td>
+                  <td className="py-4 px-6 font-body">Smart Formatting Engine</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
                 </tr>
                 <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 font-body">KDP Analytics & Revenue Tracking</td>
-                  <td className="text-center py-4 px-6 font-body">-</td>
+                  <td className="py-4 px-6 font-body">Batch Processing</td>
+                  <td className="text-center py-4 px-6 font-body">Limited</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 font-body">Royalty Calculator</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
                 </tr>
                 <tr>
-                  <td className="py-4 px-6 font-body">API Access</td>
+                  <td className="py-4 px-6 font-body">Team Collaboration</td>
                   <td className="text-center py-4 px-6 font-body">-</td>
-                  <td className="text-center py-4 px-6 font-body">-</td>
+                  <td className="text-center py-4 px-6 font-body">✅</td>
                   <td className="text-center py-4 px-6 font-body">✅</td>
                 </tr>
               </tbody>
@@ -245,7 +245,8 @@ export default function FeaturesPage() {
 
       {/* CTA Section */}
       <section className="bg-primary text-white py-20">
-        <div className="container mx-auto px-4 text-center max-w-4xl mx-auto">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading">
             Ready to Transform Your KDP Business with Amazon KDP Software?
           </h2>
@@ -258,6 +259,7 @@ export default function FeaturesPage() {
           >
             Join Waitlist
           </Link>
+        </div>
         </div>
       </section>
 
