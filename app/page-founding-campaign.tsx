@@ -22,7 +22,7 @@ export default function FoundingCampaignPage() {
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <h1 style={{ fontSize: '3em', marginBottom: '20px', fontWeight: '700' }}>KDP Creator Suite</h1>
           <p style={{ fontSize: '1.4em', marginBottom: '30px', opacity: 0.95 }}>The All-in-One Platform for Amazon KDP Self-Publishers</p>
-          <p style={{ fontSize: '1.2em', margin: '20px 0' }}>Replace 5-8 tools you're paying $100-300/month for. Pay once. Use forever.</p>
+          <p style={{ fontSize: '1.2em', margin: '20px 0' }}>Replace 5-8 tools you&apos;re paying $100-300/month for. Pay once. Use forever.</p>
 
           {/* Hero Stats */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginTop: '30px', flexWrap: 'wrap' }}>
@@ -49,13 +49,13 @@ export default function FoundingCampaignPage() {
           <div style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.15em', lineHeight: '1.8' }}>
             <p style={{ marginBottom: '20px' }}>I built KDP Creator Suite over <strong style={{ color: '#667eea' }}>8 months using library WiFi while homeless</strong>. Zero budget. No cloud credits. No startup funding. Just me, a laptop, and a determination to solve a problem I lived every day.</p>
 
-            <p style={{ marginBottom: '20px' }}>As a KDP creator, I was paying over $180/month for tools: Canva Pro, Book Bolt, Creative Fabrica, formatting software, royalty calculators. That's <strong style={{ color: '#667eea' }}>$2,160 per year</strong> just to publish coloring books and journals.</p>
+            <p style={{ marginBottom: '20px' }}>As a KDP creator, I was paying over $180/month for tools: Canva Pro, Book Bolt, Creative Fabrica, formatting software, royalty calculators. That&apos;s <strong style={{ color: '#667eea' }}>$2,160 per year</strong> just to publish coloring books and journals.</p>
 
-            <p style={{ marginBottom: '20px' }}>I couldn't afford it. So I built something better.</p>
+            <p style={{ marginBottom: '20px' }}>I couldn&apos;t afford it. So I built something better.</p>
 
-            <p style={{ marginBottom: '20px' }}>This platform consolidates everything you need into one place. AI coloring book conversion, 500+ templates, smart formatting, batch processing, royalty calculations—all the tools you're currently overpaying for, in a single platform.</p>
+            <p style={{ marginBottom: '20px' }}>This platform consolidates everything you need into one place. AI coloring book conversion, 500+ templates, smart formatting, batch processing, royalty calculations—all the tools you&apos;re currently overpaying for, in a single platform.</p>
 
-            <p style={{ marginBottom: '20px' }}><strong style={{ color: '#667eea' }}>Now I'm launching with lifetime founding memberships.</strong> Pay once during this campaign, use it forever. No recurring fees. No subscription treadmill. Just permanent access as a founding member.</p>
+            <p style={{ marginBottom: '20px' }}><strong style={{ color: '#667eea' }}>Now I&apos;m launching with lifetime founding memberships.</strong> Pay once during this campaign, use it forever. No recurring fees. No subscription treadmill. Just permanent access as a founding member.</p>
           </div>
         </div>
       </section>
@@ -93,7 +93,7 @@ export default function FoundingCampaignPage() {
 
           {/* Pricing Tiers */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px', marginTop: '50px', marginBottom: '50px' }}>
-            {foundingCampaignPlans.map((plan, idx) => {
+            {foundingCampaignPlans.map((plan) => {
               const isFeatured = plan.id === 'professional_founding';
               return (
                 <div
@@ -184,7 +184,7 @@ export default function FoundingCampaignPage() {
 
           {/* Founder's Circle Special Section */}
           <div style={{ background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)', color: 'white', padding: '60px 20px', textAlign: 'center', marginTop: '50px', borderRadius: '15px' }}>
-            <h3 style={{ fontSize: '2.5em', marginBottom: '20px' }}>👑 Founder's Circle - $9,999</h3>
+            <h3 style={{ fontSize: '2.5em', marginBottom: '20px' }}>👑 Founder&apos;s Circle - $9,999</h3>
             <p style={{ fontSize: '1.2em', maxWidth: '800px', margin: '0 auto 30px', lineHeight: '1.8' }}>
               <strong>Your name on the app splash screen. Forever.</strong>
             </p>
@@ -239,11 +239,11 @@ export default function FoundingCampaignPage() {
               },
               {
                 q: 'What if you shut down?',
-                a: 'Even if I shut down after 6 months, you still got more value than paying monthly ($19/month × 6 = $114 vs your $99 one-time). But I\'m betting everything on making this work long-term. The platform is already built—this isn\'t vaporware.',
+                a: 'Even if I shut down after 6 months, you still got more value than paying monthly ($19/month × 6 = $114 vs your $99 one-time). But I&apos;m betting everything on making this work long-term. The platform is already built—this isn&apos;t vaporware.',
               },
               {
                 q: 'Why lifetime pricing instead of monthly from day one?',
-                a: 'I\'m bootstrapped with zero runway. Monthly subscriptions take 12-18 months to generate real cash flow. Lifetime funding gets me capital now to finish strong and launch fast. Backers get rewarded for taking early risk with permanent pricing.',
+                a: 'I&apos;m bootstrapped with zero runway. Monthly subscriptions take 12-18 months to generate real cash flow. Lifetime funding gets me capital now to finish strong and launch fast. Backers get rewarded for taking early risk with permanent pricing.',
               },
               {
                 q: 'What happens after founding spots sell out?',
@@ -251,11 +251,11 @@ export default function FoundingCampaignPage() {
               },
               {
                 q: 'Can I upgrade my tier later?',
-                a: 'Yes. You can upgrade from Starter to Professional or Enterprise by paying the difference. But you must be a founding member first—once lifetime spots are gone, upgrades won\'t be available.',
+                a: 'Yes. You can upgrade from Starter to Professional or Enterprise by paying the difference. But you must be a founding member first—once lifetime spots are gone, upgrades won&apos;t be available.',
               },
               {
                 q: 'Is this just another Canva clone?',
-                a: 'No. Canva is general design. KDP Creator Suite is built specifically for Amazon KDP publishing. We handle print specifications, KDP compliance, batch processing, and publishing workflows that Canva doesn\'t touch. Think Canva + Book Bolt + Creative Fabrica combined, optimized for KDP.',
+                a: 'No. Canva is general design. KDP Creator Suite is built specifically for Amazon KDP publishing. We handle print specifications, KDP compliance, batch processing, and publishing workflows that Canva doesn&apos;t touch. Think Canva + Book Bolt + Creative Fabrica combined, optimized for KDP.',
               },
             ].map((item, idx) => (
               <div key={idx} style={{ marginBottom: '30px' }}>
@@ -276,7 +276,7 @@ export default function FoundingCampaignPage() {
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <h2 style={{ color: 'white', fontSize: '2.5em', marginBottom: '30px' }}>Join the Founding Members</h2>
           <p style={{ fontSize: '1.3em', maxWidth: '700px', margin: '0 auto 30px' }}>
-            1,185 lifetime spots. Once they're gone, monthly subscriptions begin. This is your only chance to pay once and own it forever.
+            1,185 lifetime spots. Once they&apos;re gone, monthly subscriptions begin. This is your only chance to pay once and own it forever.
           </p>
           <a
             href="#pricing"

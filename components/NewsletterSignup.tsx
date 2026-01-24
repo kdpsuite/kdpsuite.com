@@ -39,7 +39,7 @@ export default function NewsletterSignup() {
         setStatus('error');
         setMessage(data.error || '✗ Something went wrong');
       }
-    } catch (error) {
+    } catch {
       setStatus('error');
       setMessage('✗ Network error. Please try again.');
     }

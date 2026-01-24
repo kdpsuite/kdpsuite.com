@@ -44,7 +44,7 @@ export default function ContactPage() {
         setStatus('error');
         setResponseMessage(data.error || 'Something went wrong. Please try again.');
       }
-    } catch (err) {
+    } catch {
       setStatus('error');
       setResponseMessage('Network error. Please check your connection and try again.');
     }

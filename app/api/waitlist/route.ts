@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-interface WaitlistEntry {
-  id: string;
-  email: string;
-  created_at: string;
-}
-
 // Create Supabase client with service role for API routes
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || '',

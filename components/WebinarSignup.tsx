@@ -32,7 +32,7 @@ export default function WebinarSignup() {
       } else {
         setStatus('error');
       }
-    } catch (_error) {
+    } catch {
       setStatus('error');
     }
   };
