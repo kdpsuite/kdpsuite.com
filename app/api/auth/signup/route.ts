@@ -84,11 +84,6 @@ export async function POST(request: NextRequest) {
           avatarUrl: null,
           subscriptionTier: 'free',
         },
-        session: {
-          access_token: authData.session?.access_token || '',
-          refresh_token: authData.session?.refresh_token || '',
-          expires_in: authData.session?.expires_in || 3600,
-        },
       },
       { status: 201 }
     );
