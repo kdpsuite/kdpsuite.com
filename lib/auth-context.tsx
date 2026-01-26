@@ -9,6 +9,12 @@ export interface AuthUser {
   username?: string | null;
   avatarUrl?: string | null;
   subscriptionTier?: string;
+  stripe_customer_id?: string | null;
+  subscription_id?: string | null;
+  subscription_plan?: string | null;
+  subscription_status?: 'active' | 'inactive' | 'cancelled' | 'past_due';
+  subscription_start_date?: string | null;
+  subscription_end_date?: string | null;
 }
 
 export interface AuthSession {
@@ -26,6 +32,10 @@ interface AuthContextType {
   signup: (email: string, password: string, fullName: string) => Promise<void>;
   logout: () => Promise<void>;
   updateUser: (user: Partial<AuthUser>) => void;
+  refreshSubscriptionStatus: () => Promise<void>;
+  isSubscriptionActive: () => boolean;
+  isSubscriptionExpired: () => boolean;
+  daysUntilExpiry: () => number | null;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -133,6 +143,48 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const refreshSubscriptionStatus = async () => {
+    if (!user) return;
+
+    try {
+      const response = await fetch('/api/user/subscription', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${session?.access_token}`,
+        },
+      });
+
+      if (response.ok) {
+        const subscriptionData = await response.json();
+        updateUser(subscriptionData);
+      }
+    } catch (error) {
+      console.error('Failed to refresh subscription status:', error);
+    }
+  };
+
+  const isSubscriptionActive = (): boolean => {
+    return user?.subscription_status === 'active';
+  };
+
+  const isSubscriptionExpired = (): boolean => {
+    if (!user?.subscription_end_date) return true;
+
+    const expiryDate = new Date(user.subscription_end_date);
+    return new Date() > expiryDate;
+  };
+
+  const daysUntilExpiry = (): number | null => {
+    if (!user?.subscription_end_date) return null;
+
+    const expiryDate = new Date(user.subscription_end_date);
+    const now = new Date();
+    const diffTime = expiryDate.getTime() - now.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    return diffDays > 0 ? diffDays : 0;
+  };
+
   const value: AuthContextType = {
     user,
     session,
@@ -142,6 +194,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signup,
     logout,
     updateUser,
+    refreshSubscriptionStatus,
+    isSubscriptionActive,
+    isSubscriptionExpired,
+    daysUntilExpiry,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
