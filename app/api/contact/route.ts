@@ -1,16 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-// Configure your email service here
-// For production, use environment variables
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER || 'contact.kdpcreatorsuite@gmail.com',
-    pass: process.env.EMAIL_PASSWORD || '',
-  },
-});
-
 interface ContactFormData {
   name: string;
   email: string;
@@ -54,6 +44,16 @@ export async function POST(request: NextRequest) {
         { status: 200 }
       );
     }
+
+    // Configure your email service here
+    // For production, use environment variables
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER || 'contact.kdpcreatorsuite@gmail.com',
+        pass: process.env.EMAIL_PASSWORD || '',
+      },
+    });
 
     // Send email to admin
     const adminMailOptions = {
@@ -119,4 +119,3 @@ function escapeHtml(text: string): string {
   };
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
-
