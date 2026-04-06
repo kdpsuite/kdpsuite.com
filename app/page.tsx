@@ -16,6 +16,35 @@ export default function FoundingCampaignPage() {
           <h1 style={{ fontSize: '3em', marginBottom: '20px', fontWeight: '700' }}>KDP Creator Suite</h1>
           <p style={{ fontSize: '1.4em', marginBottom: '30px', opacity: 0.95 }}>The All-in-One Platform for Amazon KDP Self-Publishers</p>
           <p style={{ fontSize: '1.2em', margin: '20px 0' }}>Replace 5-8 tools you&apos;re paying $100-300/month for. Pay once. Use forever.</p>
+          
+          <div style={{ marginTop: '30px' }}>
+            <a
+              href="https://dashboard.kdpsuite.com"
+              style={{
+                display: 'inline-block',
+                background: 'rgba(255, 255, 255, 0.2)',
+                color: 'white',
+                padding: '12px 30px',
+                borderRadius: '30px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '1.1em',
+                transition: 'all 0.3s ease',
+                border: '2px solid white',
+                cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = 'white';
+                (e.currentTarget as HTMLElement).style.color = '#667eea';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.2)';
+                (e.currentTarget as HTMLElement).style.color = 'white';
+              }}
+            >
+              Access Dashboard
+            </a>
+          </div>
 
           {/* Hero Stats */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginTop: '30px', flexWrap: 'wrap' }}>
@@ -228,7 +257,7 @@ export default function FoundingCampaignPage() {
             {[
               {
                 q: 'When will the platform be ready?',
-                a: 'Beta launches in 60 days for founding members. Public launch in 90-120 days. You&apos;ll get beta access before anyone else and can start using core features immediately.',
+                a: 'The platform is live! Founding members can access the dashboard immediately and start using core features like the AI Coloring Book Converter and KDP-compliant templates.',
               },
               {
                 q: 'What if you shut down?',
