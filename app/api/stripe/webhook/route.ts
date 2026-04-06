@@ -29,25 +29,30 @@ export async function POST(request: NextRequest) {
 
   const supabase = supabaseUrl && supabaseServiceKey
     ? createClient(supabaseUrl, supabaseServiceKey)
-    : null;  }
+    : null;
+
+  if (!supabase) {
+    console.error('Supabase client not initialized - missing environment variables');
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
 
   try {
     switch (event.type) {
       case 'customer.subscription.created':
       case 'customer.subscription.updated':
-        await handleSubscriptionEvent(event.data.object);
+        await handleSubscriptionEvent(supabase, event.data.object);
         break;
 
       case 'customer.subscription.deleted':
-        await handleSubscriptionCanceled(event.data.object);
+        await handleSubscriptionCanceled(supabase, event.data.object);
         break;
 
       case 'invoice.payment_succeeded':
-        await handleInvoicePaymentSucceeded(event.data.object);
+        await handleInvoicePaymentSucceeded(supabase, event.data.object);
         break;
 
       case 'invoice.payment_failed':
-        await handleInvoicePaymentFailed(event.data.object);
+        await handleInvoicePaymentFailed(supabase, event.data.object);
         break;
 
       default:
@@ -64,12 +69,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function handleSubscriptionEvent(subscription: Record<string, any>) {
-  if (!supabase) {
-    console.error('Supabase client not initialized');
-    return;
-  }
-
+async function handleSubscriptionEvent(supabase: any, subscription: Record<string, any>) {
   const customerEmail = subscription.metadata?.email;
 
   if (!customerEmail) {
@@ -107,12 +107,7 @@ async function handleSubscriptionEvent(subscription: Record<string, any>) {
   }
 }
 
-async function handleSubscriptionCanceled(subscription: Record<string, any>) {
-  if (!supabase) {
-    console.error('Supabase client not initialized');
-    return;
-  }
-
+async function handleSubscriptionCanceled(supabase: any, subscription: Record<string, any>) {
   const { error } = await supabase
     .from('subscriptions')
     .update({ status: 'canceled', updated_at: new Date() })
@@ -123,12 +118,7 @@ async function handleSubscriptionCanceled(subscription: Record<string, any>) {
   }
 }
 
-async function handleInvoicePaymentSucceeded(invoice: Record<string, any>) {
-  if (!supabase) {
-    console.error('Supabase client not initialized');
-    return;
-  }
-
+async function handleInvoicePaymentSucceeded(supabase: any, invoice: Record<string, any>) {
   const { error } = await supabase.from('invoices').upsert(
     {
       stripe_invoice_id: invoice.id,
@@ -147,12 +137,7 @@ async function handleInvoicePaymentSucceeded(invoice: Record<string, any>) {
   }
 }
 
-async function handleInvoicePaymentFailed(invoice: Record<string, any>) {
-  if (!supabase) {
-    console.error('Supabase client not initialized');
-    return;
-  }
-
+async function handleInvoicePaymentFailed(supabase: any, invoice: Record<string, any>) {
   const { error } = await supabase.from('invoices').upsert(
     {
       stripe_invoice_id: invoice.id,
@@ -169,4 +154,3 @@ async function handleInvoicePaymentFailed(invoice: Record<string, any>) {
     console.error('Error recording failed invoice:', error);
   }
 }
-

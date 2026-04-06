@@ -1,6 +1,6 @@
 'use client';
 
-import { foundingCampaignPlans } from '@/lib/stripe';
+import { foundingCampaignPlans } from '@/lib/pricing-data';
 
 export default function FoundingCampaignPage() {
   return (

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { pricingPlans } from '@/lib/stripe';
+import { pricingPlans } from '@/lib/pricing-data';
 
 export default function PricingPage() {
   const [email, setEmail] = useState('');

@@ -1,13 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-);
-
 export async function GET(request: NextRequest) {
   try {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error('Supabase not configured - missing environment variables');
+      return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
     const authHeader = request.headers.get('Authorization');
     if (!authHeader?.startsWith('Bearer ')) {
       return NextResponse.json({ error: 'Missing authorization' }, { status: 401 });
@@ -23,6 +28,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Fetch user profile with subscription data
+    // Note: Ensure these columns exist in your Supabase user_profiles table
     const { data, error } = await supabase
       .from('user_profiles')
       .select('stripe_customer_id, subscription_id, subscription_plan, subscription_status, subscription_start_date, subscription_end_date')
@@ -30,6 +36,7 @@ export async function GET(request: NextRequest) {
       .single();
 
     if (error) {
+      console.error('Database fetch error:', error);
       return NextResponse.json({ error: 'Failed to fetch subscription' }, { status: 500 });
     }
 
