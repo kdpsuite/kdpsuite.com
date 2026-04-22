@@ -1,7 +1,7 @@
 # Critical Features Implementation Guide (v0.9.0)
 
 ## Overview
-This document outlines the implementation of 7 critical features for engagement and conversion from the "Critical Features to Add for Engagement & Conversion" guide.
+This document outlines the implementation of 6 critical features for engagement and conversion from the "Critical Features to Add for Engagement & Conversion" guide.
 
 ---
 
@@ -48,53 +48,9 @@ import NewsletterSignup from '@/components/NewsletterSignup';
 
 ---
 
-### 2. Live Chat Support (Intercom)
-**Status:** ✅ IMPLEMENTED
-**Expected Impact:**
-- +15-25% conversion increase
-- Reduces bounce rate
-- Better customer satisfaction
-
-**Files Created:**
-- `components/IntercomChat.tsx` - Intercom widget integration
-
-**Integration Steps:**
-```tsx
-// Add to app/layout.tsx
-import IntercomChat from '@/components/IntercomChat';
-
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <body>
-        <IntercomChat />
-        {children}
-      </body>
-    </html>
-  );
-}
-```
-
-**Setup Instructions:**
-1. Sign up at https://www.intercom.com
-2. Get your App ID from Intercom dashboard
-3. Add to `.env.local`:
-   ```
-   NEXT_PUBLIC_INTERCOM_APP_ID=your_app_id
-   ```
-4. Component will automatically load Intercom widget on all pages
-
-**Alternative Chat Solutions:**
-- Drift (Conversational marketing)
-- Zendesk (Customer support)
-- Freshchat (Omnichannel)
-- Crisp (Lightweight)
-
----
-
 ## 🟡 HIGH PRIORITY FEATURES (Week 2-3)
 
-### 3. Pricing Comparison Table
+### 2. Pricing Comparison Table
 **Status:** ✅ IMPLEMENTED
 **Expected Impact:** +10-15% conversion increase
 
@@ -123,7 +79,7 @@ import PricingComparison from '@/components/PricingComparison';
 
 ---
 
-### 4. Referral Program
+### 3. Referral Program
 **Status:** ✅ IMPLEMENTED
 **Expected Impact:** +10-20% viral growth
 
@@ -151,7 +107,7 @@ import ReferralProgram from '@/components/ReferralProgram';
 
 ---
 
-### 5. Case Studies/Success Stories
+### 4. Case Studies/Success Stories
 **Status:** ✅ IMPLEMENTED
 **Expected Impact:** +10-15% conversion increase
 
@@ -183,7 +139,7 @@ Edit the `studies` array in `components/CaseStudies.tsx` with:
 
 ## 🟢 MEDIUM PRIORITY FEATURES (Week 3+)
 
-### 6. Webinar/Demo Signup
+### 5. Webinar/Demo Signup
 **Status:** ✅ IMPLEMENTED
 **Expected Impact:** +5-10% lead generation
 
@@ -237,7 +193,6 @@ import WebinarSignup from '@/components/WebinarSignup';
 
 ### Week 1 (CRITICAL)
 - [ ] Email Newsletter Signup (2 hours)
-- [ ] Live Chat Support - Intercom (1 hour)
 - [ ] Case Studies (1 hour)
 - **Expected Impact:** +15-25% conversions
 
@@ -280,11 +235,8 @@ import WebinarSignup from '@/components/WebinarSignup';
 ```env
 # Newsletter
 NEXT_PUBLIC_NEWSLETTER_SERVICE=mailchimp
-MAILCHIMP_API_KEY=your_key
-MAILCHIMP_LIST_ID=your_list_id
-
-# Live Chat
-NEXT_PUBLIC_INTERCOM_APP_ID=your_app_id
+NEXT_PUBLIC_NEWSLETTER_API_KEY=your_key
+NEXT_PUBLIC_NEWSLETTER_LIST_ID=your_list_id
 
 # Webinar
 WEBINAR_API_KEY=your_key
@@ -301,7 +253,6 @@ NEXT_PUBLIC_USER_ID=user_id_from_session
 | Component | File | Priority | Impact | Time |
 |-----------|------|----------|--------|------|
 | Newsletter Signup | `NewsletterSignup.tsx` | 🔴 CRITICAL | +5-10% conversions | 2h |
-| Intercom Chat | `IntercomChat.tsx` | 🔴 CRITICAL | +15-25% conversions | 1h |
 | Pricing Comparison | `PricingComparison.tsx` | 🟡 HIGH | +10-15% conversions | 1h |
 | Case Studies | `CaseStudies.tsx` | 🟡 HIGH | +10-15% conversions | 1h |
 | Referral Program | `ReferralProgram.tsx` | 🟡 HIGH | +10-20% growth | 3h |
@@ -313,10 +264,9 @@ NEXT_PUBLIC_USER_ID=user_id_from_session
 
 1. **Integrate Components** into your pages using the integration guides above
 2. **Set Up Email Service** (Mailchimp recommended for beginners)
-3. **Configure Intercom** for live chat support
-4. **Test All Features** locally with `npm run dev`
-5. **Deploy to Production** and monitor analytics
-6. **Optimize Based on Data** - A/B test and refine
+3. **Test All Features** locally with `npm run dev`
+4. **Deploy to Production** and monitor analytics
+5. **Optimize Based on Data** - A/B test and refine
 
 ---
 
