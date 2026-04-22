@@ -42,7 +42,7 @@ export default function PricingComparison() {
                 <th className="text-center p-4 font-semibold text-neutral font-heading">
                   Free
                 </th>
-                <th className="text-center p-4 font-semibold text-primary font-heading">
+                <th className="text-center p-4 font-semibold text-neutral font-heading">
                   Pro
                 </th>
                 <th className="text-center p-4 font-semibold text-neutral font-heading">

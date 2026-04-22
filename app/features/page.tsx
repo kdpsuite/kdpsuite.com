@@ -204,24 +204,29 @@ export default function FeaturesPage() {
           {pricingPlans.map((plan, idx) => (
             <div
               key={idx}
-              className={`rounded-3xl p-8 transition-all duration-300 ${
+              className={`rounded-3xl p-8 transition-all duration-300 relative ${
                 plan.highlighted
-                  ? 'bg-primary text-white shadow-2xl transform scale-105'
+                  ? 'bg-gray-50 border-2 border-primary shadow-2xl transform scale-105 z-10'
                   : 'bg-gray-50 border border-gray-200 shadow-lg hover:shadow-xl'
               }`}
             >
-              <h3 className={`text-2xl font-bold mb-2 font-heading ${plan.highlighted ? 'text-white' : 'text-neutral'}`}>
+              {plan.highlighted && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider">
+                  Most Popular
+                </div>
+              )}
+              <h3 className="text-2xl font-bold mb-2 font-heading text-neutral">
                 {plan.name}
               </h3>
               <div className="mb-6">
-                <span className={`text-4xl font-bold font-heading ${plan.highlighted ? 'text-white' : 'text-primary'}`}>
+                <span className="text-4xl font-bold font-heading text-primary">
                   {plan.price}
                 </span>
-                <span className={`text-sm ml-2 ${plan.highlighted ? 'text-white text-opacity-80' : 'text-gray-600'}`}>
+                <span className="text-sm ml-2 text-gray-600">
                   {plan.period}
                 </span>
               </div>
-              <ul className={`space-y-3 mb-8 font-body ${plan.highlighted ? 'text-white text-opacity-90' : 'text-gray-700'}`}>
+              <ul className="space-y-3 mb-8 font-body text-gray-700">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <span className="text-lg">✓</span>
@@ -230,11 +235,7 @@ export default function FeaturesPage() {
                 ))}
               </ul>
               <button
-                className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 font-heading ${
-                  plan.highlighted
-                    ? 'bg-white text-primary hover:bg-opacity-90'
-                    : 'bg-primary text-white hover:bg-opacity-90'
-                }`}
+                className="w-full py-3 rounded-lg font-semibold transition-all duration-300 font-heading bg-primary text-white hover:bg-opacity-90"
               >
                 Get Started
               </button>
