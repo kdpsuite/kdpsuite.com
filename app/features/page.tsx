@@ -28,7 +28,6 @@ export default function FeaturesPage() {
       price: '$79',
       period: '/month',
       features: ['Everything in Starter', 'Batch Image Processing', 'Unlimited images/month', 'KDP Analytics', 'Priority Support', 'Direct KDP Integration'],
-      highlighted: true,
     },
     {
       name: 'Studio',

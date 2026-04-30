@@ -105,21 +105,17 @@ export default function FoundingCampaignPage() {
                     boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
                     textAlign: 'center',
                     position: 'relative',
-                    border: isFeatured ? '3px solid #667eea' : '3px solid transparent',
-                    transform: isFeatured ? 'scale(1.05)' : 'scale(1)',
+                    border: '3px solid transparent',
+                    transform: 'scale(1)',
                     transition: 'all 0.3s ease',
                   }}
                   onMouseEnter={(e) => {
-                    if (!isFeatured) {
-                      (e.currentTarget as HTMLElement).style.transform = 'translateY(-5px)';
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 30px rgba(0,0,0,0.15)';
-                    }
+                    (e.currentTarget as HTMLElement).style.transform = 'translateY(-5px)';
+                    (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 30px rgba(0,0,0,0.15)';
                   }}
                   onMouseLeave={(e) => {
-                    if (!isFeatured) {
-                      (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
-                    }
+                    (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
+                    (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
                   }}
                 >
                   <div style={{ background: '#667eea', color: 'white', padding: '5px 15px', borderRadius: '20px', fontSize: '0.8em', fontWeight: '600', display: 'inline-block', marginBottom: '15px' }}>
