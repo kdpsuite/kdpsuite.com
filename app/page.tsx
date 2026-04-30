@@ -144,7 +144,7 @@ export default function FoundingCampaignPage() {
 
                   <ul style={{ listStyle: 'none', margin: '25px 0', textAlign: 'left' }}>
                     {plan.features.map((feature, fidx) => (
-                      <li key={fidx} style={{ padding: '8px 0', paddingLeft: '25px', position: 'relative' }}>
+                      <li key={fidx} style={{ padding: '8px 0', paddingLeft: '25px', position: 'relative', color: '#2c3e50' }}>
                         <span style={{ position: 'absolute', left: '0', color: '#27ae60', fontWeight: 'bold' }}>✓</span>
                         {feature}
                       </li>
@@ -239,11 +239,11 @@ export default function FoundingCampaignPage() {
               },
               {
                 q: 'What if you shut down?',
-                a: 'Even if I shut down after 6 months, you still got more value than paying monthly ($19/month × 6 = $114 vs your $99 one-time). But I&apos;m betting everything on making this work long-term. The platform is already built—this isn&apos;t vaporware.',
+                a: 'Even if I shut down after 6 months, you still got more value than paying monthly ($19/month × 6 = $114 vs your $99 one-time). But I&apos;m betting everything on making this work for the next decade.',
               },
               {
                 q: 'Why lifetime pricing instead of monthly from day one?',
-                a: 'I&apos;m bootstrapped with zero runway. Monthly subscriptions take 12-18 months to generate real cash flow. Lifetime funding gets me capital now to finish strong and launch fast. Backers get rewarded for taking early risk with permanent pricing.',
+                a: 'I&apos;m bootstrapped with zero runway. Monthly subscriptions take 12-18 months to generate real cash flow. Lifetime funding gets me capital now to finish strong and launch fast.',
               },
               {
                 q: 'What happens after founding spots sell out?',
@@ -251,11 +251,11 @@ export default function FoundingCampaignPage() {
               },
               {
                 q: 'Can I upgrade my tier later?',
-                a: 'Yes. You can upgrade from Starter to Professional or Enterprise by paying the difference. But you must be a founding member first—once lifetime spots are gone, upgrades won&apos;t be available.',
+                a: 'Yes. You can upgrade from Starter to Professional or Enterprise by paying the difference. But you must be a founding member first—once lifetime spots are gone, upgrades won\'t be possible.',
               },
               {
                 q: 'Is this just another Canva clone?',
-                a: 'No. Canva is general design. KDP Creator Suite is built specifically for Amazon KDP publishing. We handle print specifications, KDP compliance, batch processing, and publishing workflows that Canva doesn&apos;t touch. Think Canva + Book Bolt + Creative Fabrica combined, optimized for KDP.',
+                a: 'No. Canva is general design. KDP Creator Suite is built specifically for Amazon KDP publishing. We handle print specifications, KDP compliance, batch processing, and publishing workflows.',
               },
             ].map((item, idx) => (
               <div key={idx} style={{ marginBottom: '30px' }}>
