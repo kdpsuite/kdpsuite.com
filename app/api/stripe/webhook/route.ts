@@ -77,80 +77,176 @@ async function handleSubscriptionEvent(supabase: any, subscription: Record<strin
     return;
   }
 
-  const { data: user } = await supabase
-    .from('users')
+  // Query user_profiles instead of users table
+  const { data: userProfile } = await supabase
+    .from('user_profiles')
     .select('id')
     .eq('email', customerEmail)
     .single();
 
-  if (!user) {
-    console.warn(`User not found for email: ${customerEmail}`);
+  if (!userProfile) {
+    console.warn(`User profile not found for email: ${customerEmail}`);
     return;
   }
 
-  const { error } = await supabase.from('subscriptions').upsert(
+  // Update user_profiles with subscription information
+  const { error: profileError } = await supabase
+    .from('user_profiles')
+    .update({
+      stripe_customer_id: subscription.customer,
+      subscription_id: subscription.id,
+      subscription_plan: subscription.items.data[0]?.price.id,
+      subscription_status: subscription.status,
+      subscription_start_date: new Date(subscription.current_period_start * 1000).toISOString(),
+      subscription_end_date: new Date(subscription.current_period_end * 1000).toISOString(),
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', userProfile.id);
+
+  if (profileError) {
+    console.error('Failed to update user profile with subscription:', profileError);
+    return;
+  }
+
+  // Also upsert into subscriptions table for historical tracking
+  const { error: subscriptionError } = await supabase.from('subscriptions').upsert(
     {
-      user_id: user.id,
+      user_id: userProfile.id,
       stripe_subscription_id: subscription.id,
       stripe_customer_id: subscription.customer,
       status: subscription.status,
-      current_period_start: new Date(subscription.current_period_start * 1000),
-      current_period_end: new Date(subscription.current_period_end * 1000),
+      current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
+      current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
       plan_id: subscription.items.data[0]?.price.id,
-      updated_at: new Date(),
+      updated_at: new Date().toISOString(),
     },
     { onConflict: 'stripe_subscription_id' }
   );
 
-  if (error) {
-    console.error('Error updating subscription in Supabase:', error);
+  if (subscriptionError) {
+    console.error('Failed to upsert subscription record:', subscriptionError);
   }
 }
 
 async function handleSubscriptionCanceled(supabase: any, subscription: Record<string, any>) {
+  // Update user_profiles to reflect canceled subscription
   const { error } = await supabase
-    .from('subscriptions')
-    .update({ status: 'canceled', updated_at: new Date() })
-    .eq('stripe_subscription_id', subscription.id);
+    .from('user_profiles')
+    .update({
+      subscription_status: 'cancelled',
+      subscription_end_date: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    })
+    .eq('stripe_customer_id', subscription.customer);
 
   if (error) {
-    console.error('Error updating canceled subscription:', error);
+    console.error('Failed to update subscription status on cancellation:', error);
+  }
+
+  // Also update subscriptions table
+  const { error: subscriptionError } = await supabase
+    .from('subscriptions')
+    .update({
+      status: 'cancelled',
+      updated_at: new Date().toISOString(),
+    })
+    .eq('stripe_subscription_id', subscription.id);
+
+  if (subscriptionError) {
+    console.error('Failed to update subscription record on cancellation:', subscriptionError);
   }
 }
 
 async function handleInvoicePaymentSucceeded(supabase: any, invoice: Record<string, any>) {
+  const customerEmail = invoice.customer_email;
+
+  if (!customerEmail) {
+    console.warn('No email found in invoice');
+    return;
+  }
+
+  const { data: userProfile } = await supabase
+    .from('user_profiles')
+    .select('id')
+    .eq('email', customerEmail)
+    .single();
+
+  if (!userProfile) {
+    console.warn(`User profile not found for email: ${customerEmail}`);
+    return;
+  }
+
+  // Upsert invoice record
   const { error } = await supabase.from('invoices').upsert(
     {
+      user_id: userProfile.id,
       stripe_invoice_id: invoice.id,
       stripe_customer_id: invoice.customer,
-      amount: invoice.amount_paid,
+      amount_paid: invoice.amount_paid,
       currency: invoice.currency,
-      status: 'paid',
-      paid_at: new Date(invoice.paid_date * 1000),
-      updated_at: new Date(),
+      status: invoice.status,
+      invoice_date: new Date(invoice.created * 1000).toISOString(),
+      due_date: invoice.due_date ? new Date(invoice.due_date * 1000).toISOString() : null,
+      paid_date: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     },
     { onConflict: 'stripe_invoice_id' }
   );
 
   if (error) {
-    console.error('Error recording paid invoice:', error);
+    console.error('Failed to upsert invoice record:', error);
   }
 }
 
 async function handleInvoicePaymentFailed(supabase: any, invoice: Record<string, any>) {
-  const { error } = await supabase.from('invoices').upsert(
+  const customerEmail = invoice.customer_email;
+
+  if (!customerEmail) {
+    console.warn('No email found in invoice');
+    return;
+  }
+
+  const { data: userProfile } = await supabase
+    .from('user_profiles')
+    .select('id')
+    .eq('email', customerEmail)
+    .single();
+
+  if (!userProfile) {
+    console.warn(`User profile not found for email: ${customerEmail}`);
+    return;
+  }
+
+  // Update user_profiles to reflect payment failure
+  const { error: profileError } = await supabase
+    .from('user_profiles')
+    .update({
+      subscription_status: 'past_due',
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', userProfile.id);
+
+  if (profileError) {
+    console.error('Failed to update subscription status on payment failure:', profileError);
+  }
+
+  // Upsert invoice record with failed status
+  const { error: invoiceError } = await supabase.from('invoices').upsert(
     {
+      user_id: userProfile.id,
       stripe_invoice_id: invoice.id,
       stripe_customer_id: invoice.customer,
-      amount: invoice.amount_due,
+      amount_paid: invoice.amount_paid,
       currency: invoice.currency,
       status: 'failed',
-      updated_at: new Date(),
+      invoice_date: new Date(invoice.created * 1000).toISOString(),
+      due_date: invoice.due_date ? new Date(invoice.due_date * 1000).toISOString() : null,
+      updated_at: new Date().toISOString(),
     },
     { onConflict: 'stripe_invoice_id' }
   );
 
-  if (error) {
-    console.error('Error recording failed invoice:', error);
+  if (invoiceError) {
+    console.error('Failed to upsert invoice record:', invoiceError);
   }
 }

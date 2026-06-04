@@ -74,6 +74,42 @@ export async function POST(request: NextRequest) {
       console.error('Profile creation error:', profileError);
     }
 
+    // Create a session for the newly created user
+    const { data: sessionData, error: sessionError } =
+      await supabase.auth.admin.createSession(authData.user.id);
+
+    if (sessionError) {
+      console.error('Session creation error:', sessionError);
+    }
+
+    // Sync user to Flask backend for dashboard access
+    const dashboardBackendUrl =
+      process.env.NEXT_PUBLIC_DASHBOARD_API_URL ||
+      'http://localhost:5000/api';
+    try {
+      const syncResponse = await fetch(
+        `${dashboardBackendUrl}/sync-supabase-user`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            supabase_token: sessionData?.session?.access_token || '',
+            email,
+            username: fullName.toLowerCase().replace(/\s+/g, '_'),
+          }),
+        }
+      );
+
+      if (!syncResponse.ok) {
+        console.warn(
+          'Failed to sync user to dashboard backend:',
+          await syncResponse.text()
+        );
+      }
+    } catch (syncError) {
+      console.warn('Dashboard sync error (non-critical):', syncError);
+    }
+
     return NextResponse.json(
       {
         user: {
@@ -84,6 +120,13 @@ export async function POST(request: NextRequest) {
           avatarUrl: null,
           subscriptionTier: 'free',
         },
+        session: sessionData?.session
+          ? {
+              access_token: sessionData.session.access_token,
+              refresh_token: sessionData.session.refresh_token || '',
+              expires_in: sessionData.session.expires_in || 3600,
+            }
+          : null,
       },
       { status: 201 }
     );
