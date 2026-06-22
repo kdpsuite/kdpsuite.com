@@ -1,0 +1,35 @@
+# Amazon KDP Software & Professional KDP Publishing Tools
+
+> This site offers comprehensive tools and resources for digital book publishing on Amazon KDP, including PDF to coloring book conversion, compliance validation, analytics, and workflow automation.
+
+Amazon KDP software suite designed for creators and publishers to streamline, automate, and optimize their digital publishing process. Features include AI-powered coloring book conversion, compliance validation, batch image processing, direct KDP integration, and real-time analytics. Suitable for hobbyists and professional studios seeking efficient self-publishing solutions.
+
+## Core Content
+- Overview of Amazon KDP tools and suite
+- PDF to coloring book conversion details
+- KDP compliance validation guidelines
+- Batch image processing features
+- KDP integration and automation workflows
+- Publishing performance metrics and analytics
+- Cross-platform accessibility (web, mobile, cloud)
+
+## Resources and Features
+- Pricing plans: Free, Pro, Studio
+- Features comparison and benefits
+- How-to guides for using AI-powered conversion tools
+- Step-by-step process for KDP compliance
+- Managing and tracking KDP revenue and analytics
+- Seamless workflow automation with API and integrations
+
+## Important Pages
+- [Join the Waitlist](https://kdpsuite.com)
+- [Features Overview](https://kdpsuite.com/features)
+- [Pricing Plans](https://kdpsuite.com/pricing)
+- [KDP Compliance Validation](https://kdpsuite.com/validation)
+- [KDP Analytics and Revenue](https://kdpsuite.com/analytics)
+- [Contact and Support](https://kdpsuite.com/contact)
+
+## Optional
+- Blog and industry news updates
+- User testimonials and success stories
+- Additional tutorials and how-to content
