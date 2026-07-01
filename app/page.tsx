@@ -230,24 +230,24 @@ export default function FoundingCampaignPage() {
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             {[
               {
-                q: 'When will the platform be ready?',
-                a: 'Beta launches in 60 days for founding members. Public launch in 90-120 days. You\'ll get beta access before anyone else and can start using core features immediately.',
+                q: 'When can I start using the platform?',
+                a: 'Beta access for founding members begins in **60 days**. The public launch is scheduled for 90-120 days. As a founding member, you gain early access to core features and influence development before anyone else.'
               },
               {
-                q: 'What if you shut down?',
-                a: 'Even if I shut down after 6 months, you still got more value than paying monthly ($19/month × 6 = $114 vs your $99 one-time). But I&apos;m betting everything on making this work for the next decade.',
+                q: 'What is the long-term vision for KDP Creator Suite?',
+                a: 'I am betting everything on making this platform the **definitive tool for KDP publishers for the next decade and beyond**. My commitment is to continuous innovation and support. Even in an unlikely scenario of early shutdown, your one-time payment would still provide more value than several months of a typical subscription.'
               },
               {
-                q: 'Why lifetime pricing instead of monthly from day one?',
-                a: 'I&apos;m bootstrapped with zero runway. Monthly subscriptions take 12-18 months to generate real cash flow. Lifetime funding gets me capital now to finish strong and launch fast.',
+                q: 'Why offer lifetime pricing instead of standard monthly subscriptions?',
+                a: 'As a bootstrapped founder with zero external funding, monthly subscriptions typically take 12-18 months to generate substantial cash flow. This limited lifetime founding campaign provides the crucial capital needed **now** to accelerate development, finalize features, and launch strong and fast.'
               },
               {
-                q: 'What happens after founding spots sell out?',
-                a: 'The platform switches to monthly subscriptions: $19/month (Starter), $49/month (Professional), $99/month (Enterprise). Lifetime access will never be available again. This is your only chance.',
+                q: 'What happens once all founding spots are claimed?',
+                a: 'Once these exclusive founding spots are completely sold out, the platform will permanently transition to a standard monthly subscription model: $19/month (Starter), $49/month (Professional), $99/month (Enterprise). **Lifetime access will never be offered again.** This is truly your singular opportunity.'
               },
               {
                 q: 'Can I upgrade my tier later?',
-                a: 'Yes. You can upgrade from Starter to Professional or Enterprise by paying the difference. But you must be a founding member first—once lifetime spots are gone, upgrades won\'t be possible.',
+                a: 'Yes. You can upgrade your lifetime tier at any time by paying the difference. For example, if you purchase a Starter Lifetime plan, you can upgrade to Professional Lifetime by paying the difference between the current Professional Lifetime price and what you originally paid for Starter.'ou can upgrade from Starter to Professional or Enterprise by paying the difference. But you must be a founding member first—once lifetime spots are gone, upgrades won\'t be possible.',
               },
               {
                 q: 'Is this just another Canva clone?',
