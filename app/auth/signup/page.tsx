@@ -4,9 +4,11 @@ import { useState, FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useAuth } from '@/lib/auth-context';
 
 export default function SignUpPage() {
   const router = useRouter();
+  const { signup } = useAuth();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -88,39 +90,28 @@ export default function SignUpPage() {
     }
 
     try {
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-          fullName: formData.fullName,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setStatus('error');
-        setMessage(data.error || 'Failed to create account');
-        return;
-      }
-
-      // Store session
-      localStorage.setItem('auth_session', JSON.stringify(data.session));
-      localStorage.setItem('auth_user', JSON.stringify(data.user));
+      const result = await signup(
+        formData.email,
+        formData.password,
+        formData.fullName
+      );
 
       setStatus('success');
-      setMessage('Account created successfully! Redirecting...');
+      if (result.requiresEmailVerification) {
+        setMessage('Account created. Check your email to verify your account before logging in.');
+      } else {
+        setMessage('Account created successfully! Redirecting...');
+      }
 
-      // Redirect to dashboard after 2 seconds
+      // Redirect based on whether an authenticated session was issued
       setTimeout(() => {
-        router.push('/dashboard');
-      }, 2000);
+        router.push(result.requiresEmailVerification ? '/auth/login' : '/dashboard');
+      }, 800);
     } catch (error) {
-      console.error('Signup error:', error);
+      const message =
+        error instanceof Error ? error.message : 'An error occurred. Please try again.';
       setStatus('error');
-      setMessage('An error occurred. Please try again.');
+      setMessage(message);
     }
   };
 

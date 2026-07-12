@@ -7,31 +7,38 @@ on:
     branches: [main, develop]
 
 jobs:
-  lint-and-build:
+  verify:
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        node-version: [20.x]
-    
+
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Setup Node.js ${{ matrix.node-version }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      
+          node-version: 20.x
+          cache: pnpm
+
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      
+        run: pnpm install --frozen-lockfile
+
       - name: Run ESLint
-        run: npm run lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Run tests
+        run: pnpm test
 
       - name: Build Next.js
-        run: npm run build
-      
+        run: pnpm build
+
       - name: Check build artifacts
         run: |
           if [ ! -d ".next" ]; then
@@ -41,25 +48,35 @@ jobs:
 
   security-scan:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Run npm audit
-        run: npm audit --audit-level=moderate
 
-      - name: Check for vulnerable dependencies
-        run: |
-          npm list --depth=0 | grep -i "vulnerable" || echo "No vulnerabilities found"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run dependency audit
+        run: pnpm audit --audit-level=moderate
 
   deploy-preview:
-    needs: [lint-and-build, security-scan]
+    needs: [verify, security-scan]
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy preview to Vercel
         uses: vercel/action@v6
         with:
@@ -69,13 +86,13 @@ jobs:
           scope: ${{ secrets.VERCEL_ORG_ID }}
 
   deploy-production:
-    needs: [lint-and-build, security-scan]
+    needs: [verify, security-scan]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy to Vercel Production
         uses: vercel/action@v6
         with:

@@ -120,10 +120,10 @@ export default function DashboardPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-semibold text-neutral mb-2 font-heading">
-                  Access Token
+                  Session Status
                 </label>
-                <p className="text-gray-700 font-mono text-xs break-all bg-gray-50 p-3 rounded-lg font-body">
-                  {session?.access_token.substring(0, 50)}...
+                <p className="text-gray-800 font-body">
+                  {session ? 'Authenticated' : 'Not authenticated'}
                 </p>
               </div>
               <div>

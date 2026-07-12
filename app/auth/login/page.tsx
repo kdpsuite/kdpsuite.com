@@ -4,9 +4,11 @@ import { useState, FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useAuth } from '@/lib/auth-context';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -34,43 +36,27 @@ export default function LoginPage() {
     }
 
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setStatus('error');
-        setMessage(data.error || 'Failed to log in');
-        return;
-      }
-
-      // Store session
-      localStorage.setItem('auth_session', JSON.stringify(data.session));
-      localStorage.setItem('auth_user', JSON.stringify(data.user));
+      await login(formData.email, formData.password);
 
       // Store remember me preference
       if (formData.rememberMe) {
         localStorage.setItem('remember_email', formData.email);
+      } else {
+        localStorage.removeItem('remember_email');
       }
 
       setStatus('success');
       setMessage('Logged in successfully! Redirecting...');
 
-      // Redirect to dashboard after 2 seconds
+      // Redirect to dashboard after successful sign-in
       setTimeout(() => {
         router.push('/dashboard');
-      }, 2000);
+      }, 500);
     } catch (error) {
-      console.error('Login error:', error);
+      const message =
+        error instanceof Error ? error.message : 'An error occurred. Please try again.';
       setStatus('error');
-      setMessage('An error occurred. Please try again.');
+      setMessage(message);
     }
   };
 

@@ -116,7 +116,6 @@ export default function FoundingCampaignPage() {
           {/* Pricing Tiers */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px', marginTop: '50px', marginBottom: '50px' }}>
             {foundingCampaignPlans.map((plan) => {
-              const isFeatured = plan.id === 'professional_founding';
               return (
                 <div
                   key={plan.id}
@@ -170,7 +169,7 @@ export default function FoundingCampaignPage() {
                   </ul>
 
                   <a
-                    href={plan.stripePriceId}
+                    href={plan.stripePaymentLink || '#'}
                     style={{
                       display: 'inline-block',
                       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -216,7 +215,7 @@ export default function FoundingCampaignPage() {
               ⚠️ ONLY 10 SPOTS - LIMITED FOREVER
             </div>
             <a
-              href={foundingCampaignPlans[3].stripePriceId}
+              href={foundingCampaignPlans[3].stripePaymentLink || '#'}
               style={{
                 display: 'inline-block',
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',

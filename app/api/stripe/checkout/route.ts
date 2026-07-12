@@ -10,6 +10,13 @@ export async function POST(request: NextRequest) {
   const logContext = createLogContext(request, requestId);
 
   try {
+    if (!stripe) {
+      return NextResponse.json(
+        { error: 'Stripe is not configured' },
+        { status: 503 }
+      );
+    }
+
     const rateLimit = createRateLimitMiddleware(10, 60_000)(request);
     if (!rateLimit.allowed) {
       return rateLimitResponse(

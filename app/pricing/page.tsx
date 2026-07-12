@@ -124,10 +124,14 @@ export default function PricingPage() {
                 {/* CTA Button */}
                 <button
                   onClick={() => {
+                    if (!plan.stripePriceId) {
+                      setMessage('This plan is not yet available for checkout.');
+                      return;
+                    }
                     setSelectedPlan(plan.id);
                     handleCheckout(plan.stripePriceId);
                   }}
-                  disabled={loading}
+                  disabled={loading || !plan.stripePriceId}
                   className="w-full bg-[#E91E63] text-white py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading && selectedPlan === plan.id

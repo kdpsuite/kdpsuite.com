@@ -16,7 +16,13 @@ export default function FeaturesPage() {
     { icon: '👥', title: 'Team Collaboration', desc: 'Share projects with designers, editors, and partners. Team tier includes multi-user workspaces for publishing teams. Work together seamlessly in one platform.' },
   ];
 
-  const pricingPlans = [
+  const pricingPlans: Array<{
+    name: string;
+    price: string;
+    period: string;
+    features: string[];
+    highlighted?: boolean;
+  }> = [
     {
       name: 'Starter',
       price: '$29',
@@ -27,6 +33,7 @@ export default function FeaturesPage() {
       name: 'Professional',
       price: '$79',
       period: '/month',
+      highlighted: true,
       features: ['Everything in Starter', 'Batch Image Processing', 'Unlimited images/month', 'KDP Analytics', 'Priority Support', 'Direct KDP Integration'],
     },
     {

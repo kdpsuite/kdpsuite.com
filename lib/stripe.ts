@@ -1,10 +1,9 @@
 import Stripe from 'stripe';
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  console.warn('STRIPE_SECRET_KEY is not defined in environment variables');
-}
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  // @ts-ignore - Using a specific version that might not be in the current types yet
+export const stripe = stripeSecretKey
+  ? new Stripe(stripeSecretKey, {
   apiVersion: '2025-10-29.clover',
-});
+    })
+  : null;

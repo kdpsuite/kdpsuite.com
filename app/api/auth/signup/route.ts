@@ -16,16 +16,16 @@ export async function POST(request: NextRequest) {
   }
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!supabaseUrl || !supabaseServiceKey) {
+  if (!supabaseUrl || !supabaseAnonKey) {
     return NextResponse.json(
       { error: 'Supabase not configured' },
       { status: 500 }
     );
   }
 
-  const supabase = createClient(supabaseUrl, supabaseServiceKey);
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
   try {
     const { email, password, fullName } = await request.json();
@@ -52,15 +52,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { data: authData, error: authError } =
-      await supabase.auth.admin.createUser({
-        email,
-        password,
-        email_confirm: false,
-        user_metadata: {
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://kdpsuite.com';
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
           full_name: fullName,
         },
-      });
+        emailRedirectTo: `${appUrl}/auth/login`,
+      },
+    });
 
     if (authError || !authData.user) {
       logger.error({
@@ -72,65 +74,6 @@ export async function POST(request: NextRequest) {
         { error: authError?.message || 'Failed to create user' },
         { status: 400 }
       );
-    }
-
-    const { error: profileError } = await supabase
-      .from('user_profiles')
-      .insert({
-        id: authData.user.id,
-        email,
-        full_name: fullName,
-      });
-
-    if (profileError) {
-      logger.warn({
-        ...logContext,
-        userId: authData.user.id,
-        error: profileError.message,
-      });
-    }
-
-    const { data: sessionData, error: sessionError } =
-      await supabase.auth.admin.createSession(authData.user.id);
-
-    if (sessionError) {
-      logger.warn({
-        ...logContext,
-        userId: authData.user.id,
-        error: sessionError.message,
-      });
-    }
-
-    const dashboardBackendUrl =
-      process.env.NEXT_PUBLIC_DASHBOARD_API_URL ||
-      'http://localhost:5000/api';
-    try {
-      const syncResponse = await fetch(
-        `${dashboardBackendUrl}/sync-supabase-user`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            supabase_token: sessionData?.session?.access_token || '',
-            email,
-            username: fullName.toLowerCase().replace(/\s+/g, '_'),
-          }),
-        }
-      );
-
-      if (!syncResponse.ok) {
-        logger.warn({
-          ...logContext,
-          userId: authData.user.id,
-          error: 'Dashboard sync failed',
-        });
-      }
-    } catch {
-      logger.warn({
-        ...logContext,
-        userId: authData.user.id,
-        error: 'Dashboard sync error',
-      });
     }
 
     logger.info({
@@ -149,13 +92,14 @@ export async function POST(request: NextRequest) {
           avatarUrl: null,
           subscriptionTier: 'free',
         },
-        session: sessionData?.session
+        session: authData.session
           ? {
-              access_token: sessionData.session.access_token,
-              refresh_token: sessionData.session.refresh_token || '',
-              expires_in: sessionData.session.expires_in || 3600,
+              access_token: authData.session.access_token,
+              refresh_token: authData.session.refresh_token,
+              expires_in: authData.session.expires_in,
             }
           : null,
+        requiresEmailVerification: !authData.session,
       },
       { status: 201 }
     );

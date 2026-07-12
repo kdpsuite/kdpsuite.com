@@ -1,11 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { createClient } from '@supabase/supabase-js';
+import { createRateLimitMiddleware } from '@/lib/rate-limit';
+import { rateLimitResponse } from '@/lib/api-response';
 import { logger, generateRequestId, createLogContext } from '@/lib/logger';
 
 export async function POST(request: NextRequest) {
   const requestId = generateRequestId();
   const logContext = createLogContext(request, requestId);
+
+  if (!stripe) {
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: 'Stripe is not configured',
+    });
+    return NextResponse.json({ error: 'Webhook not configured' }, { status: 500 });
+  }
+
+  const rateLimit = createRateLimitMiddleware(300, 60_000)(request);
+  if (!rateLimit.allowed) {
+    return rateLimitResponse(
+      Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+    );
+  }
 
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!webhookSecret) {
@@ -116,7 +134,7 @@ async function handleSubscriptionEvent(supabase: any, subscription: Record<strin
     .single();
 
   if (!userProfile) {
-    console.warn(`User profile not found for email: ${customerEmail}`);
+    console.warn('User profile not found for subscription metadata email');
     return;
   }
 
@@ -203,7 +221,7 @@ async function handleInvoicePaymentSucceeded(supabase: any, invoice: Record<stri
     .single();
 
   if (!userProfile) {
-    console.warn(`User profile not found for email: ${customerEmail}`);
+    console.warn('User profile not found for invoice email');
     return;
   }
 
@@ -244,7 +262,7 @@ async function handleInvoicePaymentFailed(supabase: any, invoice: Record<string,
     .single();
 
   if (!userProfile) {
-    console.warn(`User profile not found for email: ${customerEmail}`);
+    console.warn('User profile not found for invoice email');
     return;
   }
 

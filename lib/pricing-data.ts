@@ -6,7 +6,8 @@ export interface PricingPlan {
   interval: 'month' | 'year' | 'lifetime';
   description: string;
   features: string[];
-  stripePriceId: string;
+  stripePriceId?: string;
+  stripePaymentLink?: string;
   spots?: number;
   badgeText?: string;
   savings?: string;
@@ -35,7 +36,7 @@ export const foundingCampaignPlans: PricingPlan[] = [
       'Founding member badge',
       'Beta access before public launch',
     ],
-    stripePriceId: 'https://buy.stripe.com/00w3cu6iycwQ99X66gc7u00',
+    stripePaymentLink: 'https://buy.stripe.com/00w3cu6iycwQ99X66gc7u00',
   },
   {
     id: 'professional_founding',
@@ -56,7 +57,7 @@ export const foundingCampaignPlans: PricingPlan[] = [
       'Early access to new features',
       'Unique member number',
     ],
-    stripePriceId: 'https://buy.stripe.com/5kQaEW36m0O8fyl52cc7u01',
+    stripePaymentLink: 'https://buy.stripe.com/5kQaEW36m0O8fyl52cc7u01',
   },
   {
     id: 'enterprise_founding',
@@ -77,7 +78,7 @@ export const foundingCampaignPlans: PricingPlan[] = [
       'White-label options',
       'API access',
     ],
-    stripePriceId: 'https://buy.stripe.com/bJe4gy9uK40kgCp0LWc7u02',
+    stripePaymentLink: 'https://buy.stripe.com/bJe4gy9uK40kgCp0LWc7u02',
   },
   {
     id: 'founders_circle',
@@ -97,7 +98,7 @@ export const foundingCampaignPlans: PricingPlan[] = [
       '5% referral revenue share',
       'Physical engraved plaque',
     ],
-    stripePriceId: 'https://buy.stripe.com/eVqcN45eu1Sc5XLfGQc7u03',
+    stripePaymentLink: 'https://buy.stripe.com/eVqcN45eu1Sc5XLfGQc7u03',
   },
 ];
 
@@ -160,6 +161,7 @@ export const pricingPlans: PricingPlan[] = [
 export function getAllowedCheckoutPriceIds(): Set<string> {
   const fromPlans = pricingPlans
     .map((plan) => plan.stripePriceId)
+    .filter((id): id is string => Boolean(id))
     .filter((id) => id.startsWith('price_') && !id.includes('://'));
 
   const fromEnv = (process.env.STRIPE_ALLOWED_PRICE_IDS || '')
