@@ -274,8 +274,8 @@ export default function ContactPage() {
           <div className="flex justify-center gap-6 text-sm mb-8 font-body">
             <Link href="/features" className="hover:text-primary transition-colors">Features</Link>
             <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
           </div>
 
           <div className="text-center text-gray-400 text-sm font-body">

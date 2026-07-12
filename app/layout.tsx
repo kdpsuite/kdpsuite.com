@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Montserrat, Lato } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "@/lib/auth-context";
+import { toJsonLd } from "@/lib/seo/json-ld";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -18,8 +19,12 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "KDP Creator Suite | The Ultimate Amazon KDP Software & Publishing Tools",
-  description: "Stop paying for 5 different tools. KDP Creator Suite is the all-in-one Amazon KDP software. Features AI PDF to coloring book conversion, smart formatting, batch processing, and real-time royalty analytics. Join 1,000+ successful self-publishers.",
+  title: {
+    default: "KDP Creator Suite",
+    template: "%s | KDP Creator Suite",
+  },
+  description:
+    "KDP Creator Suite is a publishing platform for Amazon KDP workflows, including formatting, compliance checks, conversion, and royalty planning.",
   keywords: [
     "amazon kdp software",
     "kdp publishing tools",
@@ -40,32 +45,40 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.kdpsuite.com'),
+  metadataBase: new URL("https://www.kdpsuite.com"),
   alternates: {
-    canonical: '/',
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
   },
   openGraph: {
-    title: "KDP Creator Suite | The Ultimate Amazon KDP Software",
-    description: "The all-in-one platform for Amazon KDP self-publishers. Replace 5-8 tools you're paying $100-300/month for. Pay once. Use forever.",
-    url: 'https://www.kdpsuite.com',
-    siteName: 'KDP Creator Suite',
-    locale: 'en_US',
-    type: 'website',
+    title: "KDP Creator Suite",
+    description:
+      "All-in-one Amazon KDP workflow software for formatting, compliance, conversion, and publishing analytics.",
+    url: "https://www.kdpsuite.com",
+    siteName: "KDP Creator Suite",
+    locale: "en_US",
+    type: "website",
     images: [
       {
-        url: '/og-image.png',
+        url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: 'KDP Creator Suite - Professional KDP Publishing Tools',
+        alt: "KDP Creator Suite",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: "KDP Creator Suite | The Ultimate Amazon KDP Software",
-    description: "The all-in-one platform for Amazon KDP self-publishers. Replace 5-8 tools you're paying $100-300/month for. Pay once. Use forever.",
-    images: ['/og-image.png'],
-    creator: '@kdpcreatorsuite',
+    card: "summary_large_image",
+    title: "KDP Creator Suite",
+    description:
+      "Amazon KDP workflow software for formatting, conversion, compliance, and royalty planning.",
+    images: ["/og-image.svg"],
+    creator: "@kdpcreatorsuite",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.svg",
   },
   robots: {
     index: true,
@@ -73,14 +86,10 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
-  },
-  verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
   },
 };
 
@@ -106,31 +115,56 @@ export default function RootLayout({
           }}
         />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#E91E63" />
+        <meta name="theme-color" content="#e91e63" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: toJsonLd({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "KDP Creator Suite",
+              url: "https://www.kdpsuite.com",
+              logo: "https://www.kdpsuite.com/apple-touch-icon.svg",
+              email: "support@kdpsuite.com",
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: toJsonLd({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "KDP Creator Suite",
+              url: "https://www.kdpsuite.com",
+              potentialAction: {
+                "@type": "SearchAction",
+                target:
+                  "https://www.kdpsuite.com/blog?query={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: toJsonLd({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              "name": "KDP Creator Suite",
-              "applicationCategory": "BusinessApplication",
-              "offers": {
+              name: "KDP Creator Suite",
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web",
+              offers: {
                 "@type": "AggregateOffer",
-                "lowPrice": "0",
-                "highPrice": "99",
-                "priceCurrency": "USD",
-                "offerCount": "3"
+                lowPrice: "0",
+                highPrice: "99",
+                priceCurrency: "USD",
+                offerCount: "3",
               },
-              "description": "Professional Amazon KDP software and kdp publishing tools with AI-powered pdf to coloring book conversion, kdp compliance validation, batch image processing, and automated kdp workflow for digital book publishing.",
-              "operatingSystem": "Web, iOS, Android",
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "ratingCount": "1000"
-              }
-            })
+              description:
+                "Amazon KDP workflow software for formatting, compliance checks, conversion, and publishing analytics.",
+            }),
           }}
         />
       </head>

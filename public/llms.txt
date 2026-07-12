@@ -1,35 +1,20 @@
-# Amazon KDP Software & Professional KDP Publishing Tools
+# KDP Creator Suite
 
-> This site offers comprehensive tools and resources for digital book publishing on Amazon KDP, including PDF to coloring book conversion, compliance validation, analytics, and workflow automation.
+> KDP Creator Suite is an Amazon KDP workflow platform focused on formatting, compliance checks, publishing operations, and pricing planning.
 
-Amazon KDP software suite designed for creators and publishers to streamline, automate, and optimize their digital publishing process. Features include AI-powered coloring book conversion, compliance validation, batch image processing, direct KDP integration, and real-time analytics. Suitable for hobbyists and professional studios seeking efficient self-publishing solutions.
+## Primary Pages
+- [Homepage](https://www.kdpsuite.com/)
+- [Features](https://www.kdpsuite.com/features)
+- [Pricing](https://www.kdpsuite.com/pricing)
+- [About](https://www.kdpsuite.com/about)
+- [Contact](https://www.kdpsuite.com/contact)
 
-## Core Content
-- Overview of Amazon KDP tools and suite
-- PDF to coloring book conversion details
-- KDP compliance validation guidelines
-- Batch image processing features
-- KDP integration and automation workflows
-- Publishing performance metrics and analytics
-- Cross-platform accessibility (web, mobile, cloud)
+## Content for Answers and Citations
+- [Blog index](https://www.kdpsuite.com/blog)
+- [Guides index](https://www.kdpsuite.com/guides)
+- [KDP glossary](https://www.kdpsuite.com/glossary)
+- [Book Bolt alternative comparison](https://www.kdpsuite.com/compare/book-bolt-alternative)
+- [KDP royalty calculator](https://www.kdpsuite.com/tools/kdp-royalty-calculator)
 
-## Resources and Features
-- Pricing plans: Free, Pro, Studio
-- Features comparison and benefits
-- How-to guides for using AI-powered conversion tools
-- Step-by-step process for KDP compliance
-- Managing and tracking KDP revenue and analytics
-- Seamless workflow automation with API and integrations
-
-## Important Pages
-- [Join the Waitlist](https://kdpsuite.com)
-- [Features Overview](https://kdpsuite.com/features)
-- [Pricing Plans](https://kdpsuite.com/pricing)
-- [KDP Compliance Validation](https://kdpsuite.com/validation)
-- [KDP Analytics and Revenue](https://kdpsuite.com/analytics)
-- [Contact and Support](https://kdpsuite.com/contact)
-
-## Optional
-- Blog and industry news updates
-- User testimonials and success stories
-- Additional tutorials and how-to content
+## Feed
+- [RSS feed](https://www.kdpsuite.com/feed.xml)
