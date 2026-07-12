@@ -92,10 +92,25 @@ DROP POLICY IF EXISTS "Users can read their own profile" ON public.user_profiles
 CREATE POLICY "Users can read their own profile" ON public.user_profiles FOR SELECT USING (auth.uid() = id);
 
 DROP POLICY IF EXISTS "Users can update their own profile" ON public.user_profiles;
-CREATE POLICY "Users can update their own profile" ON public.user_profiles FOR UPDATE USING (auth.uid() = id);
+CREATE POLICY "Users can update their own profile" ON public.user_profiles
+  FOR UPDATE
+  USING (auth.uid() = id)
+  WITH CHECK (auth.uid() = id);
 
 DROP POLICY IF EXISTS "Service role can manage all profiles" ON public.user_profiles;
 CREATE POLICY "Service role can manage all profiles" ON public.user_profiles USING (auth.role() = 'service_role');
+
+-- Block self-service escalation of billing fields (service role bypasses via GRANT ALL / bypass RLS)
+REVOKE UPDATE ON public.user_profiles FROM authenticated;
+GRANT UPDATE (
+  full_name,
+  username,
+  avatar_url,
+  bio,
+  updated_at,
+  last_login,
+  login_count
+) ON public.user_profiles TO authenticated;
 
 -- ============================================================================
 -- STEP 5: Triggers

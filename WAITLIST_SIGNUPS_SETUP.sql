@@ -46,10 +46,9 @@ CREATE POLICY "Anyone can add to waitlist"
   ON public.waitlist_signups FOR INSERT
   WITH CHECK (true);
 
--- Allow admin to view all entries (for Vercel function or API route with service role)
-CREATE POLICY "Service role can view all waitlist entries"
-  ON public.waitlist_signups FOR SELECT
-  USING (true);
+-- No SELECT policy for anon/authenticated.
+-- Service role bypasses RLS; use Supabase dashboard or admin-gated API for exports.
+DROP POLICY IF EXISTS "Service role can view all waitlist entries" ON public.waitlist_signups;
 
 -- ============================================================================
 -- STEP 4: Create Helper Function to Check Duplicate Emails

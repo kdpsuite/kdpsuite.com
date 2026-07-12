@@ -28,8 +28,7 @@ jobs:
       
       - name: Run ESLint
         run: npm run lint
-        continue-on-error: true
-      
+
       - name: Build Next.js
         run: npm run build
       
@@ -48,8 +47,7 @@ jobs:
       
       - name: Run npm audit
         run: npm audit --audit-level=moderate
-        continue-on-error: true
-      
+
       - name: Check for vulnerable dependencies
         run: |
           npm list --depth=0 | grep -i "vulnerable" || echo "No vulnerabilities found"

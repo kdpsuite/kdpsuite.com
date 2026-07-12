@@ -8,24 +8,29 @@ This document outlines the hardening improvements applied to the kdpsuite.com ma
 - JSON-formatted request logging for production debugging
 - Unique request IDs for tracing
 - Automatic timestamp and context capture
+- **Wired into** all `app/api/**` route handlers
 
 ### 2. Standardized API Responses (`lib/api-response.ts`)
-- Consistent response format: `{ ok: true/false, data/error, timestamp }`
-- Helper functions for success, error, and special cases (401, 403, 404, 429)
-- Proper HTTP status codes and headers
+- Consistent helpers for 401/429 and errors where adopted
+- Existing client-facing success payloads kept stable (auth/contact/waitlist)
 
 ### 3. Rate Limiting (`lib/rate-limit.ts`)
-- In-memory rate limiter for API endpoints
-- Client identification by user ID or IP address
-- Configurable limits and time windows
-- Rate limit headers in responses
+- In-memory rate limiter for API endpoints (per-instance on serverless)
+- Client identification by IP only (does not trust `x-user-id`)
+- **Wired into** auth, waitlist, contact, checkout, newsletter, webinar, subscription
 
 ### 4. GitHub Actions CI/CD (`.github/workflows/ci.yml`)
-- Linting and TypeScript type checking
-- Build verification
-- Security scanning (npm audit)
+- Linting and build verification (lint is blocking)
+- Security scanning (npm audit is blocking at moderate+)
 - Preview deployments on pull requests
 - Production deployments on main branch pushes
+
+### 5. Security hotfixes (no auth rewrite)
+- Waitlist GET requires `ADMIN_API_SECRET` / `WAITLIST_ADMIN_SECRET`; only `action=count`
+- Waitlist POST no longer returns the inserted row
+- Stripe checkout price ID allowlist (`pricingPlans` + `STRIPE_ALLOWED_PRICE_IDS`)
+- Contact form: header sanitization; fails closed without email env
+- SQL: [RLS_HOTFIX.sql](RLS_HOTFIX.sql) + updated setup scripts
 
 ## Usage Examples
 

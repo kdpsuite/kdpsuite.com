@@ -1,7 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { createRateLimitMiddleware } from '@/lib/rate-limit';
+import { rateLimitResponse } from '@/lib/api-response';
+import { logger, generateRequestId, createLogContext } from '@/lib/logger';
 
 export async function POST(request: NextRequest) {
+  const requestId = generateRequestId();
+  const logContext = createLogContext(request, requestId);
+
+  const rateLimit = createRateLimitMiddleware(5, 60_000)(request);
+  if (!rateLimit.allowed) {
+    return rateLimitResponse(
+      Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+    );
+  }
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -17,7 +30,6 @@ export async function POST(request: NextRequest) {
   try {
     const { email, password, fullName } = await request.json();
 
-    // Validate input
     if (!email || !password || !fullName) {
       return NextResponse.json(
         { error: 'Email, password, and full name are required' },
@@ -25,7 +37,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -34,7 +45,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate password strength
     if (password.length < 8) {
       return NextResponse.json(
         { error: 'Password must be at least 8 characters long' },
@@ -42,7 +52,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create user
     const { data: authData, error: authError } =
       await supabase.auth.admin.createUser({
         email,
@@ -54,14 +63,17 @@ export async function POST(request: NextRequest) {
       });
 
     if (authError || !authData.user) {
-      console.error('Auth signup error:', authError);
+      logger.error({
+        ...logContext,
+        statusCode: 400,
+        error: authError?.message || 'Failed to create user',
+      });
       return NextResponse.json(
         { error: authError?.message || 'Failed to create user' },
         { status: 400 }
       );
     }
 
-    // Create profile
     const { error: profileError } = await supabase
       .from('user_profiles')
       .insert({
@@ -71,18 +83,24 @@ export async function POST(request: NextRequest) {
       });
 
     if (profileError) {
-      console.error('Profile creation error:', profileError);
+      logger.warn({
+        ...logContext,
+        userId: authData.user.id,
+        error: profileError.message,
+      });
     }
 
-    // Create a session for the newly created user
     const { data: sessionData, error: sessionError } =
       await supabase.auth.admin.createSession(authData.user.id);
 
     if (sessionError) {
-      console.error('Session creation error:', sessionError);
+      logger.warn({
+        ...logContext,
+        userId: authData.user.id,
+        error: sessionError.message,
+      });
     }
 
-    // Sync user to Flask backend for dashboard access
     const dashboardBackendUrl =
       process.env.NEXT_PUBLIC_DASHBOARD_API_URL ||
       'http://localhost:5000/api';
@@ -101,14 +119,25 @@ export async function POST(request: NextRequest) {
       );
 
       if (!syncResponse.ok) {
-        console.warn(
-          'Failed to sync user to dashboard backend:',
-          await syncResponse.text()
-        );
+        logger.warn({
+          ...logContext,
+          userId: authData.user.id,
+          error: 'Dashboard sync failed',
+        });
       }
-    } catch (syncError) {
-      console.warn('Dashboard sync error (non-critical):', syncError);
+    } catch {
+      logger.warn({
+        ...logContext,
+        userId: authData.user.id,
+        error: 'Dashboard sync error',
+      });
     }
+
+    logger.info({
+      ...logContext,
+      statusCode: 201,
+      userId: authData.user.id,
+    });
 
     return NextResponse.json(
       {
@@ -131,7 +160,11 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     );
   } catch (error) {
-    console.error('Signup error:', error);
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
     return NextResponse.json(
       { error: 'An error occurred during signup' },
       { status: 500 }

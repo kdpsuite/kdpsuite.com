@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { createRateLimitMiddleware } from '@/lib/rate-limit';
+import { rateLimitResponse } from '@/lib/api-response';
+import { logger, generateRequestId, createLogContext } from '@/lib/logger';
 
 interface ContactFormData {
   name: string;
@@ -8,12 +11,25 @@ interface ContactFormData {
   message: string;
 }
 
+function sanitizeHeaderValue(value: string): string {
+  return value.replace(/[\r\n]+/g, ' ').trim();
+}
+
 export async function POST(request: NextRequest) {
+  const requestId = generateRequestId();
+  const logContext = createLogContext(request, requestId);
+
   try {
+    const rateLimit = createRateLimitMiddleware(5, 60_000)(request);
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(
+        Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+      );
+    }
+
     const body: ContactFormData = await request.json();
     const { name, email, subject, message } = body;
 
-    // Validate required fields
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
         { error: 'All fields are required' },
@@ -21,7 +37,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -30,55 +45,64 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if email service is configured
+    const safeSubject = sanitizeHeaderValue(subject);
+    const safeName = sanitizeHeaderValue(name);
+
     if (!process.env.EMAIL_PASSWORD) {
-      // For development, just log the message
-      console.log('Contact form submission:', { name, email, subject, message });
-      
+      logger.error({
+        ...logContext,
+        statusCode: 503,
+        error: 'EMAIL_PASSWORD not configured',
+      });
       return NextResponse.json(
-        {
-          success: true,
-          message: 'Thank you for your message! We will get back to you soon.',
-          note: 'Email service not configured. Message logged for development.',
-        },
-        { status: 200 }
+        { error: 'Email service is not configured. Please try again later.' },
+        { status: 503 }
       );
     }
 
-    // Configure your email service here
-    // For production, use environment variables
+    const mailUser = process.env.EMAIL_USER;
+    if (!mailUser) {
+      logger.error({
+        ...logContext,
+        statusCode: 503,
+        error: 'EMAIL_USER not configured',
+      });
+      return NextResponse.json(
+        { error: 'Email service is not configured. Please try again later.' },
+        { status: 503 }
+      );
+    }
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER || 'contact.kdpcreatorsuite@gmail.com',
-        pass: process.env.EMAIL_PASSWORD || '',
+        user: mailUser,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
 
-    // Send email to admin
     const adminMailOptions = {
-      from: process.env.EMAIL_USER || 'contact.kdpcreatorsuite@gmail.com',
-      to: 'contact.kdpcreatorsuite@gmail.com',
-      subject: `New Contact Form Submission: ${subject}`,
+      from: mailUser,
+      to: mailUser,
+      subject: `New Contact Form Submission: ${safeSubject}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Name:</strong> ${escapeHtml(safeName)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
+        <p><strong>Subject:</strong> ${escapeHtml(safeSubject)}</p>
         <p><strong>Message:</strong></p>
         <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
       `,
       replyTo: email,
     };
 
-    // Send confirmation email to user
     const userMailOptions = {
-      from: process.env.EMAIL_USER || 'contact.kdpcreatorsuite@gmail.com',
+      from: mailUser,
       to: email,
       subject: 'We received your message - KDP Creator Suite',
       html: `
         <h2>Thank You for Contacting Us!</h2>
-        <p>Hi ${escapeHtml(name)},</p>
+        <p>Hi ${escapeHtml(safeName)},</p>
         <p>We have received your message and will get back to you as soon as possible.</p>
         <p><strong>Your Message:</strong></p>
         <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
@@ -86,12 +110,12 @@ export async function POST(request: NextRequest) {
       `,
     };
 
-    // Send both emails
     await Promise.all([
       transporter.sendMail(adminMailOptions),
       transporter.sendMail(userMailOptions),
     ]);
 
+    logger.info({ ...logContext, statusCode: 200 });
     return NextResponse.json(
       {
         success: true,
@@ -100,7 +124,11 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Contact form error:', error);
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
     return NextResponse.json(
       { error: 'Failed to send message. Please try again later.' },
       { status: 500 }
@@ -108,7 +136,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Helper function to escape HTML
 function escapeHtml(text: string): string {
   const map: { [key: string]: string } = {
     '&': '&amp;',

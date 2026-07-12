@@ -1,45 +1,46 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createRateLimitMiddleware } from '@/lib/rate-limit';
+import { rateLimitResponse } from '@/lib/api-response';
+import { logger, generateRequestId, createLogContext } from '@/lib/logger';
 
 /**
  * Webinar Registration API Route
- * Handles free demo/webinar signups
+ * Stub until a webinar provider is wired — does not persist or log PII.
  */
 
 export async function POST(request: NextRequest) {
+  const requestId = generateRequestId();
+  const logContext = createLogContext(request, requestId);
+
   try {
+    const rateLimit = createRateLimitMiddleware(10, 60_000)(request);
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(
+        Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+      );
+    }
+
     const { email } = await request.json();
 
-    // Validate email
-    if (!email || !email.includes('@')) {
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
       return NextResponse.json(
         { error: 'Valid email is required' },
         { status: 400 }
       );
     }
 
-    // TODO: Integrate with calendar/webinar service
-    // Example for Calendly, Zoom, or similar:
-    // const response = await fetch('https://api.calendly.com/event_types', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Authorization': `Bearer ${process.env.CALENDLY_API_KEY}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ email }),
-    // });
-
-    // For now, log the registration
-    console.log('Webinar registration:', email, new Date().toISOString());
-
-    // In production, save to database and send confirmation email
-    // await db.webinarRegistration.create({ email, registeredAt: new Date() });
+    logger.info({ ...logContext, statusCode: 200 });
 
     return NextResponse.json(
       { success: true, message: 'Successfully registered for webinar' },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Webinar registration error:', error);
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
     return NextResponse.json(
       { error: 'Failed to register for webinar' },
       { status: 500 }

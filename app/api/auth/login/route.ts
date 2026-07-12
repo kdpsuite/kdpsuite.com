@@ -1,8 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { createRateLimitMiddleware } from '@/lib/rate-limit';
+import { rateLimitResponse } from '@/lib/api-response';
+import { logger, generateRequestId, createLogContext } from '@/lib/logger';
 
 export async function POST(request: NextRequest) {
+  const requestId = generateRequestId();
+  const logContext = createLogContext(request, requestId);
+
   try {
+    const rateLimit = createRateLimitMiddleware(10, 60_000)(request);
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(
+        Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+      );
+    }
+
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -17,7 +30,6 @@ export async function POST(request: NextRequest) {
 
     const { email, password } = await request.json();
 
-    // Validate input
     if (!email || !password) {
       return NextResponse.json(
         { error: 'Email and password are required' },
@@ -25,21 +37,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Sign in user with Supabase Auth
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (authError || !authData.user || !authData.session) {
-      console.error('Login error:', authError);
+      logger.warn({
+        ...logContext,
+        statusCode: 401,
+        error: 'Login failed',
+      });
       return NextResponse.json(
-        { error: authError?.message || 'Invalid email or password' },
+        { error: 'Invalid email or password' },
         { status: 401 }
       );
     }
 
-    // Fetch user profile
     const { data: profile, error: profileError } = await supabase
       .from('user_profiles')
       .select('*')
@@ -47,8 +61,17 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (profileError) {
-      console.error('Profile fetch error:', profileError);
+      logger.warn({
+        ...logContext,
+        error: profileError.message,
+      });
     }
+
+    logger.info({
+      ...logContext,
+      statusCode: 200,
+      userId: authData.user.id,
+    });
 
     return NextResponse.json(
       {
@@ -69,11 +92,14 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Login error:', error);
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
     return NextResponse.json(
       { error: 'An error occurred during login' },
       { status: 500 }
     );
   }
 }
-

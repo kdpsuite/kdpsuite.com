@@ -155,3 +155,17 @@ export const pricingPlans: PricingPlan[] = [
     stripePriceId: 'price_enterprise_monthly', // Replace with actual Stripe price ID
   },
 ];
+
+/** Price IDs accepted by /api/stripe/checkout. Env list overrides/extends plan IDs. */
+export function getAllowedCheckoutPriceIds(): Set<string> {
+  const fromPlans = pricingPlans
+    .map((plan) => plan.stripePriceId)
+    .filter((id) => id.startsWith('price_') && !id.includes('://'));
+
+  const fromEnv = (process.env.STRIPE_ALLOWED_PRICE_IDS || '')
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean);
+
+  return new Set([...fromPlans, ...fromEnv]);
+}

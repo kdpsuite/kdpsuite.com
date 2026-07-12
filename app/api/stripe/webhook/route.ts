@@ -1,8 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { createClient } from '@supabase/supabase-js';
+import { logger, generateRequestId, createLogContext } from '@/lib/logger';
 
 export async function POST(request: NextRequest) {
+  const requestId = generateRequestId();
+  const logContext = createLogContext(request, requestId);
+
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!webhookSecret) {
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: 'STRIPE_WEBHOOK_SECRET not configured',
+    });
+    return NextResponse.json({ error: 'Webhook not configured' }, { status: 500 });
+  }
+
   const body = await request.text();
   const signature = request.headers.get('stripe-signature');
 
@@ -16,10 +30,14 @@ export async function POST(request: NextRequest) {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET || ''
+      webhookSecret
     );
   } catch (error) {
-    console.error('Webhook signature verification failed:', error);
+    logger.error({
+      ...logContext,
+      statusCode: 400,
+      error: error instanceof Error ? error.message : 'Invalid signature',
+    });
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
   }
 
@@ -32,7 +50,11 @@ export async function POST(request: NextRequest) {
     : null;
 
   if (!supabase) {
-    console.error('Supabase client not initialized - missing environment variables');
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: 'Supabase not configured',
+    });
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 
@@ -56,12 +78,21 @@ export async function POST(request: NextRequest) {
         break;
 
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        logger.info({
+          ...logContext,
+          statusCode: 200,
+          error: `Unhandled event type: ${event.type}`,
+        });
     }
 
+    logger.info({ ...logContext, statusCode: 200 });
     return NextResponse.json({ received: true });
   } catch (error) {
-    console.error('Webhook processing error:', error);
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: error instanceof Error ? error.message : 'Webhook processing failed',
+    });
     return NextResponse.json(
       { error: 'Webhook processing failed' },
       { status: 500 }

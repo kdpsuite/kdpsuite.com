@@ -1,9 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { createRateLimitMiddleware } from '@/lib/rate-limit';
+import { rateLimitResponse, unauthorizedResponse } from '@/lib/api-response';
+import { logger, generateRequestId, createLogContext } from '@/lib/logger';
+
+function isAdminAuthorized(request: NextRequest): boolean {
+  const secret = process.env.ADMIN_API_SECRET || process.env.WAITLIST_ADMIN_SECRET;
+  if (!secret) {
+    return false;
+  }
+
+  const bearer = request.headers.get('authorization');
+  if (bearer?.startsWith('Bearer ') && bearer.slice(7) === secret) {
+    return true;
+  }
+
+  return request.headers.get('x-admin-secret') === secret;
+}
 
 export async function POST(request: NextRequest) {
+  const requestId = generateRequestId();
+  const logContext = createLogContext(request, requestId);
+
   try {
-    // Create Supabase client within the function
+    const rateLimit = createRateLimitMiddleware(10, 60_000)(request);
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(
+        Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+      );
+    }
+
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL || '',
       process.env.SUPABASE_SERVICE_ROLE_KEY || '',
@@ -18,7 +44,6 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { email } = body;
 
-    // Validate email
     if (!email || typeof email !== 'string') {
       return NextResponse.json(
         { error: 'Email is required' },
@@ -26,7 +51,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -37,7 +61,6 @@ export async function POST(request: NextRequest) {
 
     const normalizedEmail = email.toLowerCase().trim();
 
-    // Check if email already exists in waitlist
     const { data: existing, error: checkError } = await supabase
       .from('waitlist_signups')
       .select('email')
@@ -45,8 +68,11 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (checkError && checkError.code !== 'PGRST116') {
-      // PGRST116 = no rows found (expected for new emails)
-      console.error('Error checking waitlist:', checkError);
+      logger.error({
+        ...logContext,
+        statusCode: 500,
+        error: checkError.message,
+      });
       return NextResponse.json(
         { error: 'An error occurred while processing your request' },
         { status: 500 }
@@ -60,34 +86,39 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Insert new entry
-    const { data: newEntry, error: insertError } = await supabase
+    const { error: insertError } = await supabase
       .from('waitlist_signups')
       .insert({
         email: normalizedEmail,
         source: 'landing_page',
-      })
-      .select()
-      .single();
+      });
 
     if (insertError) {
-      console.error('Error adding to waitlist:', insertError);
+      logger.error({
+        ...logContext,
+        statusCode: 500,
+        error: insertError.message,
+      });
       return NextResponse.json(
         { error: 'Failed to add email to waitlist' },
         { status: 500 }
       );
     }
 
+    logger.info({ ...logContext, statusCode: 201 });
     return NextResponse.json(
       {
         success: true,
         message: 'Successfully added to waitlist',
-        entry: newEntry,
       },
       { status: 201 }
     );
   } catch (error) {
-    console.error('Waitlist API error:', error);
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -96,8 +127,30 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  const requestId = generateRequestId();
+  const logContext = createLogContext(request, requestId);
+
   try {
-    // Create Supabase client within the function
+    if (!isAdminAuthorized(request)) {
+      logger.warn({ ...logContext, statusCode: 401, error: 'Unauthorized waitlist GET' });
+      return unauthorizedResponse('Admin authorization required');
+    }
+
+    const rateLimit = createRateLimitMiddleware(30, 60_000)(request);
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(
+        Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+      );
+    }
+
+    const action = new URL(request.url).searchParams.get('action');
+    if (action !== 'count') {
+      return NextResponse.json(
+        { error: 'Only action=count is supported' },
+        { status: 403 }
+      );
+    }
+
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL || '',
       process.env.SUPABASE_SERVICE_ROLE_KEY || '',
@@ -109,38 +162,33 @@ export async function GET(request: NextRequest) {
       }
     );
 
-    const { searchParams } = new URL(request.url);
-    const action = searchParams.get('action');
-
-    // Get all waitlist entries
-    const { data: entries, error } = await supabase
+    const { count, error } = await supabase
       .from('waitlist_signups')
-      .select('*')
-      .order('created_at', { ascending: false });
+      .select('*', { count: 'exact', head: true });
 
     if (error) {
-      console.error('Error fetching waitlist:', error);
+      logger.error({
+        ...logContext,
+        statusCode: 500,
+        error: error.message,
+      });
       return NextResponse.json(
-        { error: 'Failed to fetch waitlist' },
+        { error: 'Failed to fetch waitlist count' },
         { status: 500 }
       );
     }
 
-    if (action === 'count') {
-      return NextResponse.json({ count: entries?.length || 0 });
-    }
-
-    // Return all entries
-    return NextResponse.json({
-      entries: entries || [],
-      total: entries?.length || 0,
-    });
+    logger.info({ ...logContext, statusCode: 200 });
+    return NextResponse.json({ count: count ?? 0 });
   } catch (error) {
-    console.error('Waitlist API error:', error);
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
     );
   }
 }
-

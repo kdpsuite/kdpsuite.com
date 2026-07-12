@@ -69,16 +69,10 @@ class RateLimiter {
 export const rateLimiter = RateLimiter.getInstance();
 
 export function getClientIdentifier(req: NextRequest): string {
-  // Try to get user ID from headers (if authenticated)
-  const userId = req.headers.get('x-user-id');
-  if (userId) {
-    return `user:${userId}`;
-  }
-
-  // Fall back to IP address
+  // Never trust client-supplied user IDs for rate limiting
   const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0] ||
-    req.headers.get('x-real-ip') ||
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    req.headers.get('x-real-ip')?.trim() ||
     'unknown';
   return `ip:${ip}`;
 }

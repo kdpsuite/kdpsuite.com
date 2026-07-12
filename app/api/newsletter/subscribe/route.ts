@@ -1,55 +1,46 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createRateLimitMiddleware } from '@/lib/rate-limit';
+import { rateLimitResponse } from '@/lib/api-response';
+import { logger, generateRequestId, createLogContext } from '@/lib/logger';
 
 /**
  * Newsletter Subscription API Route
- * Handles email newsletter signups
- * 
- * Integration ready for:
- * - Mailchimp
- * - ConvertKit
- * - Brevo (Sendinblue)
- * - ActiveCampaign
- * - HubSpot
+ * Stub until an ESP is wired — does not persist or log PII.
  */
 
 export async function POST(request: NextRequest) {
+  const requestId = generateRequestId();
+  const logContext = createLogContext(request, requestId);
+
   try {
+    const rateLimit = createRateLimitMiddleware(10, 60_000)(request);
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(
+        Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+      );
+    }
+
     const { email } = await request.json();
 
-    // Validate email
-    if (!email || !email.includes('@')) {
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
       return NextResponse.json(
         { error: 'Valid email is required' },
         { status: 400 }
       );
     }
 
-    // TODO: Integrate with email service provider
-    // Example for Mailchimp:
-    // const mailchimpResponse = await fetch('https://us1.api.mailchimp.com/3.0/lists/{list_id}/members', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Authorization': `Bearer ${process.env.MAILCHIMP_API_KEY}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     email_address: email,
-    //     status: 'subscribed',
-    //   }),
-    // });
-
-    // For now, log the subscription
-    console.log('Newsletter signup:', email, new Date().toISOString());
-
-    // In production, save to database
-    // await db.newsletter.create({ email, subscribedAt: new Date() });
+    logger.info({ ...logContext, statusCode: 200 });
 
     return NextResponse.json(
       { success: true, message: 'Successfully subscribed to newsletter' },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Newsletter subscription error:', error);
+    logger.error({
+      ...logContext,
+      statusCode: 500,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
     return NextResponse.json(
       { error: 'Failed to subscribe to newsletter' },
       { status: 500 }
