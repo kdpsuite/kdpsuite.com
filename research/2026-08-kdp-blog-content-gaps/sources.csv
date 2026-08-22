@@ -1,0 +1,37 @@
+id,slug,title,url,type,credibility,recency,bias,hypotheses
+01,kdp_trim_bleed_margins,Set Trim Size Bleed and Margins,https://kdp.amazon.com/help/topic/GVBQ3CMEQW3W2VL6,primary,5,5,Amazon,H4
+02,kdp_fix_formatting,Fix Paperback and Hardcover Formatting Issues,https://kdp.amazon.com/help/topic/G201834260,primary,5,5,Amazon,H4
+03,kdp_content_guidelines,KDP Content Guidelines AI,https://kdp.amazon.com/help/topic/G200672390,primary,5,5,Amazon,H3
+04,kdp_content_quality,Guide to Kindle Content Quality,https://kdp.amazon.com/help/topic/G200952510,primary,5,5,Amazon,H3
+05,kdp_low_content,Low-Content Books,https://kdp.amazon.com/help/topic/GGE5T76TWKA85DJM,primary,5,5,Amazon,H2,H3
+06,kdp_expanded_distribution,Expanded Distribution,https://kdp.amazon.com/help/topic/GQTT4W3T5AYK7L45,primary,5,5,Amazon,H1,H2
+07,kdp_hardcover_cover,Create a Hardcover Cover,https://kdp.amazon.com/help/topic/GDTKFJPNQCBTMRV6,primary,5,5,Amazon,H1
+08,kdp_title_limits,Update on KDP Title Creation Limits,https://www.kdpcommunity.com/s/article/Update-on-KDP-Title-Creation-Limits?language=en_US,primary,5,3,Amazon PR,H3
+09,kindlepreneur_coloring_book,How to Publish a Coloring Book,https://kindlepreneur.com/how-to-publish-a-coloring-book/,industry,4,5,Atticus/Rocket CTA,H1,H2
+10,kindlepreneur_hardcover_vs_paperback,Hardcover vs Paperback,https://kindlepreneur.com/hardcover-vs-paperback/,industry,4,4,Atticus CTA,H2
+11,kindlepreneur_a_plus,Amazon A+ Content,https://kindlepreneur.com/amazon-a-content/,industry,4,4,marketing,H2
+12,kindlepreneur_gutter,Book Gutter,https://kindlepreneur.com/book-gutter/,industry,4,4,Atticus CTA,H2
+13,atticus_product_docs,Atticus help cluster,https://www.atticus.io/reduce-print-costs/,industry,3,4,vendor,H1
+14,vellum_help,Vellum Print Help,https://help.vellum.pub/print/,industry,4,4,vendor,H1
+15,bookbolt_blog,BookBolt blog index,https://old.bookbolt.io/blog/,industry,3,3,low-content marketing,H1
+16,guardian_three_a_day,Amazon three books a day,https://www.theguardian.com/books/2023/sep/20/amazon-restricts-authors-from-self-publishing-more-than-three-books-a-day-after-ai-concerns,news,5,3,news,H3
+17,alli_ai_and_limits,ALLi KDP AI and limits,https://selfpublishingadvice.org/self-publishing-news-kdp-ai-new-limits-on-titles/,industry,4,3,advocacy,H3
+18,jane_friedman_ai,How AI-Generated Books Could Hurt,https://janefriedman.com/how-ai-generated-books-could-hurt-self-publishing-authors/,industry,5,4,analyst,H2,H3
+19,education_blogs_inventory,Reedsy SPS Written Word Media,https://blog.reedsy.com/guide/how-to-self-publish-a-book/cost-to-self-publish/,industry,3,4,course/marketplace,H2
+20,kdp_community_bleed_coloring,8.5x11 bleed coloring rejection,https://www.kdpcommunity.com/s/question/0D58V00007QiTm3SAF/problems-with-85x11-bleed-coloring-book?language=en_US,discussion,3,3,user,H4
+21,kdp_community_hardcover_coloring,Hardcover coloring books,https://www.kdpcommunity.com/s/question/0D58V00007xT0mqSAC/hardcover-coloring-books?language=en_US,discussion,3,3,user,H4
+22,adversarial_seo_fillers,KDPEasy BookIllustrationAI InkfluenceAI,https://bookillustrationai.com/blog/why-amazon-kdp-rejects-coloring-books,industry,2,5,SEO/affiliate,adversarial
+23,d2d_no_low_content,D2D will not distribute coloring/low-content,https://draft2digital.com/knowledge-base/,industry,4,4,distributor,H3
+24,kdp_timelines,KDP publishing timelines,https://kdp.amazon.com/help/topic/G202173620,primary,5,5,Amazon,H3
+25,kdp_print_royalty_cliff_2025,Print royalty 50pct below 9.99 Jun 2025,https://www.kdpcommunity.com/s/article/Update-Changes-to-KDP-royalty-rates-for-print-books-priced-below-certain-list-prices-for-example-less-than-9-99-USD-and-updates-to-color-printing-costs,primary,5,4,Amazon,H3
+26,serp_fanout_20_queries,SERP spot-check 20 gap queries,internal snapshot,search-index,3,5,sampling,adversarial
+27,bookbolt_a_plus_low_content,BookBolt A+ for low-content,https://bookbolt.io/the-definitive-guide-to-amazon-kdps-a-content/,industry,3,3,vendor,H1 adversarial
+28,kdp_community_lem_bleed,Insufficient bleed after IR passed,https://www.kdpcommunity.com/s/question/0D5at00000861bWCAQ/i-keep-getting-an-error-email-insufficient-bleed,discussion,3,3,user,H4
+29,kdp_paperback_royalty_help,Paperback Royalty 50/60 table,https://kdp.amazon.com/help/topic/G201834330,primary,5,5,Amazon,H3
+30,kdp_title_cap_10_per_week,10 titles per format per week,https://kdp.amazon.com/help/topic/G201857950,primary,5,5,Amazon,H3
+31,kindlepreneur_low_content_books,Low Content Books classification bullet,https://kindlepreneur.com/low-content-books/,industry,4,4,Rocket CTA,H2
+32,kdpeasy_coloring_faq,KDP coloring FAQ checkbox retired false,https://www.kdpeasy.com/faq/coloring-books,industry,2,5,SaaS SEO,adversarial
+33,bookillustrationai_royalty_cliff,KDP 9.99 royalty cliff SOP,https://bookillustrationai.com/blog/kdp-9-99-royalty-cliff,industry,2,5,SaaS SEO,adversarial
+34,kdpeasy_8_5x11_trim,8.5x11 trim hardcover not available,https://www.kdpeasy.com/trim-sizes/8.5x11,industry,3,4,SaaS SEO,adversarial
+35,kdp_community_coloring_bleed_2025,8.5x11 coloring bleed May 2025,https://www.kdpcommunity.com/s/question/0D5at00000FWzanCAD/85-x-11-coloring-book-bleed,discussion,3,4,user,H4
+36,kindlepreneur_royalty_calculator,KDP royalty calculator 50/60 copy,https://kindlepreneur.com/kdp-royalty-calculator/,industry,4,4,Rocket CTA,H3
