@@ -20,6 +20,10 @@
 - [KDP trim size checker](https://www.kdpsuite.com/tools/kdp-trim-size-checker)
 - [KDP compliance requirements](https://www.kdpsuite.com/blog/kdp-compliance-requirements)
 - [Low content book creator workflow](https://www.kdpsuite.com/blog/low-content-book-creator-workflow)
+- [Coloring books are not low-content on KDP](https://www.kdpsuite.com/blog/kdp-coloring-book-low-content)
+- [KDP Expanded Distribution coloring book exclusions](https://www.kdpsuite.com/blog/kdp-expanded-distribution-coloring-book)
+- [KDP insufficient bleed and live element margin](https://www.kdpsuite.com/blog/kdp-insufficient-bleed-live-element-margin)
+- [Why 8.5x11 coloring books fail as KDP hardcovers](https://www.kdpsuite.com/blog/kdp-hardcover-coloring-book-trim)
 
 ## Feed
 - [RSS feed](https://www.kdpsuite.com/feed.xml)
