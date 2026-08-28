@@ -61,7 +61,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.65,
     },
     {
+      url: `${SITE_URL}/compare/atticus-alternative`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
+      url: `${SITE_URL}/compare/vellum-alternative`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
       url: `${SITE_URL}/tools/kdp-royalty-calculator`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/tools/kdp-trim-size-checker`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,

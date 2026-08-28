@@ -8,8 +8,8 @@ Before deploying any changes to the KDP Suite website, ensure the following:
 
 - [ ] `/public/BingSiteAuth.xml` - Bing Webmaster Tools verification
 - [ ] `/public/a893d08d1c9d4429b266d5faaf5f41ff.txt` - Google Search Console verification
-- [ ] `/public/robots.txt` - Search engine crawling rules
-- [ ] `/public/sitemap.xml` - Site structure for search engines
+- [ ] `app/robots.ts` - Dynamic robots.txt route (replaces static `public/robots.txt`)
+- [ ] `app/sitemap.ts` - Dynamic sitemap.xml route (replaces static `public/sitemap.xml`)
 
 ### Verification Steps
 
@@ -17,8 +17,7 @@ Before deploying any changes to the KDP Suite website, ensure the following:
    ```bash
    ls -la public/BingSiteAuth.xml
    ls -la public/a893d08d1c9d4429b266d5faaf5f41ff.txt
-   ls -la public/robots.txt
-   ls -la public/sitemap.xml
+   ls -la app/robots.ts app/sitemap.ts
    ```
 
 2. **Verify Git Status**
@@ -29,27 +28,29 @@ Before deploying any changes to the KDP Suite website, ensure the following:
 
 3. **Build Test**
    ```bash
-   npm run build
+   pnpm run build
    # Ensure build completes without errors
    ```
 
 4. **Local Verification**
    ```bash
-   npm run dev
+   pnpm run dev
    # Visit http://localhost:3000/BingSiteAuth.xml
    # Visit http://localhost:3000/a893d08d1c9d4429b266d5faaf5f41ff.txt
+   # Visit http://localhost:3000/robots.txt
+   # Visit http://localhost:3000/sitemap.xml
    ```
 
 ## Post-Deployment Verification
 
-After deployment, verify that all critical files are accessible:
+After deployment, verify that all critical files and routes are accessible:
 
 ### Production URL Checks
 
 - [ ] Visit `https://kdpsuite.com/BingSiteAuth.xml` - Should return XML content
 - [ ] Visit `https://kdpsuite.com/a893d08d1c9d4429b266d5faaf5f41ff.txt` - Should return token
-- [ ] Visit `https://kdpsuite.com/robots.txt` - Should return robots directives
-- [ ] Visit `https://kdpsuite.com/sitemap.xml` - Should return sitemap XML
+- [ ] Visit `https://kdpsuite.com/robots.txt` - Should return robots directives (from `app/robots.ts`)
+- [ ] Visit `https://kdpsuite.com/sitemap.xml` - Should return sitemap XML (from `app/sitemap.ts`)
 
 ### Expected Responses
 
@@ -66,6 +67,14 @@ After deployment, verify that all critical files are accessible:
 a893d08d1c9d4429b266d5faaf5f41ff
 ```
 
+**robots.txt / sitemap.xml**
+
+These are generated at runtime by Next.js App Router. Do not expect static files in `/public/`.
+
+## Ops Checklist
+
+For Supabase migrations, Vercel env vars, Stripe webhooks, and GSC/Bing submission, see [DEPLOYMENT_OPS.md](../DEPLOYMENT_OPS.md).
+
 ## Common Issues and Solutions
 
 ### Issue: Verification file returns 404
@@ -76,6 +85,13 @@ a893d08d1c9d4429b266d5faaf5f41ff
 3. Rebuild and redeploy
 4. Clear Vercel cache if necessary
 
+### Issue: robots.txt or sitemap.xml returns 404
+
+**Solution:**
+1. Verify `app/robots.ts` and `app/sitemap.ts` exist
+2. Run `pnpm run build` locally to confirm routes compile
+3. Redeploy via Vercel
+
 ### Issue: File content is incorrect
 
 **Solution:**
@@ -83,14 +99,6 @@ a893d08d1c9d4429b266d5faaf5f41ff
 2. Check for extra whitespace or line breaks
 3. Ensure UTF-8 encoding
 4. Recommit and redeploy
-
-### Issue: Files missing after deployment
-
-**Solution:**
-1. Check `.gitignore` - ensure files are not excluded
-2. Verify files are in the Git repository
-3. Check Vercel build logs for errors
-4. Manually verify files in Vercel deployment inspector
 
 ## Emergency Recovery
 
@@ -113,21 +121,14 @@ If verification files are accidentally deleted or corrupted:
    git push origin main
    ```
 
-## Automated Checks (Future Enhancement)
-
-Consider adding these automated checks to CI/CD pipeline:
-
-- Pre-deployment script to verify file existence
-- Post-deployment health check to verify file accessibility
-- Automated alerts if verification files return 404
-
 ## Contact
 
 For issues or questions about verification files, refer to:
+- [DEPLOYMENT_OPS.md](../DEPLOYMENT_OPS.md) - Full deployment operations guide
 - [VERIFICATION_FILES.md](../VERIFICATION_FILES.md) - Detailed documentation
 - [README.md](../README.md) - Project overview
 
 ---
 
-**Last Updated**: November 5, 2025
+**Last Updated**: August 2026
 **Maintained By**: KDP Suite Development Team

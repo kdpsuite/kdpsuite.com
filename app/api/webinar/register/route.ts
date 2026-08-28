@@ -2,11 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createRateLimitMiddleware } from '@/lib/rate-limit';
 import { rateLimitResponse } from '@/lib/api-response';
 import { logger, generateRequestId, createLogContext } from '@/lib/logger';
-
-/**
- * Webinar Registration API Route
- * Stub until a webinar provider is wired — does not persist or log PII.
- */
+import {
+  registerForWebinar,
+  isValidWebinarEmail,
+  WebinarConfigError,
+  WebinarRegistrationError,
+} from '@/lib/webinar';
+import { captureException } from '@/lib/sentry';
 
 export async function POST(request: NextRequest) {
   const requestId = generateRequestId();
@@ -20,14 +22,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { email } = await request.json();
+    const body = await request.json();
+    const { email, source } = body;
 
-    if (!email || typeof email !== 'string' || !email.includes('@')) {
+    if (!email || typeof email !== 'string' || !isValidWebinarEmail(email)) {
       return NextResponse.json(
         { error: 'Valid email is required' },
         { status: 400 }
       );
     }
+
+    await registerForWebinar(email, typeof source === 'string' ? source : 'website');
 
     logger.info({ ...logContext, statusCode: 200 });
 
@@ -36,6 +41,31 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
+    if (error instanceof WebinarConfigError) {
+      logger.error({
+        ...logContext,
+        statusCode: 503,
+        error: error.message,
+      });
+      return NextResponse.json(
+        { error: 'Webinar registration is not configured' },
+        { status: 503 }
+      );
+    }
+
+    if (error instanceof WebinarRegistrationError) {
+      logger.error({
+        ...logContext,
+        statusCode: 502,
+        error: error.message,
+      });
+      return NextResponse.json(
+        { error: 'Failed to register for webinar' },
+        { status: 502 }
+      );
+    }
+
+    captureException(error, { tags: { route: 'webinar-register' } });
     logger.error({
       ...logContext,
       statusCode: 500,

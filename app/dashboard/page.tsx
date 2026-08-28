@@ -1,10 +1,18 @@
 'use client';
 
+import ReferralProgram from '@/components/ReferralProgram';
 import { useAuth } from '@/lib/auth-context';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+
+const dashboardStats = [
+  { label: 'Books Published', value: '0', note: 'Coming soon' },
+  { label: 'Total Revenue', value: '$0', note: 'Coming soon' },
+  { label: 'Conversions', value: '0', note: 'Coming soon' },
+  { label: 'Average Rating', value: '—', note: 'Coming soon' },
+];
 
 export default function DashboardPage() {
   const { user, session, logout, isLoading } = useAuth();
@@ -81,6 +89,24 @@ export default function DashboardPage() {
             </p>
           </div>
 
+          {/* Stats Cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {dashboardStats.map((stat) => (
+              <div
+                key={stat.label}
+                className="bg-white rounded-3xl shadow-lg p-6 border border-gray-200"
+              >
+                <p className="text-sm font-semibold text-gray-500 mb-2 font-heading">
+                  {stat.label}
+                </p>
+                <p className="text-3xl font-bold text-neutral mb-1 font-heading">
+                  {stat.value}
+                </p>
+                <p className="text-xs text-gray-400 font-body">{stat.note}</p>
+              </div>
+            ))}
+          </div>
+
           {/* User Profile Card */}
           <div className="bg-white rounded-3xl shadow-lg p-8 mb-8 border border-gray-200">
             <h2 className="text-2xl font-bold text-neutral mb-6 font-heading">Profile Information</h2>
@@ -138,7 +164,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Quick Links */}
-          <div className="mt-12 grid md:grid-cols-3 gap-6">
+          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Link href="/features" className="bg-white rounded-3xl shadow-lg p-8 border border-gray-200 hover:shadow-xl transition-shadow">
               <div className="text-4xl mb-4">📚</div>
               <h3 className="text-xl font-bold text-neutral mb-2 font-heading">Features</h3>
@@ -151,6 +177,12 @@ export default function DashboardPage() {
               <p className="text-gray-700 font-body">View pricing and upgrade your subscription</p>
             </Link>
 
+            <Link href="/dashboard/profile" className="bg-white rounded-3xl shadow-lg p-8 border border-gray-200 hover:shadow-xl transition-shadow">
+              <div className="text-4xl mb-4">👤</div>
+              <h3 className="text-xl font-bold text-neutral mb-2 font-heading">Edit Profile</h3>
+              <p className="text-gray-700 font-body">Update your name, username, and bio</p>
+            </Link>
+
             <Link href="/contact" className="bg-white rounded-3xl shadow-lg p-8 border border-gray-200 hover:shadow-xl transition-shadow">
               <div className="text-4xl mb-4">💬</div>
               <h3 className="text-xl font-bold text-neutral mb-2 font-heading">Contact Support</h3>
@@ -159,6 +191,8 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      <ReferralProgram />
     </div>
   );
 }

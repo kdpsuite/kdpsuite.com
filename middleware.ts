@@ -1,12 +1,20 @@
 import { createServerClient } from '@supabase/ssr';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import { getReferralCodeFromRequest, setReferralCookie } from '@/lib/referral';
 
 export async function middleware(request: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
+  const referralCode = getReferralCodeFromRequest(request);
+
   if (!supabaseUrl || !supabaseAnonKey) {
+    if (referralCode) {
+      const response = NextResponse.next();
+      setReferralCookie(response, referralCode);
+      return response;
+    }
     return NextResponse.next();
   }
 
@@ -15,6 +23,10 @@ export async function middleware(request: NextRequest) {
       headers: request.headers,
     },
   });
+
+  if (referralCode) {
+    setReferralCookie(response, referralCode);
+  }
 
   const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
@@ -57,5 +69,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/auth/login', '/auth/signup'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml)$).*)',
+  ],
 };

@@ -10,6 +10,7 @@ export interface AuthUser {
   fullName: string;
   username?: string | null;
   avatarUrl?: string | null;
+  bio?: string | null;
   subscriptionTier?: string;
   stripe_customer_id?: string | null;
   subscription_id?: string | null;
@@ -76,6 +77,7 @@ function mapAuthUser(user: User, profile?: Record<string, unknown> | null): Auth
       '',
     username: (profile?.username as string | null | undefined) ?? null,
     avatarUrl: (profile?.avatar_url as string | null | undefined) ?? null,
+    bio: (profile?.bio as string | null | undefined) ?? null,
     subscriptionTier:
       (profile?.subscription_tier as string | undefined) ||
       (profile?.subscription_plan as string | undefined) ||
@@ -221,6 +223,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       await setAuthState(data.session, data.user);
+
+      if (data.user?.email) {
+        fetch('/api/referral', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: data.user.email }),
+        }).catch(() => undefined);
+      }
+
       return { requiresEmailVerification: !data.session };
     } finally {
       setIsLoading(false);

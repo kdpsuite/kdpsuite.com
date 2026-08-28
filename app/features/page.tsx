@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { GoogleAdsenseBanner } from '@/components/ads';
 
 export default function FeaturesPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -128,6 +129,10 @@ export default function FeaturesPage() {
           </p>
         </div>
       </section>
+
+      <div className="container mx-auto px-4">
+        <GoogleAdsenseBanner slot="FEATURES_BANNER_SLOT" format="horizontal" />
+      </div>
 
       {/* Features Grid */}
       <section className="container mx-auto px-4 py-20">

@@ -14,7 +14,12 @@
 - [Guides index](https://www.kdpsuite.com/guides)
 - [KDP glossary](https://www.kdpsuite.com/glossary)
 - [Book Bolt alternative comparison](https://www.kdpsuite.com/compare/book-bolt-alternative)
+- [Atticus alternative comparison](https://www.kdpsuite.com/compare/atticus-alternative)
+- [Vellum alternative comparison](https://www.kdpsuite.com/compare/vellum-alternative)
 - [KDP royalty calculator](https://www.kdpsuite.com/tools/kdp-royalty-calculator)
+- [KDP trim size checker](https://www.kdpsuite.com/tools/kdp-trim-size-checker)
+- [KDP compliance requirements](https://www.kdpsuite.com/blog/kdp-compliance-requirements)
+- [Low content book creator workflow](https://www.kdpsuite.com/blog/low-content-book-creator-workflow)
 
 ## Feed
 - [RSS feed](https://www.kdpsuite.com/feed.xml)

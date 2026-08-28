@@ -1,24 +1,7 @@
 import type { Metadata } from "next";
 import FoundingCampaignPage from "./page-founding-campaign";
+import { foundingCampaignFaqs, homepageFaqs, toFaqPageJsonLd } from "@/lib/content/homepage-faq";
 import { toJsonLd } from "@/lib/seo/json-ld";
-
-const homepageFaq = [
-  {
-    question: "When will the platform be ready?",
-    answer:
-      "The platform is live and founding members can access the dashboard immediately.",
-  },
-  {
-    question: "What happens after founding spots sell out?",
-    answer:
-      "When founding spots are sold out, the platform moves to monthly subscription pricing.",
-  },
-  {
-    question: "Can I upgrade my tier later?",
-    answer:
-      "Founding members can upgrade by paying the difference while lifetime tiers are available.",
-  },
-];
 
 export const metadata: Metadata = {
   title: "Amazon KDP Software and Publishing Workflow Platform",
@@ -46,18 +29,9 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: toJsonLd({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: homepageFaq.map((item) => ({
-              "@type": "Question",
-              name: item.question,
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: item.answer,
-              },
-            })),
-          }),
+          __html: toJsonLd(
+            toFaqPageJsonLd([...foundingCampaignFaqs, ...homepageFaqs])
+          ),
         }}
       />
       <FoundingCampaignPage />

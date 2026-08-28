@@ -1,5 +1,14 @@
 'use client';
 
+import CaseStudies from '@/components/CaseStudies';
+import FAQ from '@/components/FAQ';
+import NewsletterSignup from '@/components/NewsletterSignup';
+import Stats from '@/components/Stats';
+import StickyFooterCTA from '@/components/StickyFooterCTA';
+import Testimonials from '@/components/Testimonials';
+import TrustBadges from '@/components/TrustBadges';
+import WebinarSignup from '@/components/WebinarSignup';
+import { GoogleAdsenseBanner } from '@/components/ads';
 import { foundingCampaignPlans } from '@/lib/pricing-data';
 
 export default function FoundingCampaignPage() {
@@ -104,6 +113,12 @@ export default function FoundingCampaignPage() {
           </div>
         </div>
       </section>
+
+      <Stats />
+      <Testimonials />
+      <CaseStudies />
+
+      <GoogleAdsenseBanner slot="HOME_BANNER_SLOT" format="horizontal" />
 
       {/* Pricing Section */}
       <section id="pricing" style={{ padding: '80px 20px', background: 'white' }}>
@@ -244,49 +259,14 @@ export default function FoundingCampaignPage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faq" style={{ padding: '80px 20px', background: '#f8f9fa' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <h2 style={{ fontSize: '2.5em', marginBottom: '30px', textAlign: 'center', color: '#2c3e50' }}>Frequently Asked Questions</h2>
-          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-            {[
-              {
-                q: 'When will the platform be ready?',
-                a: 'The platform is live! Founding members can access the dashboard immediately and start using core features like the AI Coloring Book Converter and KDP-compliant templates.',
-              },
-              {
-                q: 'What if you shut down?',
-                a: 'Even if I shut down after 6 months, you still got more value than paying monthly ($19/month × 6 = $114 vs your $99 one-time). But I&apos;m betting everything on making this work long-term. The platform is already built—this isn&apos;t vaporware.',
-              },
-              {
-                q: 'Why lifetime pricing instead of monthly from day one?',
-                a: 'I&apos;m bootstrapped with zero runway. Monthly subscriptions take 12-18 months to generate real cash flow. Lifetime funding gets me capital now to finish strong and launch fast. Backers get rewarded for taking early risk with permanent pricing.',
-              },
-              {
-                q: 'What happens after founding spots sell out?',
-                a: 'The platform switches to monthly subscriptions: $19/month (Starter), $49/month (Professional), $99/month (Enterprise). Lifetime access will never be available again. This is your only chance.',
-              },
-              {
-                q: 'Can I upgrade my tier later?',
-                a: 'Yes. You can upgrade from Starter to Professional or Enterprise by paying the difference. But you must be a founding member first—once lifetime spots are gone, upgrades won&apos;t be available.',
-              },
-              {
-                q: 'Is this just another Canva clone?',
-                a: 'No. Canva is general design. KDP Creator Suite is built specifically for Amazon KDP publishing. We handle print specifications, KDP compliance, batch processing, and publishing workflows that Canva doesn&apos;t touch. Think Canva + Book Bolt + Creative Fabrica combined, optimized for KDP.',
-              },
-            ].map((item, idx) => (
-              <div key={idx} style={{ marginBottom: '30px' }}>
-                <div style={{ fontSize: '1.3em', fontWeight: '600', color: '#2c3e50', marginBottom: '10px' }}>
-                  {item.q}
-                </div>
-                <div style={{ fontSize: '1.05em', lineHeight: '1.7', color: '#555' }}>
-                  {item.a}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TrustBadges />
+      <WebinarSignup />
+
+      <div id="faq">
+        <FAQ />
+      </div>
+
+      <NewsletterSignup />
 
       {/* Final CTA Section */}
       <section style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', textAlign: 'center', padding: '80px 20px' }}>
@@ -330,6 +310,8 @@ export default function FoundingCampaignPage() {
           <p style={{ marginTop: '10px', fontSize: '0.9em' }}>Questions? Email: support@kdpsuite.com</p>
         </div>
       </footer>
+
+      <StickyFooterCTA />
     </div>
   );
 }

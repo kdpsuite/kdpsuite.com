@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import PricingComparison from '@/components/PricingComparison';
 import { pricingPlans } from '@/lib/pricing-data';
 
 export default function PricingPage() {
@@ -142,6 +143,8 @@ export default function PricingPage() {
             </div>
           ))}
         </div>
+
+        <PricingComparison />
 
         {/* FAQ Section */}
         <div className="bg-gray-50 rounded-lg p-8 mt-16">

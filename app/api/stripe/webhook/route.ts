@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import { createRateLimitMiddleware } from '@/lib/rate-limit';
 import { rateLimitResponse } from '@/lib/api-response';
 import { logger, generateRequestId, createLogContext } from '@/lib/logger';
+import { captureException } from '@/lib/sentry';
 
 export async function POST(request: NextRequest) {
   const requestId = generateRequestId();
@@ -77,6 +78,26 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    const { data: existingEvent, error: idempotencyLookupError } = await supabase
+      .from('processed_stripe_events')
+      .select('event_id')
+      .eq('event_id', event.id)
+      .maybeSingle();
+
+    if (idempotencyLookupError) {
+      logger.error({
+        ...logContext,
+        statusCode: 500,
+        error: idempotencyLookupError.message,
+      });
+      return NextResponse.json({ error: 'Idempotency check failed' }, { status: 500 });
+    }
+
+    if (existingEvent) {
+      logger.info({ ...logContext, statusCode: 200, error: 'Duplicate Stripe event skipped' });
+      return NextResponse.json({ received: true, duplicate: true });
+    }
+
     switch (event.type) {
       case 'customer.subscription.created':
       case 'customer.subscription.updated':
@@ -103,9 +124,26 @@ export async function POST(request: NextRequest) {
         });
     }
 
+    const { error: idempotencyInsertError } = await supabase
+      .from('processed_stripe_events')
+      .insert({
+        event_id: event.id,
+        event_type: event.type,
+      });
+
+    if (idempotencyInsertError) {
+      logger.error({
+        ...logContext,
+        statusCode: 500,
+        error: idempotencyInsertError.message,
+      });
+      return NextResponse.json({ error: 'Failed to record processed event' }, { status: 500 });
+    }
+
     logger.info({ ...logContext, statusCode: 200 });
     return NextResponse.json({ received: true });
   } catch (error) {
+    captureException(error, { tags: { route: 'stripe-webhook' } });
     logger.error({
       ...logContext,
       statusCode: 500,
