@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/nextjs";
+
 interface SentryContext {
   tags?: Record<string, string>;
   extra?: Record<string, unknown>;
@@ -5,7 +7,7 @@ interface SentryContext {
 }
 
 function isSentryEnabled(): boolean {
-  return Boolean(process.env.SENTRY_DSN);
+  return Boolean(process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN);
 }
 
 export function captureException(error: unknown, context?: SentryContext): void {
@@ -13,21 +15,20 @@ export function captureException(error: unknown, context?: SentryContext): void 
     return;
   }
 
-  const message = error instanceof Error ? error.message : String(error);
-  const stack = error instanceof Error ? error.stack : undefined;
-
-  console.error(
-    JSON.stringify({
-      level: 'error',
-      sentry: true,
-      message,
-      stack,
-      tags: context?.tags,
-      extra: context?.extra,
-      userId: context?.userId,
-      timestamp: new Date().toISOString(),
-    })
-  );
+  Sentry.withScope((scope) => {
+    if (context?.tags) {
+      for (const [key, value] of Object.entries(context.tags)) {
+        scope.setTag(key, value);
+      }
+    }
+    if (context?.extra) {
+      scope.setExtras(context.extra);
+    }
+    if (context?.userId) {
+      scope.setUser({ id: context.userId });
+    }
+    Sentry.captureException(error);
+  });
 }
 
 export function captureMessage(message: string, context?: SentryContext): void {
@@ -35,15 +36,18 @@ export function captureMessage(message: string, context?: SentryContext): void {
     return;
   }
 
-  console.warn(
-    JSON.stringify({
-      level: 'warning',
-      sentry: true,
-      message,
-      tags: context?.tags,
-      extra: context?.extra,
-      userId: context?.userId,
-      timestamp: new Date().toISOString(),
-    })
-  );
+  Sentry.withScope((scope) => {
+    if (context?.tags) {
+      for (const [key, value] of Object.entries(context.tags)) {
+        scope.setTag(key, value);
+      }
+    }
+    if (context?.extra) {
+      scope.setExtras(context.extra);
+    }
+    if (context?.userId) {
+      scope.setUser({ id: context.userId });
+    }
+    Sentry.captureMessage(message, "warning");
+  });
 }

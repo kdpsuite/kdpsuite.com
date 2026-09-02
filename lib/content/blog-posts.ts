@@ -412,6 +412,265 @@ export const blogPosts: BlogPost[] = [
     contentHtml:
       "<p><strong>An 8.5×11 coloring book cannot publish as a KDP hardcover because hardcover trims stop at 8.25×11.</strong> Coloring niches standardize on 8.5×11 paperbacks for page area. Creators who duplicate the same Canva interior for hardcover see incompatible manuscript errors—even when paperback uploaded cleanly. Wrap and hinge math also differ from paperback, and long color hardcovers hit uneconomic print costs.</p><h2>Supported hardcover trims vs coloring default</h2><p>KDP hardcover currently allows five interior trim sizes, largest 8.25×11. Paperback coloring templates commonly export at 8.5×11 (often 8.625×11.25 with bleed in design tools). That mismatch alone blocks hardcover binding.</p><table><thead><tr><th>Format</th><th>Typical coloring trim</th><th>KDP support</th></tr></thead><tbody><tr><td>Paperback</td><td>8.5×11</td><td>Yes</td></tr><tr><td>Hardcover</td><td>8.5×11</td><td>No — max 8.25×11</td></tr><tr><td>Hardcover</td><td>8.25×11</td><td>Yes — requires redesign from 8.5×11 art</td></tr></tbody></table><h2>Cover wrap and page-count economics</h2><p>Hardcover covers use wrap dimensions with 0.51-inch wrap and 0.4-inch hinge requirements, plus spine width tied to page count. A 350-page color interior—not unusual in community threads—creates a thick spine and high print quote. Coloring buyers rarely pay premium hardcover prices for large page counts. Paperback at 8.5×11 is usually the rational default.</p><h2>Decision workflow before you design hardcover</h2><ol><li><strong>Confirm trim list:</strong> open KDP hardcover specs before layout, not after paperback is finished.</li><li><strong>Choose audience format:</strong> if buyers expect lay-flat area, stay paperback 8.5×11.</li><li><strong>Redesign if you must do hardcover:</strong> reflow art to 8.25×11 or smaller—not a automatic duplicate.</li><li><strong>Rebuild wrap PDF:</strong> use KDP Cover Calculator output for hardcover, not paperback spread templates.</li><li><strong>Model print cost:</strong> compare paperback vs hardcover unit economics before ordering proofs.</li></ol><h2>Community failure mode</h2><p>KDP Community publishers describe uploading 8.5×11 Canva coloring interiors that paperback accepted, then receiving hardcover rejection for incompatible manuscript size. Peer advice: hardcovers only exist in the limited trim set—if 8.5×11 is not on the list, redesign or stay paperback.</p><h2>FAQ</h2><h3>Can I shrink 8.5×11 art to fit 8.25×11 hardcover?</h3><p>Only with a full relayout. Scaling down uniformly shrinks line art and margins unpredictably. Treat it as a new interior.</p><h3>Does Expanded Distribution help hardcover coloring?</h3><p>No. Hardcovers are ineligible for Expanded Distribution, and coloring books are excluded regardless.</p><h2>Bottom line</h2><p>Ship coloring at 8.5×11 paperback unless you deliberately design for a supported hardcover trim. Validate sizes with our <a href=\"/tools/kdp-trim-size-checker\">trim size checker</a> before cover export.</p>",
   },
+  {
+    slug: "kdp-print-royalty-cliff-catalog-repricing",
+    title: "KDP Print Royalty Cliff Catalog Repricing: SKU Audit After the June 2025 Rate Split",
+    description:
+      "A catalog SKU-audit SOP for the June 2025 KDP print royalty cliff: 50% below $9.99, 60% at or above, marketplace floors including 110 SEK, and how to fix wrong $7.99×60% math.",
+    excerpt:
+      "After June 2025, KDP print royalties are 50% below marketplace cliffs and 60% at or above them. Catalog operators need a SKU audit—not another calculator explainer—to reprice live titles safely.",
+    datePublished: "2026-09-02",
+    dateModified: "2026-09-02",
+    category: "Analytics",
+    readTime: "12 min read",
+    imageEmoji: "📉",
+    keywords: [
+      "kdp print royalty cliff",
+      "kdp catalog repricing",
+      "kdp 50 percent royalty",
+      "kdp paperback royalty audit",
+      "kdp sek royalty floor",
+    ],
+    author: {
+      name: "KDP Creator Suite Editorial Team",
+      role: "Pricing and Analytics",
+      bio: "The team publishes pricing frameworks and catalog-ops workflows so KDP creators reprice live SKUs against current Amazon Help rates.",
+    },
+    faq: [
+      {
+        question: "What is the KDP print royalty cliff after June 2025?",
+        answer:
+          "On Amazon.com, list prices at or below $9.98 USD earn 50% of list minus printing cost; $9.99 and above earn 60%. Other marketplaces use matching floors, including 110 SEK for the 60% band on Amazon.se.",
+      },
+      {
+        question: "Does a $7.99 USD paperback earn 60% royalty?",
+        answer:
+          "No. $7.99 USD is below the $9.99 cliff, so Amazon.com applies 50%. Treating every paperback as 60% × list price overstates margin. £7.99 on Amazon.co.uk is a different floor and must be modeled separately.",
+      },
+      {
+        question: "What happens if I edit a title priced under the new minimum?",
+        answer:
+          "Amazon’s June 2025 announcement stated that updates to book details or content after June 10, 2025 can require you to raise list price to the new minimum for that marketplace.",
+      },
+    ],
+    contentHtml:
+      "<p><strong>A KDP print royalty cliff catalog audit is a SKU-by-SKU repricing SOP for titles that still sit below marketplace rate floors after the June 2025 print royalty change.</strong> This is not another unit-math explainer. It is how catalog operators inventory live paperbacks and hardcovers, map each marketplace list price to the correct 50% or 60% band, and decide whether to raise price, accept thinner 50% margins, or leave untouched titles alone. Amazon Help as of 2026-08-21 documents the split: 50% at or below the listed floors (for example $9.98 USD) and 60% at or above the next cent ($9.99 USD). Expanded Distribution remains 40% of list minus print cost when eligible.</p><h2>What changed—and what wrong blogs still teach</h2><p>Before June 10, 2025, many low-price journals and coloring paperbacks assumed a flat 60% Amazon.com print royalty. After the cliff, sub-$9.99 USD titles earn 50%. Help (reviewed 2026-08-21) lists marketplace floors including Amazon.com 9.98/9.99 USD, EUR 9.98/9.99, UK 7.98/7.99 GBP, CAD and AUD 13.98/13.99, JPY 999/1000, PLN 39/40, and Amazon.se <strong>109/110 SEK</strong>. Some coloring FAQs still teach “paperbacks always use 60%” and show $7.99 × 0.60 math. That is wrong on Amazon.com: $7.99 USD is a 50% title. Do not copy that arithmetic into a catalog spreadsheet.</p><table><thead><tr><th>Marketplace</th><th>50% band (at or below)</th><th>60% band (at or above)</th></tr></thead><tbody><tr><td>Amazon.com</td><td>$9.98 USD</td><td>$9.99 USD</td></tr><tr><td>Amazon.co.uk</td><td>£7.98</td><td>£7.99</td></tr><tr><td>Amazon.se</td><td>109 SEK</td><td>110 SEK</td></tr><tr><td>Amazon.ca / .com.au</td><td>13.98 local</td><td>13.99 local</td></tr></tbody></table><h2>Catalog SKU-audit SOP</h2><ol><li><strong>Export live print SKUs:</strong> list every paperback and hardcover with current list prices per marketplace you actually sell in.</li><li><strong>Tag the rate band:</strong> mark each price 50% or 60% using Help floors—not a single global 60% assumption.</li><li><strong>Recalculate royalty:</strong> use (rate × list) − print cost. Run scenarios in our <a href=\"/tools/kdp-royalty-calculator\">KDP royalty calculator</a> before changing live prices.</li><li><strong>Flag edit risk:</strong> titles you plan to revise after June 10, 2025 may be forced to new minimum list prices—batch content edits with price updates.</li><li><strong>Prioritize thin-margin SKUs:</strong> sub-cliff color interiors with high print cost first; leave healthy 60% titles alone.</li><li><strong>Reprice or accept 50%:</strong> raise to the 60% floor only when conversion math still works; document the decision per ASIN.</li><li><strong>Re-check Help before the next sprint:</strong> SEK and other floors can move; verify against Amazon Help, not a cached blog table.</li></ol><h2>Ops rules that prevent catalog damage</h2><ul><li>Never model USD $7.99 as 60% royalty.</li><li>Treat UK £7.99, EUR €9.99, and SEK 110 as separate cliffs—not USD copies.</li><li>Do not enroll coloring or heavy-ink titles in Expanded Distribution to “recover” margin; ED exclusions still apply.</li><li>Use our <a href=\"/blog/kdp-royalty-calculator-guide\">royalty calculator guide</a> for unit scenarios; use this SOP for catalog queueing and owner sign-off.</li></ul><h2>FAQ</h2><h3>Should I raise every title to $9.99?</h3><p>No. Raise only when 60% math plus expected conversion beats staying at 50%. Some niches convert better under $9.99 even at the lower rate.</p><h3>Is Expanded Distribution a workaround for the cliff?</h3><p>No. ED pays 40% of list minus print cost and excludes coloring books, many journals, and heavy-ink interiors entirely.</p><h2>Bottom line</h2><p>Audit the catalog by marketplace floor, kill the $7.99×60% habit, and reprice only where unit economics justify crossing the cliff.</p>",
+  },
+  {
+    slug: "kdp-coloring-book-too-much-ink",
+    title: "KDP Coloring Books and “Too Much Ink”: Darkness, Rejection Risk, and ED Exclusion",
+    description:
+      "How KDP treats coloring books with high ink concentration: Expanded Distribution exclusion, forum failure patterns, and what Amazon Help actually says—without inventing TAC percentages.",
+    excerpt:
+      "Coloring books are already barred from Expanded Distribution, and interiors that need a high concentration of ink are a separate ED kill-switch. Forums discuss darkness failures; Help does not publish a TAC percentage.",
+    datePublished: "2026-09-02",
+    dateModified: "2026-09-02",
+    category: "Compliance",
+    readTime: "10 min read",
+    imageEmoji: "🖤",
+    keywords: [
+      "kdp coloring book too much ink",
+      "kdp high concentration of ink",
+      "kdp expanded distribution ink",
+      "kdp coloring book darkness",
+    ],
+    author: {
+      name: "KDP Creator Suite Editorial Team",
+      role: "Distribution and Pricing",
+      bio: "The team publishes distribution and production guides so coloring publishers avoid ink and Expanded Distribution assumptions Amazon does not support.",
+    },
+    faq: [
+      {
+        question: "Does Amazon publish a maximum ink or TAC percentage for KDP coloring books?",
+        answer:
+          "No. Amazon Help excludes paperbacks whose interiors require a high concentration of ink from Expanded Distribution, but it does not publish a numeric TAC or ink-coverage threshold for publishers to target.",
+      },
+      {
+        question: "Are coloring books blocked from Expanded Distribution even with light line art?",
+        answer:
+          "Yes. Coloring books are listed under content not currently accepted for Expanded Distribution, separate from the high-ink rule.",
+      },
+      {
+        question: "Can dark full-page fills cause print quality issues on Amazon.com?",
+        answer:
+          "Community threads report darkness and ink-related quality complaints on heavy fills. Treat heavy black or dense gray fields as a production risk even when the title remains Amazon.com-only.",
+      },
+    ],
+    contentHtml:
+      "<p><strong>“Too much ink” on a KDP coloring book usually means one of two Amazon rules colliding with dark interiors: Expanded Distribution’s high-ink exclusion, or print-quality failures discussed in publisher forums.</strong> Amazon Help lists both coloring books and paperbacks that require a high concentration of ink under content not accepted for Expanded Distribution. Help does not publish a total area coverage (TAC) percentage, CMYK ink limit, or darkness meter. Any blog that invents a numeric TAC threshold is guessing. This guide stays inside what Help and forums actually support.</p><h2>Two separate kill-switches</h2><table><thead><tr><th>Rule</th><th>What Help says</th><th>What it means for coloring</th></tr></thead><tbody><tr><td>Coloring books</td><td>Not currently accepted for Expanded Distribution</td><td>ED is off regardless of how light the line art is</td></tr><tr><td>High concentration of ink</td><td>Interiors that require heavy ink to print are not accepted for ED</td><td>Dark fills and dense coverage are an independent ban</td></tr><tr><td>Amazon.com sales</td><td>ED exclusions do not by themselves ban Amazon retail</td><td>You can still sell on Amazon.com; do not promise bookstore ED</td></tr></tbody></table><p>See our dedicated <a href=\"/blog/kdp-expanded-distribution-coloring-book\">Expanded Distribution coloring guide</a> for the full exclusion list including journals and hardcovers.</p><h2>What forums report (and what they do not prove)</h2><p>KDP Community and publisher forums repeatedly describe heavy black backgrounds, solid gray panels, and dense patterned fills as triggers for ink-related quality complaints or ED denial. Those threads are useful as risk signals. They are not official thresholds. Do not reverse-engineer a fake “under X% ink” rule from anecdotal posts.</p><h2>Production workflow for dark coloring interiors</h2><ol><li><strong>Decide channel first:</strong> if you need ED, coloring books are already ineligible—stop designing for wholesale.</li><li><strong>Audit fill density:</strong> flag full-page blacks, large solid panels, and stacked overlapping strokes before export.</li><li><strong>Lighten where possible:</strong> prefer open line art and white negative space over flooded backgrounds when the design allows.</li><li><strong>Order a proof:</strong> judge darkness on a physical copy, not only on a calibrated monitor.</li><li><strong>Price for Amazon.com only:</strong> model print cost with ED off; heavy pages raise manufacturing cost even without ED.</li><li><strong>Document the SOP:</strong> template teams should not promise ED or invent a TAC percentage in briefs.</li></ol><h2>FAQ</h2><h3>Is “high concentration of ink” only an Expanded Distribution rule?</h3><p>Help states it under ED eligibility. Separately, dark interiors can still create print-quality issues on Amazon.com sales. Treat both risks as real without inventing a shared percentage.</p><h3>Should I switch to black-and-white ink to avoid the rule?</h3><p>Black ink can still look heavy if coverage is dense. Ink type does not erase the coloring-book ED ban.</p><h2>Bottom line</h2><p>Plan coloring catalogs for Amazon.com, avoid inventing TAC math, and treat heavy fills as a proof-and-design problem—not an ED growth lever.</p>",
+  },
+  {
+    slug: "kdp-activity-book-interior-specs",
+    title: "KDP Activity and Puzzle Book Interior Specs: Not Low-Content, Gutters vs Grids",
+    description:
+      "Interior specifications for KDP activity and puzzle books: why they are not low-content, how gutters differ from grid gutters, and a pre-upload checklist.",
+    excerpt:
+      "Activity and puzzle books are generally not low-content on KDP. Specs hinge on unique pages, binding gutters by page count, and keeping puzzle grids out of the unsafe margin zone.",
+    datePublished: "2026-09-02",
+    dateModified: "2026-09-02",
+    category: "Formatting",
+    readTime: "11 min read",
+    imageEmoji: "🧩",
+    keywords: [
+      "kdp activity book interior",
+      "kdp puzzle book gutter",
+      "activity book kdp specifications",
+      "kdp puzzle book not low content",
+    ],
+    author: {
+      name: "KDP Creator Suite Editorial Team",
+      role: "Formatting and Production",
+      bio: "The team documents print interior specs for activity, puzzle, and coloring publishers who need Amazon-accurate classification and margin rules.",
+    },
+    faq: [
+      {
+        question: "Are activity books and puzzle books low-content on KDP?",
+        answer:
+          "Generally no. Amazon Help says low-content does not typically include activity books such as puzzle books or coloring books, because they do not feature repetitive fill-in pages.",
+      },
+      {
+        question: "What is the difference between binding gutter and a puzzle grid gutter?",
+        answer:
+          "Binding gutter is Amazon’s inside margin that grows with page count so content clears the spine. A puzzle grid gutter is the white gap between cells in your design—it does not replace Amazon’s margin table.",
+      },
+      {
+        question: "Can I mark an activity book as low-content for faster review?",
+        answer:
+          "No. Wrong classification can reject the title and changes ISBN, series, and review-timeline eligibility. Leave the low-content box unchecked for unique-page activity interiors.",
+      },
+    ],
+    contentHtml:
+      "<p><strong>KDP activity and puzzle book interiors are fixed-layout print PDFs with unique pages—not low-content repetitive fill-in books.</strong> Amazon Help groups puzzle books and coloring books with titles that generally do not feature the same page repeated. That classification choice drives checkbox settings, ISBN eligibility, series enrollment, and review timing. Interior engineering then comes down to trim, bleed, and binding gutters—not marketing blogs that still lump activity books into “low content niches.”</p><h2>Classification first</h2><p>Under Amazon’s low-content Help, notebooks, planners, diaries/journals, prompt journals, and log books are low-content. Novels, puzzle books, coloring books, photography, and children’s books are generally not. If every crossword, maze, or activity page is unique, leave the Low-content box unchecked. For the coloring-specific checklist, use our <a href=\"/blog/kdp-coloring-book-low-content\">coloring book classification guide</a>.</p><h2>Gutter vs grid: do not confuse the terms</h2><table><thead><tr><th>Term</th><th>Meaning on KDP</th><th>Failure mode</th></tr></thead><tbody><tr><td>Binding gutter (inside margin)</td><td>Amazon minimum inside margin by page count (for example 0.375\" at 24–150 pages, rising to 0.875\" at 701–828)</td><td>Puzzle answers or grid edges disappear into the spine</td></tr><tr><td>Outer/top/bottom margins</td><td>0.25\" without bleed; 0.375\" with bleed</td><td>Clipped numbers, titles, or QR codes</td></tr><tr><td>Puzzle grid spacing</td><td>Designer-chosen gaps between cells</td><td>Looks fine on screen but still violates binding gutter if the whole grid sits too close to the spine</td></tr></tbody></table><h2>Interior spec workflow</h2><ol><li><strong>Pick trim for the activity:</strong> many puzzle books use 8.5×11 or 6×9; lock trim before drawing grids.</li><li><strong>Count pages early:</strong> set inside margin from Amazon’s page-count table, then build the grid inside that safe rectangle.</li><li><strong>Keep answer keys clear of the spine:</strong> move solution pages or mirror layouts so text does not ride the gutter.</li><li><strong>Decide bleed:</strong> edge-to-edge art needs +0.125\" width and +0.25\" height; most grid-only interiors do better without bleed and with 0.25\" outer margins.</li><li><strong>Export unique pages:</strong> do not submit a 100-page file that is one worksheet repeated—that invites low-content treatment and quality policy risk.</li><li><strong>Preview and classify:</strong> confirm the low-content box is off, then run Print Previewer before submit.</li></ol><h2>FAQ</h2><h3>Do activity books get the 10-business-day low-content review?</h3><p>When correctly classified as not low-content, they follow standard paperback timelines rather than the low-content review window. Misclassification breaks both policy and calendar planning.</p><h3>Can lined practice pages inside an activity book make it low-content?</h3><p>A mostly unique activity interior with a few practice lines is still usually not a notebook. If the book is primarily repetitive lined or blank pages, Amazon may treat it as low-content—design the majority of pages as distinct activities.</p><h2>Bottom line</h2><p>Treat activity books as unique-page print products: correct classification, Amazon binding gutters, and grids that live inside the safe area—not affiliate “low content” bundles.</p>",
+  },
+  {
+    slug: "kdp-journal-6x9-bleed-math",
+    title: "KDP 6×9 Journal Bleed Math: Use 6.125×9.25, Not Affiliate 6.125×9.125",
+    description:
+      "Correct KDP 6×9 bleed page size is 6.125×9.25 inches. Affiliate templates that export 6.125×9.125 are short on height—here is the Help math and a fix workflow.",
+    excerpt:
+      "For a 6×9 KDP paperback with bleed, Amazon requires 6.125\" × 9.25\". Templates that use 6.125×9.125 underbuild height by 0.125\" and risk rejection or trim errors.",
+    datePublished: "2026-09-02",
+    dateModified: "2026-09-02",
+    category: "Formatting",
+    readTime: "9 min read",
+    imageEmoji: "📏",
+    keywords: [
+      "kdp 6x9 bleed",
+      "kdp journal bleed size",
+      "6.125 x 9.25 kdp",
+      "kdp paperback page size with bleed",
+    ],
+    author: {
+      name: "KDP Creator Suite Editorial Team",
+      role: "Formatting and Production",
+      bio: "The team documents Amazon-canonical trim and bleed math so journal publishers catch wrong affiliate template dimensions before upload.",
+    },
+    faq: [
+      {
+        question: "What PDF page size should a 6x9 KDP journal use with bleed?",
+        answer:
+          "6.125 inches wide by 9.25 inches high. Amazon’s Help example adds 0.125\" to width and 0.25\" to height for a 6×9 trim.",
+      },
+      {
+        question: "Why do some templates use 6.125×9.125?",
+        answer:
+          "That size incorrectly adds only 0.125\" to height instead of 0.25\". It is a common affiliate shortcut, not Amazon’s documented formula.",
+      },
+      {
+        question: "Do no-bleed 6x9 journals use 6×9 exactly?",
+        answer:
+          "Yes. Without bleed, set the PDF to the trim size (6×9) and keep outer margins at least 0.25\". Use bleed dimensions only when art extends to the trim edge.",
+      },
+    ],
+    contentHtml:
+      "<p><strong>Correct KDP bleed math for a 6×9 paperback is 6.125\" wide × 9.25\" high—not the affiliate shortcut 6.125×9.125.</strong> Amazon Help states that when a book has bleed you add 0.125\" (3.2 mm) to the width and 0.25\" (6.4 mm) to the height. For a 6\" × 9\" trim, that produces a manuscript page of 6.125\" × 9.25\". Templates that only bump height by 0.125\" leave the file short and can fail upload checks or print with unexpected trim.</p><h2>Amazon’s formula vs the wrong template</h2><table><thead><tr><th>Source</th><th>Width</th><th>Height</th><th>Verdict</th></tr></thead><tbody><tr><td>Amazon Help (6×9 with bleed)</td><td>6.125\"</td><td>9.25\"</td><td>Correct</td></tr><tr><td>Common affiliate export</td><td>6.125\"</td><td>9.125\"</td><td>Short 0.125\" on height</td></tr><tr><td>6×9 without bleed</td><td>6.0\"</td><td>9.0\"</td><td>Correct only if no edge-to-edge art</td></tr></tbody></table><p>Full formatting context—including margins and gutters—is in our <a href=\"/blog/kdp-formatting-guide\">KDP formatting guide</a>.</p><h2>Fix workflow for journal templates</h2><ol><li><strong>Measure the PDF page box:</strong> open the interior and confirm MediaBox equals 6.125×9.25 when bleed is on.</li><li><strong>Reject 9.125 height:</strong> rebuild or re-export any Canva/template file stuck on the affiliate size.</li><li><strong>Extend background fills:</strong> lined or patterned backgrounds must reach the full bleed rectangle, not stop at trim.</li><li><strong>Keep live text inside margins:</strong> with bleed, outer margins are at least 0.375\"; increase the inside gutter by page count.</li><li><strong>Validate before upload:</strong> run dimensions through our <a href=\"/tools/kdp-trim-size-checker\">trim size checker</a>, then inspect Print Previewer.</li></ol><h2>When journals still fail after “correct” bleed</h2><ul><li>Lined pages that hug the outer edge can trip live-element / insufficient-bleed Human Review even when page size is right.</li><li>Hardcover and paperback wrap files are separate—do not reuse paperback bleed math for hardcover wrap templates.</li><li>No-bleed journals should not silently include bleed-sized canvases; mismatch between KDP trim selection and PDF size causes rejection.</li></ul><h2>FAQ</h2><h3>Is 6.125×9.25 only for journals?</h3><p>No. Any 6×9 paperback with bleed uses the same Help example—novels, workbooks, and journals alike.</p><h3>Can I crop a 6.125×9.125 file to fix it?</h3><p>Cropping alone does not add missing bleed height. Rebuild the page to 9.25\" and re-extend edge art.</p><h2>Bottom line</h2><p>Trust Amazon’s +0.125\" / +0.25\" rule. If a template ships 6.125×9.125 for 6×9 bleed, replace it before you upload.</p>",
+  },
+  {
+    slug: "kdp-ai-disclosure-image-catalogs",
+    title: "KDP AI Disclosure for Converter and Image Catalogs (Not a Generic Checkbox Guide)",
+    description:
+      "How to disclose AI-generated images when your KDP catalog uses photo-to-line-art converters or AI image pipelines—when the box is required and when AI-assisted edits are not.",
+    excerpt:
+      "Converter output that creates line art or other images is AI-generated under KDP rules, even after heavy edits. Image-catalog publishers must disclose; generic AI-assisted cleanup does not require the same checkbox.",
+    datePublished: "2026-09-02",
+    dateModified: "2026-09-02",
+    category: "Compliance",
+    readTime: "10 min read",
+    imageEmoji: "🤖",
+    keywords: [
+      "kdp ai disclosure images",
+      "kdp ai generated coloring book",
+      "kdp converter ai disclosure",
+      "amazon kdp ai content images",
+    ],
+    author: {
+      name: "KDP Creator Suite Editorial Team",
+      role: "Compliance and Production",
+      bio: "The team documents KDP AI disclosure for image-heavy catalogs so converter and generative-art publishers answer Amazon’s questions accurately.",
+    },
+    faq: [
+      {
+        question: "Is photo-to-coloring converter output AI-generated on KDP?",
+        answer:
+          "Yes, if an AI-based tool created the actual images. Amazon defines AI-generated content as text, images, or translations created by an AI-based tool, even when you apply substantial edits afterward.",
+      },
+      {
+        question: "Do I need to disclose AI-assisted cleanup of hand-drawn art?",
+        answer:
+          "No. If you created the art yourself and only used AI to edit, refine, or error-check it, Amazon treats that as AI-assisted and does not require disclosure.",
+      },
+      {
+        question: "Does disclosure apply to covers as well as interiors?",
+        answer:
+          "Yes. AI-generated images include cover and interior images and artwork. Disclose when either was created by an AI tool.",
+      },
+    ],
+    contentHtml:
+      "<p><strong>KDP AI disclosure for image catalogs is the requirement to tell Amazon when an AI tool created your cover or interior images—including converter pipelines that turn photos into line art.</strong> This is not another generic “check the AI box” SERP clone. Catalog operators who batch-convert photos or generate decorative assets need a clear rule: converter output that creates the artwork is AI-generated; human-made art that only used AI for cleanup is AI-assisted and does not require disclosure. Amazon Help (Content Guidelines) states you must inform KDP of AI-generated text, images, or translations when you publish or republish.</p><h2>Amazon’s definitions that matter for converters</h2><ul><li><strong>AI-generated:</strong> an AI-based tool created the actual content (text, images, or translations), even if you edited heavily afterward.</li><li><strong>AI-assisted:</strong> you created the content yourself and used AI only to edit, refine, error-check, or otherwise improve it.</li><li><strong>Images in scope:</strong> cover images, interior images, and artwork all count.</li></ul><p>Pair this with the broader upload checklist in our <a href=\"/blog/kdp-compliance-requirements\">KDP compliance requirements</a> guide.</p><h2>Catalog disclosure SOP</h2><ol><li><strong>Inventory the pipeline:</strong> list every title that used a photo-to-line-art converter, generative image model, or AI upscaler that produced new artwork.</li><li><strong>Classify each asset:</strong> mark AI-generated vs AI-assisted vs fully human. When unsure whether the tool created the image, treat converter-created line art as AI-generated.</li><li><strong>Disclose on publish and republish:</strong> answer Amazon’s AI questions when uploading new books or editing and republishing existing ones that include those assets.</li><li><strong>Do not hide behind “I edited it”:</strong> substantial manual cleanup does not convert AI-generated images into undisclosed human work under Help’s definition.</li><li><strong>Keep a SKU log:</strong> store which ASIN used which model/converter so future edits stay consistent.</li><li><strong>Skip the box only for true assistance:</strong> sharpening or cleanup on art you drew still does not require disclosure.</li></ol><h2>What this post is not</h2><table><thead><tr><th>Topic</th><th>Covered here?</th><th>Why</th></tr></thead><tbody><tr><td>Generic AI text novel disclosure</td><td>No</td><td>SERP already saturated; not the image-catalog problem</td></tr><tr><td>Converter / generative image catalogs</td><td>Yes</td><td>Unique operational gap for coloring and illustration SKUs</td></tr><tr><td>Whether AI art is “allowed”</td><td>Disclosure focus only</td><td>Help requires disclosure of AI-generated images; follow all other content policies separately</td></tr></tbody></table><h2>FAQ</h2><h3>If only the cover is AI-generated, do I still disclose?</h3><p>Yes. Disclose AI-generated images when any cover or interior artwork was created by an AI tool.</p><h3>Does using a non-AI filter on a photo avoid disclosure?</h3><p>Traditional non-AI image filters are outside Amazon’s AI-generated definition. If the tool is AI-based and creates the artwork, disclose.</p><h2>Bottom line</h2><p>For converter and generative image catalogs, disclose AI-generated artwork on every affected publish or republish—and stop treating heavy edits as a loophole.</p>",
+  },
+  {
+    slug: "kdp-publishing-calendar-title-cap",
+    title: "KDP Publishing Calendar: 10 Titles per Format per Week (Not the Old 3/Day Rule)",
+    description:
+      "Build a KDP publishing calendar around Amazon Help’s limit of 10 titles per book format each week and up to 10 business days for low-content review—not outdated 3-per-day news.",
+    excerpt:
+      "Amazon Help limits new titles to 10 per book format each week. Low-content review can take up to 10 business days. Plan calendars from Help, not from 2023 3-titles-per-day articles.",
+    datePublished: "2026-09-02",
+    dateModified: "2026-09-02",
+    category: "Workflow",
+    readTime: "10 min read",
+    imageEmoji: "📅",
+    keywords: [
+      "kdp publishing calendar",
+      "kdp title limit per week",
+      "kdp 10 titles per week",
+      "kdp low content review time",
+    ],
+    author: {
+      name: "KDP Creator Suite Editorial Team",
+      role: "Product and Publishing Research",
+      bio: "The team publishes implementation guides based on day-to-day self-publishing workflows and current Amazon Help operational limits.",
+    },
+    faq: [
+      {
+        question: "How many KDP titles can I create per week?",
+        answer:
+          "Amazon Help states you can create up to 10 titles per book format each week. If you need to create more regularly, Help says to contact Amazon to inquire about an exception.",
+      },
+      {
+        question: "Is the KDP limit still 3 titles per day?",
+        answer:
+          "Amazon Help does not publish a 3-titles-per-day cap. That figure comes from 2023 news coverage. Plan from the live Help rule: 10 titles per book format each week.",
+      },
+      {
+        question: "How long does low-content review take?",
+        answer:
+          "Help estimates up to 10 business days for low-content books such as journals or notebooks to go live, versus about 3 business days for many other books. Manuscript updates can also take up to 10 business days for low-content titles.",
+      },
+    ],
+    contentHtml:
+      "<p><strong>A KDP publishing calendar under current Amazon Help is paced by a weekly creation cap—10 titles per book format each week—and by longer review windows for low-content books.</strong> It is not paced by the widely repeated “3 titles per day” figure from 2023 news articles. Help’s Paperback Submission Guidelines still state the weekly per-format limit and invite high-volume publishers to contact Amazon for an exception. Timelines Help still estimates about 3 business days for many books to go live, and up to 10 business days for low-content titles such as journals or notebooks.</p><h2>Current Help limits vs outdated headlines</h2><table><thead><tr><th>Rule people cite</th><th>Status as of Help reviewed 2026-08-21</th><th>Use in your calendar?</th></tr></thead><tbody><tr><td>10 titles per book format each week</td><td>Documented in Amazon Help</td><td>Yes — primary throttle</td></tr><tr><td>3 titles per day</td><td>Not in current Help; 2023 news only</td><td>No — do not treat as live policy</td></tr><tr><td>~3 business days to live</td><td>Standard estimate for many books</td><td>Yes for non-low-content</td></tr><tr><td>Up to 10 business days</td><td>Low-content new books and many low-content updates</td><td>Yes for journals/notebooks</td></tr></tbody></table><h2>Weekly calendar SOP</h2><ol><li><strong>Count by format:</strong> track paperback, hardcover, and eBook creation separately against the 10-per-format weekly cap.</li><li><strong>Batch by review class:</strong> queue true low-content titles with a 10-business-day buffer; keep correctly classified coloring/activity books on the standard timeline.</li><li><strong>Reserve slots for fixes:</strong> do not burn the weekly cap on speculative uploads if you expect rejections and resubmits.</li><li><strong>Align edits with price locks:</strong> content edits after major royalty policy dates can force list-price updates—group those changes.</li><li><strong>Request an exception only if needed:</strong> Help says to contact Amazon if you regularly need more than 10 titles per format per week.</li><li><strong>Re-read Help each quarter:</strong> do not refresh the calendar from viral “3/day” posts.</li></ol><h2>Low-content vs activity timing</h2><p>Misclassifying a coloring or puzzle book as low-content does more than risk rejection—it wrecks launch dates if you assumed a 10-day review. Classify first using our <a href=\"/blog/kdp-coloring-book-low-content\">coloring classification guide</a>, then place the title on the matching calendar row. Journal workflows remain in our <a href=\"/blog/low-content-book-creator-workflow\">low-content creator workflow</a>.</p><h2>FAQ</h2><h3>Does the weekly cap apply to manuscript updates?</h3><p>Help’s wording limits how many titles you can create at the same time to 10 per book format each week. Plan new creations against that cap; treat update review time using the separate timelines Help publishes.</p><h3>Can I publish 10 paperbacks and 10 eBooks in the same week?</h3><p>Help expresses the limit per book format. Count each format’s creations toward its own weekly ten unless Amazon tells you otherwise for your account.</p><h2>Bottom line</h2><p>Build the calendar from Help’s 10-per-format weekly cap and 10-day low-content review—not from outdated 3-per-day headlines.</p>",
+  },
 ];
 
 export const blogPostsBySlug = Object.fromEntries(

@@ -24,6 +24,12 @@
 - [KDP Expanded Distribution coloring book exclusions](https://www.kdpsuite.com/blog/kdp-expanded-distribution-coloring-book)
 - [KDP insufficient bleed and live element margin](https://www.kdpsuite.com/blog/kdp-insufficient-bleed-live-element-margin)
 - [Why 8.5x11 coloring books fail as KDP hardcovers](https://www.kdpsuite.com/blog/kdp-hardcover-coloring-book-trim)
+- [KDP print royalty cliff catalog repricing](https://www.kdpsuite.com/blog/kdp-print-royalty-cliff-catalog-repricing)
+- [KDP coloring books and too much ink](https://www.kdpsuite.com/blog/kdp-coloring-book-too-much-ink)
+- [KDP activity book interior specs](https://www.kdpsuite.com/blog/kdp-activity-book-interior-specs)
+- [KDP 6x9 journal bleed math](https://www.kdpsuite.com/blog/kdp-journal-6x9-bleed-math)
+- [KDP AI disclosure for image catalogs](https://www.kdpsuite.com/blog/kdp-ai-disclosure-image-catalogs)
+- [KDP publishing calendar title cap](https://www.kdpsuite.com/blog/kdp-publishing-calendar-title-cap)
 
 ## Feed
 - [RSS feed](https://www.kdpsuite.com/feed.xml)
