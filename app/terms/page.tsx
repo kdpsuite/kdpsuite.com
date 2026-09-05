@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -37,6 +38,19 @@ export default function TermsPage() {
             For questions about these terms, contact support@kdpsuite.com.
           </p>
         </div>
+        <p className="mt-10 text-gray-700 font-body">
+          <Link href="/" className="text-primary hover:underline">
+            Home
+          </Link>
+          {" · "}
+          <Link href="/contact" className="text-primary hover:underline">
+            Contact
+          </Link>
+          {" · "}
+          <Link href="/privacy" className="text-primary hover:underline">
+            Privacy
+          </Link>
+        </p>
       </section>
     </main>
   );

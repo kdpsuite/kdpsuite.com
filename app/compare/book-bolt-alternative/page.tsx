@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { toJsonLd } from "@/lib/seo/json-ld";
 
 export const metadata: Metadata = {
@@ -108,6 +109,24 @@ export default function BookBoltAlternativePage() {
             <p className="text-gray-700 font-body">{item.answer}</p>
           </div>
         ))}
+        <p className="mt-10 text-gray-700 font-body">
+          Related:{" "}
+          <Link href="/features" className="text-primary hover:underline">
+            Features
+          </Link>
+          {" · "}
+          <Link href="/pricing" className="text-primary hover:underline">
+            Pricing
+          </Link>
+          {" · "}
+          <Link href="/blog" className="text-primary hover:underline">
+            Blog
+          </Link>
+          {" · "}
+          <Link href="/" className="text-primary hover:underline">
+            Home
+          </Link>
+        </p>
       </section>
     </main>
   );

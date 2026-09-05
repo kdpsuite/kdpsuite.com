@@ -26,7 +26,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: "all-in-one-publishing-platform",
-    title: "All-in-One KDP Publishing Platform: What It Is and How It Saves Time",
+    title: "All-in-One KDP Publishing Platform Guide",
     description:
       "A practical guide to using one KDP publishing platform instead of stitching together multiple tools for formatting, compliance, conversion, and analytics.",
     excerpt:
@@ -112,7 +112,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-royalty-calculator-guide",
-    title: "KDP Royalty Calculator Guide: Price, Printing Cost, and Profit",
+    title: "KDP Royalty Calculator: Price, Cost, Profit",
     description:
       "Learn how to estimate Kindle and paperback royalties with a simple calculator workflow and margin targets before publishing.",
     excerpt:
@@ -156,9 +156,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-compliance-requirements",
-    title: "KDP Compliance Requirements: What Amazon Checks Before Publishing",
+    title: "KDP Compliance: What Amazon Checks First",
     description:
-      "A practical checklist of KDP compliance requirements for Kindle eBooks and paperbacks, covering file specs, metadata, content policies, and pre-upload validation.",
+      "Practical KDP compliance checklist for Kindle and paperbacks: file specs, metadata, content policies, and pre-upload validation.",
     excerpt:
       "KDP compliance requirements are the file, metadata, and content standards Amazon validates before a title goes live on Kindle or KDP Print.",
     datePublished: "2026-08-15",
@@ -199,7 +199,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "low-content-book-creator-workflow",
-    title: "Low Content Book Creator Workflow: From Idea to Published Title",
+    title: "Low Content Book Creator: Idea to Publish",
     description:
       "A step-by-step low content book creator workflow covering niche selection, interior layout, cover design, KDP upload, and post-launch optimization.",
     excerpt:
@@ -242,9 +242,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-coloring-book-low-content",
-    title: "Coloring Books Are Not Low-Content on KDP (The Checkbox Was Not Retired)",
+    title: "Coloring Books Aren't Low-Content on KDP",
     description:
-      "Amazon KDP still requires the low-content checkbox for journals and planners, but coloring and puzzle books are generally not low-content. Wrong classification causes rejection and changes ISBN, series, and review rules.",
+      "Amazon still requires the low-content checkbox for journals, but coloring and puzzle books usually aren't low-content. Wrong class risks rejection.",
     excerpt:
       "Coloring books on KDP are generally not low-content. Checking the low-content box on a coloring title can get it rejected and blocks the free ISBN, series enrollment, and Look Inside.",
     datePublished: "2026-08-28",
@@ -285,9 +285,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-expanded-distribution-coloring-book",
-    title: "KDP Expanded Distribution Will Not Take Coloring Books, Journals, or Heavy-Ink Interiors",
+    title: "KDP Expanded Distribution Excludes Coloring Books",
     description:
-      "Amazon KDP Expanded Distribution excludes coloring books, lined journals, high-ink interiors, and all hardcovers. Plan Amazon-only pricing instead of bookstore distribution.",
+      "KDP Expanded Distribution excludes coloring books, lined journals, high-ink interiors, and all hardcovers. Plan Amazon-only pricing.",
     excerpt:
       "Expanded Distribution on KDP refuses coloring books, frequent lined or blank pages, interiors that need heavy ink coverage, and every hardcover format—regardless of trim size eligibility elsewhere.",
     datePublished: "2026-08-28",
@@ -328,9 +328,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-insufficient-bleed-live-element-margin",
-    title: "KDP Insufficient Bleed After Print Previewer Passed (LEM vs Bleed Explained)",
+    title: "KDP Bleed Rejection After Previewer Passed",
     description:
-      "When KDP Print Previewer passes but Human Review emails insufficient bleed, the failure is often live-element margin—not missing bleed. Fix unsafe zones and copyright lines before resubmitting.",
+      "When Print Previewer passes but Human Review cites insufficient bleed, fix live-element margin and unsafe zones—not just add bleed.",
     excerpt:
       "KDP can approve a file in Print Previewer and still reject it for insufficient bleed during Human Review. The fix is usually live-element margin: keep art and text out of the unsafe zone, not just add bleed.",
     datePublished: "2026-08-28",
@@ -414,9 +414,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-print-royalty-cliff-catalog-repricing",
-    title: "KDP Print Royalty Cliff Catalog Repricing: SKU Audit After the June 2025 Rate Split",
+    title: "KDP Print Royalty Cliff: Catalog Repricing SOP",
     description:
-      "A catalog SKU-audit SOP for the June 2025 KDP print royalty cliff: 50% below $9.99, 60% at or above, marketplace floors including 110 SEK, and how to fix wrong $7.99×60% math.",
+      "SKU-audit SOP for the June 2025 KDP print royalty cliff: 50% below $9.99, 60% at or above, and how to kill $7.99×60% math.",
     excerpt:
       "After June 2025, KDP print royalties are 50% below marketplace cliffs and 60% at or above them. Catalog operators need a SKU audit—not another calculator explainer—to reprice live titles safely.",
     datePublished: "2026-09-02",
@@ -458,9 +458,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-coloring-book-too-much-ink",
-    title: "KDP Coloring Books and “Too Much Ink”: Darkness, Rejection Risk, and ED Exclusion",
+    title: "KDP Coloring Books: Too Much Ink Risks",
     description:
-      "How KDP treats coloring books with high ink concentration: Expanded Distribution exclusion, forum failure patterns, and what Amazon Help actually says—without inventing TAC percentages.",
+      "How KDP treats high-ink coloring books: Expanded Distribution exclusion, forum failure patterns, and what Help actually says.",
     excerpt:
       "Coloring books are already barred from Expanded Distribution, and interiors that need a high concentration of ink are a separate ED kill-switch. Forums discuss darkness failures; Help does not publish a TAC percentage.",
     datePublished: "2026-09-02",
@@ -501,7 +501,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-activity-book-interior-specs",
-    title: "KDP Activity and Puzzle Book Interior Specs: Not Low-Content, Gutters vs Grids",
+    title: "KDP Activity Book Interior Specs Guide",
     description:
       "Interior specifications for KDP activity and puzzle books: why they are not low-content, how gutters differ from grid gutters, and a pre-upload checklist.",
     excerpt:
@@ -544,7 +544,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-journal-6x9-bleed-math",
-    title: "KDP 6×9 Journal Bleed Math: Use 6.125×9.25, Not Affiliate 6.125×9.125",
+    title: "KDP 6×9 Journal Bleed: Use 6.125×9.25",
     description:
       "Correct KDP 6×9 bleed page size is 6.125×9.25 inches. Affiliate templates that export 6.125×9.125 are short on height—here is the Help math and a fix workflow.",
     excerpt:
@@ -587,9 +587,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-ai-disclosure-image-catalogs",
-    title: "KDP AI Disclosure for Converter and Image Catalogs (Not a Generic Checkbox Guide)",
+    title: "KDP AI Disclosure for Image Catalogs",
     description:
-      "How to disclose AI-generated images when your KDP catalog uses photo-to-line-art converters or AI image pipelines—when the box is required and when AI-assisted edits are not.",
+      "Disclose AI-generated images for converter and image catalogs on KDP—when the box is required and when AI-assisted edits are not.",
     excerpt:
       "Converter output that creates line art or other images is AI-generated under KDP rules, even after heavy edits. Image-catalog publishers must disclose; generic AI-assisted cleanup does not require the same checkbox.",
     datePublished: "2026-09-02",
@@ -630,9 +630,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kdp-publishing-calendar-title-cap",
-    title: "KDP Publishing Calendar: 10 Titles per Format per Week (Not the Old 3/Day Rule)",
+    title: "KDP Publishing Calendar: 10 Titles/Week Cap",
     description:
-      "Build a KDP publishing calendar around Amazon Help’s limit of 10 titles per book format each week and up to 10 business days for low-content review—not outdated 3-per-day news.",
+      "Plan a KDP calendar around Help's 10 titles per format per week and up to 10 business days for low-content review—not the old 3/day rule.",
     excerpt:
       "Amazon Help limits new titles to 10 per book format each week. Low-content review can take up to 10 business days. Plan calendars from Help, not from 2023 3-titles-per-day articles.",
     datePublished: "2026-09-02",

@@ -42,7 +42,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     slug: "dpi",
     term: "DPI",
     definition:
-      "DPI means dots per inch and describes print image resolution quality.",
+      "DPI means dots per inch and describes print image resolution quality for KDP interiors and covers.",
     detail:
       "Low DPI images look blurry in print. Interiors often target 300 DPI at final print dimensions.",
   },

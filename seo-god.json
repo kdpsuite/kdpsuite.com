@@ -10,7 +10,7 @@
   },
   "phases": {
     "setup": "done",
-    "audit": "pending",
+    "audit": "done",
     "measure": "pending",
     "ai_visibility": "pending",
     "schedule": "done"
@@ -25,5 +25,6 @@
     "dataforseo": false,
     "llm_keys": false,
     "telegram": false
-  }
+  },
+  "build_cmd": "pnpm run build"
 }

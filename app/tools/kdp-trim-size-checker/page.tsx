@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import TrimSizeCheckerClient from "./checker-client";
 import { toJsonLd } from "@/lib/seo/json-ld";
 
@@ -89,6 +90,20 @@ export default function TrimSizeCheckerPage() {
             <p className="text-gray-700 font-body">{item.answer}</p>
           </div>
         ))}
+        <p className="mt-10 text-gray-700 font-body">
+          Related:{" "}
+          <Link href="/blog/kdp-formatting-guide" className="text-primary hover:underline">
+            Formatting guide
+          </Link>
+          {" · "}
+          <Link href="/pricing" className="text-primary hover:underline">
+            Pricing
+          </Link>
+          {" · "}
+          <Link href="/" className="text-primary hover:underline">
+            Home
+          </Link>
+        </p>
       </section>
     </main>
   );

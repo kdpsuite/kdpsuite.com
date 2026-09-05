@@ -85,6 +85,9 @@ export default function PricingPage() {
         </div>
 
         {/* Plans Grid */}
+        <h2 className="text-3xl font-bold mb-8 text-center text-gray-900">
+          Choose a plan
+        </h2>
         <div className="grid md:grid-cols-3 gap-8 mb-16">
           {pricingPlans.map((plan) => (
             <div

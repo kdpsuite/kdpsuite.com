@@ -136,6 +136,9 @@ export default function FeaturesPage() {
 
       {/* Features Grid */}
       <section className="container mx-auto px-4 py-20">
+        <h2 className="text-4xl font-bold text-neutral mb-12 text-center font-heading">
+          Platform capabilities
+        </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {features.map((feature, idx) => (
             <div key={idx} className="p-8 rounded-3xl bg-gray-50 border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import RoyaltyCalculatorClient from "./calculator-client";
 import { toJsonLd } from "@/lib/seo/json-ld";
 
@@ -77,6 +78,20 @@ export default function RoyaltyCalculatorPage() {
           margin targets.
         </p>
         <RoyaltyCalculatorClient />
+        <p className="mt-10 text-gray-700 font-body">
+          Related:{" "}
+          <Link href="/blog/kdp-royalty-calculator-guide" className="text-primary hover:underline">
+            Royalty calculator guide
+          </Link>
+          {" · "}
+          <Link href="/pricing" className="text-primary hover:underline">
+            Pricing
+          </Link>
+          {" · "}
+          <Link href="/" className="text-primary hover:underline">
+            Home
+          </Link>
+        </p>
       </section>
     </main>
   );

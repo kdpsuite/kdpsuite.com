@@ -243,6 +243,9 @@ export default function ContactPage() {
 
           {/* Contact Info */}
           <div className="mt-16 grid md:grid-cols-2 gap-8">
+            <h2 className="md:col-span-2 text-3xl font-bold text-neutral text-center font-heading mb-2">
+              Contact details
+            </h2>
             <div className="text-center">
               <h3 className="text-2xl font-bold text-neutral mb-2 font-heading">Email</h3>
               <a href="mailto:contact.kdpcreatorsuite@gmail.com" className="text-primary hover:underline font-body text-lg">

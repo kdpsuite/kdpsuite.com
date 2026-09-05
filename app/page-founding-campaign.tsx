@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import CaseStudies from '@/components/CaseStudies';
 import FAQ from '@/components/FAQ';
 import NewsletterSignup from '@/components/NewsletterSignup';
@@ -306,6 +307,21 @@ export default function FoundingCampaignPage() {
       {/* Footer */}
       <footer style={{ background: '#2c3e50', color: 'white', textAlign: 'center', padding: '40px 20px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <nav aria-label="Site" style={{ marginBottom: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '12px 18px', fontSize: '0.95em' }}>
+            <Link href="/pricing" style={{ color: 'white' }}>Pricing</Link>
+            <Link href="/features" style={{ color: 'white' }}>Features</Link>
+            <Link href="/about" style={{ color: 'white' }}>About</Link>
+            <Link href="/guides" style={{ color: 'white' }}>Guides</Link>
+            <Link href="/blog" style={{ color: 'white' }}>Blog</Link>
+            <Link href="/contact" style={{ color: 'white' }}>Contact</Link>
+            <Link href="/tools/kdp-royalty-calculator" style={{ color: 'white' }}>Royalty calculator</Link>
+            <Link href="/tools/kdp-trim-size-checker" style={{ color: 'white' }}>Trim size checker</Link>
+            <Link href="/compare/atticus-alternative" style={{ color: 'white' }}>Atticus alternative</Link>
+            <Link href="/compare/book-bolt-alternative" style={{ color: 'white' }}>Book Bolt alternative</Link>
+            <Link href="/compare/vellum-alternative" style={{ color: 'white' }}>Vellum alternative</Link>
+            <Link href="/privacy" style={{ color: 'white' }}>Privacy</Link>
+            <Link href="/terms" style={{ color: 'white' }}>Terms</Link>
+          </nav>
           <p>Built with library WiFi and determination. © 2026 KDP Creator Suite. All rights reserved.</p>
           <p style={{ marginTop: '10px', fontSize: '0.9em' }}>Questions? Email: support@kdpsuite.com</p>
         </div>
