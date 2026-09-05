@@ -6,12 +6,12 @@
     "status": "running"
   },
   "gsc": {
-    "connected": false
+    "connected": true
   },
   "phases": {
     "setup": "done",
     "audit": "done",
-    "measure": "pending",
+    "measure": "done",
     "ai_visibility": "pending",
     "schedule": "done"
   },
@@ -26,5 +26,25 @@
     "llm_keys": false,
     "telegram": false
   },
-  "build_cmd": "pnpm run build"
+  "build_cmd": "pnpm run build",
+  "keywords": [
+    "amazon kdp software",
+    "kdp publishing tools",
+    "kdp creator suite",
+    "all in one publishing platform",
+    "kdp royalty calculator",
+    "kdp trim size checker",
+    "atticus alternative",
+    "book bolt alternative",
+    "vellum alternative",
+    "kdp formatting guide",
+    "kdp compliance requirements",
+    "kdp expanded distribution coloring book",
+    "kdp bleed live element margin",
+    "kdp print royalty cliff",
+    "kdp publishing calendar",
+    "kdp ai disclosure images",
+    "pdf to coloring book converter",
+    "amazon self publishing tools"
+  ]
 }

@@ -1,0 +1,229 @@
+{
+  "date": "2026-09-05",
+  "source": "seo-god",
+  "site": "https://www.kdpsuite.com",
+  "crawl": {
+    "pages": 47,
+    "issues": [
+      {
+        "type": "thin-content",
+        "severity": "warn",
+        "urls": [
+          "https://www.kdpsuite.com/compare/book-bolt-alternative",
+          "https://www.kdpsuite.com/contact",
+          "https://www.kdpsuite.com/glossary/bisac",
+          "https://www.kdpsuite.com/glossary/bleed",
+          "https://www.kdpsuite.com/glossary/cover",
+          "https://www.kdpsuite.com/glossary/dpi",
+          "https://www.kdpsuite.com/glossary/front-matter",
+          "https://www.kdpsuite.com/glossary/gutter",
+          "https://www.kdpsuite.com/glossary/hardcover",
+          "https://www.kdpsuite.com/glossary/isbn",
+          "https://www.kdpsuite.com/glossary/kdp-select",
+          "https://www.kdpsuite.com/glossary/kindle-unlimited",
+          "https://www.kdpsuite.com/glossary/margin",
+          "https://www.kdpsuite.com/glossary/metadata",
+          "https://www.kdpsuite.com/glossary/paperback",
+          "https://www.kdpsuite.com/glossary/print-on-demand",
+          "https://www.kdpsuite.com/glossary/reflowable-layout",
+          "https://www.kdpsuite.com/glossary/spine",
+          "https://www.kdpsuite.com/glossary/trim-size",
+          "https://www.kdpsuite.com/privacy",
+          "https://www.kdpsuite.com/terms",
+          "https://www.kdpsuite.com/tools/kdp-royalty-calculator"
+        ]
+      },
+      {
+        "type": "no-outgoing-links",
+        "severity": "warn",
+        "urls": [
+          "https://www.kdpsuite.com/compare/atticus-alternative",
+          "https://www.kdpsuite.com/compare/book-bolt-alternative",
+          "https://www.kdpsuite.com/compare/vellum-alternative",
+          "https://www.kdpsuite.com/privacy",
+          "https://www.kdpsuite.com/terms",
+          "https://www.kdpsuite.com/tools/kdp-royalty-calculator",
+          "https://www.kdpsuite.com/tools/kdp-trim-size-checker"
+        ]
+      },
+      {
+        "type": "orphan-page",
+        "severity": "warn",
+        "urls": [
+          "https://www.kdpsuite.com/about",
+          "https://www.kdpsuite.com/compare/atticus-alternative",
+          "https://www.kdpsuite.com/compare/book-bolt-alternative",
+          "https://www.kdpsuite.com/compare/vellum-alternative",
+          "https://www.kdpsuite.com/guides",
+          "https://www.kdpsuite.com/pricing"
+        ]
+      },
+      {
+        "type": "title-too-long",
+        "severity": "info",
+        "urls": [
+          "https://www.kdpsuite.com/blog/all-in-one-publishing-platform",
+          "https://www.kdpsuite.com/blog/kdp-activity-book-interior-specs",
+          "https://www.kdpsuite.com/blog/kdp-ai-disclosure-image-catalogs",
+          "https://www.kdpsuite.com/blog/kdp-coloring-book-low-content",
+          "https://www.kdpsuite.com/blog/kdp-coloring-book-too-much-ink",
+          "https://www.kdpsuite.com/blog/kdp-compliance-requirements",
+          "https://www.kdpsuite.com/blog/kdp-expanded-distribution-coloring-book",
+          "https://www.kdpsuite.com/blog/kdp-insufficient-bleed-live-element-margin",
+          "https://www.kdpsuite.com/blog/kdp-journal-6x9-bleed-math",
+          "https://www.kdpsuite.com/blog/kdp-print-royalty-cliff-catalog-repricing",
+          "https://www.kdpsuite.com/blog/kdp-publishing-calendar-title-cap",
+          "https://www.kdpsuite.com/blog/kdp-royalty-calculator-guide",
+          "https://www.kdpsuite.com/blog/low-content-book-creator-workflow"
+        ]
+      },
+      {
+        "type": "meta-description-too-long",
+        "severity": "info",
+        "urls": [
+          "https://www.kdpsuite.com/blog/kdp-ai-disclosure-image-catalogs",
+          "https://www.kdpsuite.com/blog/kdp-coloring-book-low-content",
+          "https://www.kdpsuite.com/blog/kdp-coloring-book-too-much-ink",
+          "https://www.kdpsuite.com/blog/kdp-compliance-requirements",
+          "https://www.kdpsuite.com/blog/kdp-expanded-distribution-coloring-book",
+          "https://www.kdpsuite.com/blog/kdp-insufficient-bleed-live-element-margin",
+          "https://www.kdpsuite.com/blog/kdp-print-royalty-cliff-catalog-repricing",
+          "https://www.kdpsuite.com/blog/kdp-publishing-calendar-title-cap"
+        ]
+      },
+      {
+        "type": "heading-order-skip",
+        "severity": "info",
+        "urls": [
+          "https://www.kdpsuite.com/contact",
+          "https://www.kdpsuite.com/features",
+          "https://www.kdpsuite.com/pricing"
+        ]
+      },
+      {
+        "type": "meta-description-too-short",
+        "severity": "info",
+        "urls": [
+          "https://www.kdpsuite.com/glossary/dpi"
+        ]
+      }
+    ]
+  },
+  "ranks": [
+    {
+      "keyword": "amazon kdp software",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp publishing tools",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp creator suite",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "all in one publishing platform",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp royalty calculator",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp trim size checker",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "atticus alternative",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "book bolt alternative",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "vellum alternative",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp formatting guide",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp compliance requirements",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp expanded distribution coloring book",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp bleed live element margin",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp print royalty cliff",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp publishing calendar",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "kdp ai disclosure images",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "pdf to coloring book converter",
+      "position": null,
+      "url": ""
+    },
+    {
+      "keyword": "amazon self publishing tools",
+      "position": null,
+      "url": ""
+    }
+  ],
+  "gsc": {
+    "available": true,
+    "clicks28d": 0,
+    "impressions28d": 11,
+    "top_queries": [
+      {
+        "query": "kdp",
+        "clicks": 0,
+        "impressions": 2,
+        "position": 2.0
+      },
+      {
+        "query": "software",
+        "clicks": 0,
+        "impressions": 2,
+        "position": 5.5
+      }
+    ]
+  },
+  "ai_visibility": {
+    "measured": false,
+    "prompts_ok": 0,
+    "cited": 0,
+    "competitors": {}
+  }
+}
