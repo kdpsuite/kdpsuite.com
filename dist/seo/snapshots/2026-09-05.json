@@ -210,7 +210,7 @@
         "query": "kdp",
         "clicks": 0,
         "impressions": 2,
-        "position": 2.0
+        "position": 2
       },
       {
         "query": "software",
@@ -221,9 +221,20 @@
     ]
   },
   "ai_visibility": {
-    "measured": false,
-    "prompts_ok": 0,
+    "measured": true,
+    "prompts_ok": 10,
     "cited": 0,
-    "competitors": {}
+    "competitors": {
+      "kdp.amazon.com": 2,
+      "kdpbuilder.com": 2,
+      "kdpcreatorsuite.net": 2,
+      "publishing.co.uk": 2,
+      "book2color.com": 1,
+      "bookcoverslab.com": 1,
+      "builtwritten.com": 1,
+      "cambric.pub": 1,
+      "colorbliss.com": 1,
+      "colorin.ai": 1
+    }
   }
 }

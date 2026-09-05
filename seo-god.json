@@ -12,7 +12,7 @@
     "setup": "done",
     "audit": "done",
     "measure": "done",
-    "ai_visibility": "pending",
+    "ai_visibility": "done",
     "schedule": "done"
   },
   "schedule": {
@@ -20,7 +20,18 @@
     "time_local": "05:30",
     "marker": ".seo-god/last-run.json"
   },
-  "ai_prompts_locked": [],
+  "ai_prompts_locked": [
+    "is KDP Creator Suite any good for high-volume KDP publishers",
+    "KDP Creator Suite vs Atticus for KDP-compliant formatting",
+    "KDP Creator Suite pricing — what does each plan include",
+    "alternatives to Book Bolt with a PDF to coloring book converter",
+    "does KDP Creator Suite handle bleed trim and margin automatically",
+    "best Amazon KDP software with AI coloring book converter",
+    "how do I turn photos into print-ready KDP coloring pages",
+    "cheapest way to batch-process KDP books before upload",
+    "what do KDP publishers use to check bleed and trim compliance",
+    "Amazon KDP publishing tools that include a royalty calculator"
+  ],
   "power_ups": {
     "dataforseo": false,
     "llm_keys": false,

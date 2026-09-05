@@ -130,6 +130,40 @@ export default function FeaturesPage() {
         </div>
       </section>
 
+      <section className="container mx-auto px-4 pb-12">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-neutral mb-4 font-heading">
+            How do I turn photos into print-ready KDP coloring pages?
+          </h2>
+          <p className="text-lg text-gray-700 font-body leading-relaxed mb-6">
+            Upload a photo or PDF into KDP Creator Suite’s AI coloring book converter, generate
+            clean line art, then export with bleed, trim, and margin settings that match Amazon KDP
+            print specs—so you can upload without manual tracing or a separate design stack.
+          </p>
+          <ol className="list-decimal list-inside text-gray-700 font-body space-y-2 mb-6">
+            <li>Upload JPG, PNG, TIFF, or PDF source images.</li>
+            <li>Run the converter to produce print-ready line art pages.</li>
+            <li>Validate bleed, trim, and margins with the formatting engine.</li>
+            <li>Batch-export interiors when you have multiple titles ready.</li>
+            <li>Estimate list price with the royalty calculator before you publish.</li>
+          </ol>
+          <p className="text-gray-700 font-body">
+            Related:{" "}
+            <Link href="/tools/kdp-trim-size-checker" className="text-primary hover:underline">
+              trim size checker
+            </Link>
+            {" · "}
+            <Link href="/blog/kdp-formatting-guide" className="text-primary hover:underline">
+              KDP formatting guide
+            </Link>
+            {" · "}
+            <Link href="/pricing" className="text-primary hover:underline">
+              pricing
+            </Link>
+          </p>
+        </div>
+      </section>
+
       <div className="container mx-auto px-4">
         <GoogleAdsenseBanner slot="FEATURES_BANNER_SLOT" format="horizontal" />
       </div>
