@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "KDP Creator Suite",
     description:
-      "All-in-one Amazon KDP workflow software for formatting, compliance, conversion, and publishing analytics.",
+      "KDP Creator Suite is a publishing platform for Amazon KDP workflows, including formatting, compliance checks, conversion, and royalty planning.",
     url: "https://www.kdpsuite.com",
     siteName: "KDP Creator Suite",
     locale: "en_US",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "KDP Creator Suite",
     description:
-      "Amazon KDP workflow software for formatting, conversion, compliance, and royalty planning.",
+      "KDP Creator Suite is a publishing platform for Amazon KDP workflows, including formatting, compliance checks, conversion, and royalty planning.",
     images: ["/og-image.svg"],
     creator: "@kdpcreatorsuite",
   },
@@ -164,7 +164,7 @@ export default function RootLayout({
                 offerCount: "3",
               },
               description:
-                "Amazon KDP workflow software for formatting, compliance checks, conversion, and publishing analytics.",
+                "KDP Creator Suite is a publishing platform for Amazon KDP workflows, including formatting, compliance checks, conversion, and royalty planning.",
             }),
           }}
         />

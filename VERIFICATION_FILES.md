@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the integration of search engine verification files into the KDP Suite landing page. These files are critical for search engine indexing and webmaster tools access.
+This document describes the integration of search engine verification files into the KDP Creator Suite landing page. These files are critical for search engine indexing and webmaster tools access.
 
 ## Integrated Files
 

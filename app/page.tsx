@@ -4,22 +4,24 @@ import { foundingCampaignFaqs, homepageFaqs, toFaqPageJsonLd } from "@/lib/conte
 import { toJsonLd } from "@/lib/seo/json-ld";
 
 export const metadata: Metadata = {
-  title: "Amazon KDP Software and Publishing Workflow Platform",
+  title: {
+    absolute: "KDP Creator Suite",
+  },
   description:
-    "KDP Creator Suite helps self-publishers format, validate, and publish faster with one workflow platform.",
+    "KDP Creator Suite is a publishing platform for Amazon KDP workflows, including formatting, compliance checks, conversion, and royalty planning.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "KDP Creator Suite",
     description:
-      "Amazon KDP workflow software for conversion, formatting, compliance checks, and analytics.",
+      "KDP Creator Suite is a publishing platform for Amazon KDP workflows, including formatting, compliance checks, conversion, and royalty planning.",
     url: "https://www.kdpsuite.com",
   },
   twitter: {
     title: "KDP Creator Suite",
     description:
-      "Amazon KDP workflow software for conversion, formatting, compliance checks, and analytics.",
+      "KDP Creator Suite is a publishing platform for Amazon KDP workflows, including formatting, compliance checks, conversion, and royalty planning.",
   },
 };
 
