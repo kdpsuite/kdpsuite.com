@@ -1,12 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import CaseStudies from '@/components/CaseStudies';
 import FAQ from '@/components/FAQ';
 import NewsletterSignup from '@/components/NewsletterSignup';
-import Stats from '@/components/Stats';
 import StickyFooterCTA from '@/components/StickyFooterCTA';
-import Testimonials from '@/components/Testimonials';
 import TrustBadges from '@/components/TrustBadges';
 import WebinarSignup from '@/components/WebinarSignup';
 import { GoogleAdsenseBanner } from '@/components/ads';
@@ -114,10 +111,6 @@ export default function FoundingCampaignPage() {
           </div>
         </div>
       </section>
-
-      <Stats />
-      <Testimonials />
-      <CaseStudies />
 
       <GoogleAdsenseBanner slot="HOME_BANNER_SLOT" format="horizontal" />
 

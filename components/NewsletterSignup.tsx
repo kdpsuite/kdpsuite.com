@@ -52,7 +52,7 @@ export default function NewsletterSignup() {
           Get Weekly KDP Tips
         </h2>
         <p className="text-center text-pink-100 mb-8 font-body">
-          Join 5,000+ publishers receiving exclusive tips, guides, and success stories
+          Practical KDP tips, formatting guides, and build notes from the workshop
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 mb-4">
