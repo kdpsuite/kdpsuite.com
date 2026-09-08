@@ -208,6 +208,13 @@ export default function FoundingCampaignPage() {
             })}
           </div>
 
+          <p style={{ textAlign: 'center', fontSize: '1.05em', maxWidth: '800px', margin: '30px auto 0', color: '#555' }}>
+            <strong>How access works:</strong> pay first, then create your account at{' '}
+            <a href="https://dashboard.kdpsuite.com" style={{ color: '#667eea' }}>dashboard.kdpsuite.com</a>{' '}
+            using the same email address you paid with. Your founding tier is applied automatically the first
+            time you sign in. Paid with a different email? Contact support and we&apos;ll move it across.
+          </p>
+
           {/* Founder's Circle Special Section */}
           <div style={{ background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)', color: 'white', padding: '60px 20px', textAlign: 'center', marginTop: '50px', borderRadius: '15px' }}>
           <h2 style={{ fontSize: '2.5em', marginBottom: '20px' }}>👑 Founder&apos;s Circle - $9,999</h2>
