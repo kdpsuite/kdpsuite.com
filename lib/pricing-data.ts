@@ -30,7 +30,7 @@ export const foundingCampaignPlans: PricingPlan[] = [
     features: [
       'All core features',
       'AI coloring book converter',
-      '500+ templates',
+      '5 KDP-compliant template families',
       'Smart formatting',
       'Royalty calculator',
       'Founding member badge',

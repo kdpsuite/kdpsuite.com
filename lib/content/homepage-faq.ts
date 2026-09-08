@@ -8,7 +8,7 @@ export const homepageFaqs: HomepageFaqItem[] = [
   {
     question: 'How does KDP Creator Suite work?',
     answer:
-      'Upload your PDF or images, our AI converts them to KDP-compliant coloring books, validates compliance, and you can publish directly to Amazon KDP.',
+      'Upload your PDF or images, our AI converts them to KDP-compliant coloring books and validates them against Amazon KDP specs, then you download print-ready files to upload to KDP.',
   },
   {
     question: 'Do I need design skills?',

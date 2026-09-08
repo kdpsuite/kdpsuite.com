@@ -10,7 +10,7 @@ export default function FeaturesPage() {
 
   const features = [
     { icon: '🎨', title: 'AI Coloring Book Converter', desc: 'Transform any image into print-ready line art. Upload a photo, get publication-ready coloring pages in seconds. No manual tracing. No expensive artists. Perfect for high-volume publishers.' },
-    { icon: '📚', title: '500+ KDP-Compliant Templates', desc: 'Journals, planners, coloring books, activity books, and more. Every template is pre-formatted for Amazon KDP specifications. Just customize and export. Built by publishing professionals who know KDP inside-out.' },
+    { icon: '📚', title: 'KDP-Compliant Templates', desc: 'Five template families covering journals, planners, and coloring books. Each one is generated against Amazon KDP trim, bleed, and margin specifications, so you customize and export rather than reformat.' },
     { icon: '⚡', title: 'Smart Formatting Engine', desc: 'Automatic bleed, trim, and margin calculations. No more rejected uploads. No more manual adjustments. Perfect KDP specs every time. Ensures compliance on first submission.' },
     { icon: '🚀', title: 'Batch Processing', desc: 'Process multiple books simultaneously. Export dozens of projects in one click. Built for high-volume publishers who need speed. Scale your business without hiring a team.' },
     { icon: '💰', title: 'Royalty Calculator', desc: 'Instant profit projections. Input your pricing, see your royalties across different markets. Make informed decisions before you publish. Know your exact earnings potential upfront.' },
@@ -35,7 +35,7 @@ export default function FeaturesPage() {
       price: '$79',
       period: '/month',
       highlighted: true,
-      features: ['Everything in Starter', 'Batch Image Processing', 'Unlimited images/month', 'KDP Analytics', 'Priority Support', 'Direct KDP Integration'],
+      features: ['Everything in Starter', 'Batch Image Processing', 'Unlimited images/month', 'KDP Analytics', 'Priority Support', 'KDP-Ready Export & Validation'],
     },
     {
       name: 'Studio',

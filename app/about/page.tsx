@@ -119,7 +119,7 @@ export default function AboutPage() {
             </p>
 
             <p>
-              This platform consolidates everything you need into one place. AI coloring book conversion, 500+ templates, smart formatting, batch processing, royalty calculations—all the tools you&apos;re currently overpaying for, in a single platform.
+              This platform consolidates everything you need into one place. AI coloring book conversion, KDP-compliant templates, smart formatting, and batch processing—all the tools you&apos;re currently overpaying for, in a single platform.
             </p>
 
             <p>

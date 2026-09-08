@@ -110,7 +110,7 @@ export default function WebinarSignup() {
             </li>
             <li>✓ Batch processing to publish 10+ books per day</li>
             <li>✓ Compliance validation to avoid Amazon rejections</li>
-            <li>✓ Direct KDP integration for seamless publishing</li>
+            <li>✓ KDP-ready exports that upload without reformatting</li>
             <li>✓ Analytics to track your earnings in real-time</li>
           </ul>
         </div>

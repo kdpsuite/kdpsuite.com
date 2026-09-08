@@ -19,7 +19,7 @@ export default function PricingComparison() {
     { name: 'Team Collaboration', free: '❌', pro: '❌', studio: '✓' },
     { name: 'Advanced Analytics', free: '❌', pro: '✓', studio: '✓' },
     { name: 'Bulk Image Processing', free: '❌', pro: '✓', studio: '✓' },
-    { name: 'Direct KDP Integration', free: 'Manual', pro: 'Automated', studio: 'Automated' },
+    { name: 'KDP-Ready Export & Validation', free: '✓', pro: '✓', studio: '✓' },
   ];
 
   return (

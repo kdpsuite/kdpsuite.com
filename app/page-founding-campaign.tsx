@@ -82,7 +82,7 @@ export default function FoundingCampaignPage() {
 
             <p style={{ marginBottom: '20px' }}>I couldn&apos;t afford it. So I built something better.</p>
 
-            <p style={{ marginBottom: '20px' }}>This platform consolidates everything you need into one place. AI coloring book conversion, 500+ templates, smart formatting, batch processing, royalty calculations—all the tools you&apos;re currently overpaying for, in a single platform.</p>
+            <p style={{ marginBottom: '20px' }}>This platform consolidates everything you need into one place. AI coloring book conversion, KDP-compliant templates, smart formatting, and batch processing—all the tools you&apos;re currently overpaying for, in a single platform.</p>
 
             <p style={{ marginBottom: '20px' }}><strong style={{ color: '#667eea' }}>Now I&apos;m launching with lifetime founding memberships.</strong> Pay once during this campaign, use it forever. No recurring fees. No subscription treadmill. Just permanent access as a founding member.</p>
           </div>
@@ -97,7 +97,7 @@ export default function FoundingCampaignPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', marginTop: '50px' }}>
             {[
               { title: '🎨 AI Coloring Book Converter', desc: 'Transform any image into print-ready line art. Upload a photo, get publication-ready coloring pages in seconds. No manual tracing. No expensive artists.' },
-              { title: '📚 500+ KDP-Compliant Templates', desc: 'Journals, planners, coloring books, activity books, and more. Every template is pre-formatted for Amazon KDP specifications. Just customize and export.' },
+              { title: '📚 KDP-Compliant Templates', desc: 'Five template families covering journals, planners, and coloring books, each generated against Amazon KDP trim, bleed, and margin specs. Customize and export.' },
               { title: '⚡ Smart Formatting Engine', desc: 'Automatic bleed, trim, and margin calculations. No more rejected uploads. No more manual adjustments. Perfect KDP specs every time.' },
               { title: '🚀 Batch Processing', desc: 'Process multiple books simultaneously. Export dozens of projects in one click. Built for high-volume publishers who need speed.' },
               { title: '💰 Royalty Calculator', desc: 'Instant profit projections. Input your pricing, see your royalties across different markets. Make informed decisions before you publish.' },
