@@ -1,38 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { isAdminAuthorized } from '@/lib/admin-auth';
 import { createRateLimitMiddleware } from '@/lib/rate-limit';
 import { rateLimitResponse, unauthorizedResponse } from '@/lib/api-response';
 import { logger, generateRequestId, createLogContext } from '@/lib/logger';
-
-function isAdminAuthorized(request: NextRequest): boolean {
-  const secret = process.env.ADMIN_API_SECRET || process.env.WAITLIST_ADMIN_SECRET;
-  if (!secret) {
-    return false;
-  }
-
-  const bearer = request.headers.get('authorization');
-  if (bearer?.startsWith('Bearer ') && bearer.slice(7) === secret) {
-    return true;
-  }
-
-  return request.headers.get('x-admin-secret') === secret;
-}
 
 export async function GET(request: NextRequest) {
   const requestId = generateRequestId();
   const logContext = createLogContext(request, requestId);
 
   try {
-    if (!isAdminAuthorized(request)) {
-      logger.warn({ ...logContext, statusCode: 401, error: 'Unauthorized admin waitlist GET' });
-      return unauthorizedResponse('Admin authorization required');
-    }
-
     const rateLimit = createRateLimitMiddleware(30, 60_000)(request);
     if (!rateLimit.allowed) {
       return rateLimitResponse(
         Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
       );
+    }
+
+    if (!isAdminAuthorized(request)) {
+      logger.warn({ ...logContext, statusCode: 401, error: 'Unauthorized admin waitlist GET' });
+      return unauthorizedResponse('Admin authorization required');
     }
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;

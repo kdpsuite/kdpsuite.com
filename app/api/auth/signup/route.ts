@@ -95,8 +95,9 @@ export async function POST(request: NextRequest) {
         session: authData.session
           ? {
               access_token: authData.session.access_token,
-              refresh_token: authData.session.refresh_token,
               expires_in: authData.session.expires_in,
+              expires_at: authData.session.expires_at,
+              token_type: authData.session.token_type,
             }
           : null,
         requiresEmailVerification: !authData.session,

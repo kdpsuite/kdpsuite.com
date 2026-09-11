@@ -10,7 +10,6 @@ class RateLimiter {
   private store: Map<string, RateLimitEntry> = new Map();
 
   private constructor() {
-    // Cleanup old entries every 5 minutes
     setInterval(() => this.cleanup(), 5 * 60 * 1000);
   }
 
@@ -39,7 +38,6 @@ class RateLimiter {
     const entry = this.store.get(identifier);
 
     if (!entry || entry.resetTime < now) {
-      // New window
       const resetTime = now + windowMs;
       this.store.set(identifier, { count: 1, resetTime });
       return { allowed: true, remaining: limit - 1, resetTime };
@@ -68,19 +66,30 @@ class RateLimiter {
 
 export const rateLimiter = RateLimiter.getInstance();
 
+/**
+ * Prefer platform-provided client IP. On Vercel, X-Forwarded-For is trusted
+ * (platform-controlled). Elsewhere, ignore client-supplied XFF to prevent spoofing.
+ */
 export function getClientIdentifier(req: NextRequest): string {
-  // Never trust client-supplied user IDs for rate limiting
-  const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    req.headers.get('x-real-ip')?.trim() ||
-    'unknown';
-  return `ip:${ip}`;
+  const onVercel = process.env.VERCEL === '1';
+
+  if (onVercel) {
+    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    if (forwarded) {
+      return `ip:${forwarded}`;
+    }
+  }
+
+  const realIp = req.headers.get('x-real-ip')?.trim();
+  if (realIp && onVercel) {
+    return `ip:${realIp}`;
+  }
+
+  // Local / non-Vercel: do not trust X-Forwarded-For from the client
+  return 'ip:local';
 }
 
-export function createRateLimitMiddleware(
-  limit: number,
-  windowMs: number
-) {
+export function createRateLimitMiddleware(limit: number, windowMs: number) {
   return (req: NextRequest) => {
     const identifier = getClientIdentifier(req);
     const result = rateLimiter.check(identifier, limit, windowMs);

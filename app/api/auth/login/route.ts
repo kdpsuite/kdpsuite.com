@@ -73,6 +73,8 @@ export async function POST(request: NextRequest) {
       userId: authData.user.id,
     });
 
+    // Do not return refresh_token in JSON — XSS/exfiltration would enable account takeover.
+    // Prefer cookie-based sessions via @supabase/ssr on the web client.
     return NextResponse.json(
       {
         user: {
@@ -85,8 +87,9 @@ export async function POST(request: NextRequest) {
         },
         session: {
           access_token: authData.session.access_token,
-          refresh_token: authData.session.refresh_token,
           expires_in: authData.session.expires_in,
+          expires_at: authData.session.expires_at,
+          token_type: authData.session.token_type,
         },
       },
       { status: 200 }

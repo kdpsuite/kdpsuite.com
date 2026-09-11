@@ -156,23 +156,49 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function handleSubscriptionEvent(supabase: any, subscription: Record<string, any>) {
-  const customerEmail = subscription.metadata?.email;
-
-  if (!customerEmail) {
-    console.warn('No email found in subscription metadata');
-    return;
+async function resolveProfileForSubscription(supabase: any, subscription: Record<string, any>) {
+  const userId = subscription.metadata?.supabase_user_id;
+  if (userId) {
+    const { data } = await supabase
+      .from('user_profiles')
+      .select('id')
+      .eq('id', userId)
+      .maybeSingle();
+    if (data) {
+      return data;
+    }
   }
 
-  // Query user_profiles instead of users table
-  const { data: userProfile } = await supabase
+  const customerId = subscription.customer;
+  if (customerId) {
+    const { data } = await supabase
+      .from('user_profiles')
+      .select('id')
+      .eq('stripe_customer_id', customerId)
+      .maybeSingle();
+    if (data) {
+      return data;
+    }
+  }
+
+  // Last resort: metadata email (guest checkout). Prefer id / customer above.
+  const customerEmail = subscription.metadata?.email;
+  if (!customerEmail) {
+    return null;
+  }
+  const { data } = await supabase
     .from('user_profiles')
     .select('id')
     .eq('email', customerEmail)
-    .single();
+    .maybeSingle();
+  return data;
+}
+
+async function handleSubscriptionEvent(supabase: any, subscription: Record<string, any>) {
+  const userProfile = await resolveProfileForSubscription(supabase, subscription);
 
   if (!userProfile) {
-    console.warn('User profile not found for subscription metadata email');
+    console.warn('User profile not found for subscription');
     return;
   }
 

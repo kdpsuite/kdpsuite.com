@@ -8,6 +8,23 @@ export async function middleware(request: NextRequest) {
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   const referralCode = getReferralCodeFromRequest(request);
+  const isDashboard = request.nextUrl.pathname.startsWith('/dashboard');
+  const isAuthPage =
+    request.nextUrl.pathname.startsWith('/auth/login') ||
+    request.nextUrl.pathname.startsWith('/auth/signup');
+
+  // Fail closed: protected routes require auth config
+  if (isDashboard && (!supabaseUrl || !supabaseAnonKey)) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = '/auth/login';
+    redirectUrl.searchParams.set('redirectTo', request.nextUrl.pathname);
+    redirectUrl.searchParams.set('error', 'auth_unconfigured');
+    const response = NextResponse.redirect(redirectUrl);
+    if (referralCode) {
+      setReferralCookie(response, referralCode);
+    }
+    return response;
+  }
 
   if (!supabaseUrl || !supabaseAnonKey) {
     if (referralCode) {
@@ -48,18 +65,14 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
+  if (!user && isDashboard) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = '/auth/login';
     redirectUrl.searchParams.set('redirectTo', request.nextUrl.pathname);
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (
-    user &&
-    (request.nextUrl.pathname.startsWith('/auth/login') ||
-      request.nextUrl.pathname.startsWith('/auth/signup'))
-  ) {
+  if (user && isAuthPage) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = '/dashboard';
     return NextResponse.redirect(redirectUrl);
