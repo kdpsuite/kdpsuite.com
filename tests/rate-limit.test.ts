@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  checkRateLimit,
   createRateLimitMiddleware,
   getClientIdentifier,
   rateLimiter,
@@ -48,11 +49,15 @@ describe('rate-limit helpers', () => {
     }
   });
 
-  it('enforces limit within a window', () => {
+  it('enforces limit within a window (memory path)', () => {
     const prev = process.env.VERCEL;
+    const prevUrl = process.env.UPSTASH_REDIS_REST_URL;
+    const prevToken = process.env.UPSTASH_REDIS_REST_TOKEN;
     delete process.env.VERCEL;
+    delete process.env.UPSTASH_REDIS_REST_URL;
+    delete process.env.UPSTASH_REDIS_REST_TOKEN;
     try {
-      rateLimiter.reset('ip:local');
+      rateLimiter.reset('ip:local:2:60000');
       const req = mockRequest({});
       const middleware = createRateLimitMiddleware(2, 60_000);
       const first = middleware(req);
@@ -64,11 +69,31 @@ describe('rate-limit helpers', () => {
       expect(third.allowed).toBe(false);
       expect(third.remaining).toBe(0);
     } finally {
-      if (prev === undefined) {
-        delete process.env.VERCEL;
-      } else {
-        process.env.VERCEL = prev;
-      }
+      if (prev === undefined) delete process.env.VERCEL;
+      else process.env.VERCEL = prev;
+      if (prevUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL;
+      else process.env.UPSTASH_REDIS_REST_URL = prevUrl;
+      if (prevToken === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN;
+      else process.env.UPSTASH_REDIS_REST_TOKEN = prevToken;
+    }
+  });
+
+  it('checkRateLimit falls back to memory without Upstash', async () => {
+    const prevUrl = process.env.UPSTASH_REDIS_REST_URL;
+    const prevToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+    delete process.env.UPSTASH_REDIS_REST_URL;
+    delete process.env.UPSTASH_REDIS_REST_TOKEN;
+    try {
+      rateLimiter.reset('ip:local:3:60000');
+      const req = mockRequest({});
+      const first = await checkRateLimit(req, 3, 60_000);
+      expect(first.allowed).toBe(true);
+      expect(first.headers['X-RateLimit-Limit']).toBe('3');
+    } finally {
+      if (prevUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL;
+      else process.env.UPSTASH_REDIS_REST_URL = prevUrl;
+      if (prevToken === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN;
+      else process.env.UPSTASH_REDIS_REST_TOKEN = prevToken;
     }
   });
 });

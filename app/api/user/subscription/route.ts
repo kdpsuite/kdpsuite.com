@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import { createRateLimitMiddleware } from '@/lib/rate-limit';
+import { checkRateLimit } from '@/lib/rate-limit';
 import { rateLimitResponse } from '@/lib/api-response';
 import { logger, generateRequestId, createLogContext } from '@/lib/logger';
 
@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const logContext = createLogContext(request, requestId);
 
   try {
-    const rateLimit = createRateLimitMiddleware(30, 60_000)(request);
+    const rateLimit = await checkRateLimit(request, 30, 60_000);
     if (!rateLimit.allowed) {
       return rateLimitResponse(
         Math.ceil((rateLimit.resetTime - Date.now()) / 1000)

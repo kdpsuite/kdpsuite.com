@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { stripe } from '@/lib/stripe';
 import { getAllowedCheckoutPriceIds } from '@/lib/pricing-data';
-import { createRateLimitMiddleware } from '@/lib/rate-limit';
+import { checkRateLimit } from '@/lib/rate-limit';
 import { rateLimitResponse } from '@/lib/api-response';
 import { logger, generateRequestId, createLogContext } from '@/lib/logger';
 
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const rateLimit = createRateLimitMiddleware(10, 60_000)(request);
+    const rateLimit = await checkRateLimit(request, 10, 60_000);
     if (!rateLimit.allowed) {
       return rateLimitResponse(
         Math.ceil((rateLimit.resetTime - Date.now()) / 1000)

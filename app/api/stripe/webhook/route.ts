@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { createClient } from '@supabase/supabase-js';
-import { createRateLimitMiddleware } from '@/lib/rate-limit';
+import { checkRateLimit } from '@/lib/rate-limit';
 import { rateLimitResponse } from '@/lib/api-response';
 import { logger, generateRequestId, createLogContext } from '@/lib/logger';
 import { captureException } from '@/lib/sentry';
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Webhook not configured' }, { status: 500 });
   }
 
-  const rateLimit = createRateLimitMiddleware(300, 60_000)(request);
+  const rateLimit = await checkRateLimit(request, 300, 60_000);
   if (!rateLimit.allowed) {
     return rateLimitResponse(
       Math.ceil((rateLimit.resetTime - Date.now()) / 1000)

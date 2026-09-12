@@ -1,9 +1,30 @@
 import { createServerClient } from '@supabase/ssr';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import { buildCspHeader, STATIC_SECURITY_HEADERS } from '@/lib/csp';
 import { getReferralCodeFromRequest, setReferralCookie } from '@/lib/referral';
 
+function applySecurityHeaders(response: NextResponse, nonce: string) {
+  const csp = buildCspHeader(nonce, process.env.NODE_ENV === 'development');
+  response.headers.set('Content-Security-Policy', csp);
+  for (const { key, value } of STATIC_SECURITY_HEADERS) {
+    response.headers.set(key, value);
+  }
+  return response;
+}
+
+function nextWithNonce(request: NextRequest, nonce: string) {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-nonce', nonce);
+
+  const response = NextResponse.next({
+    request: { headers: requestHeaders },
+  });
+  return applySecurityHeaders(response, nonce);
+}
+
 export async function middleware(request: NextRequest) {
+  const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -19,7 +40,7 @@ export async function middleware(request: NextRequest) {
     redirectUrl.pathname = '/auth/login';
     redirectUrl.searchParams.set('redirectTo', request.nextUrl.pathname);
     redirectUrl.searchParams.set('error', 'auth_unconfigured');
-    const response = NextResponse.redirect(redirectUrl);
+    const response = applySecurityHeaders(NextResponse.redirect(redirectUrl), nonce);
     if (referralCode) {
       setReferralCookie(response, referralCode);
     }
@@ -27,19 +48,20 @@ export async function middleware(request: NextRequest) {
   }
 
   if (!supabaseUrl || !supabaseAnonKey) {
+    const response = nextWithNonce(request, nonce);
     if (referralCode) {
-      const response = NextResponse.next();
       setReferralCookie(response, referralCode);
-      return response;
     }
-    return NextResponse.next();
+    return response;
   }
 
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-nonce', nonce);
+
   const response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
+    request: { headers: requestHeaders },
   });
+  applySecurityHeaders(response, nonce);
 
   if (referralCode) {
     setReferralCookie(response, referralCode);
@@ -69,13 +91,14 @@ export async function middleware(request: NextRequest) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = '/auth/login';
     redirectUrl.searchParams.set('redirectTo', request.nextUrl.pathname);
-    return NextResponse.redirect(redirectUrl);
+    const redirect = applySecurityHeaders(NextResponse.redirect(redirectUrl), nonce);
+    return redirect;
   }
 
   if (user && isAuthPage) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = '/dashboard';
-    return NextResponse.redirect(redirectUrl);
+    return applySecurityHeaders(NextResponse.redirect(redirectUrl), nonce);
   }
 
   return response;
@@ -83,6 +106,13 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml)$).*)',
+    {
+      source:
+        '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml)$).*)',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+      ],
+    },
   ],
 };

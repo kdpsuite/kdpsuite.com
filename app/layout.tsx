@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { headers } from "next/headers";
 import { Montserrat, Lato } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AdScriptLoader } from "@/components/ads";
@@ -94,18 +95,26 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
   return (
     <html lang="en">
       <head>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-DL0SQ99CX4" strategy="afterInteractive" />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-DL0SQ99CX4"
+          strategy="afterInteractive"
+          nonce={nonce}
+        />
         <Script
           id="google-analytics"
           strategy="afterInteractive"
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -119,6 +128,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#e91e63" />
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: toJsonLd({
               "@context": "https://schema.org",
@@ -132,6 +142,7 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: toJsonLd({
               "@context": "https://schema.org",
@@ -149,6 +160,7 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: toJsonLd({
               "@context": "https://schema.org",
@@ -179,4 +191,3 @@ export default function RootLayout({
     </html>
   );
 }
-
