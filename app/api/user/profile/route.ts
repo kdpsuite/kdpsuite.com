@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { rateLimitResponse } from '@/lib/api-response';
 import { logger, generateRequestId, createLogContext } from '@/lib/logger';
+import { createUserScopedClient } from '@/lib/supabase/user-client';
 
 const USERNAME_REGEX = /^[a-zA-Z0-9_-]{3,30}$/;
 
@@ -19,9 +20,9 @@ export async function PATCH(request: NextRequest) {
     }
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-    if (!supabaseUrl || !supabaseServiceKey) {
+    if (!supabaseUrl || !supabaseAnonKey) {
       return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 
@@ -31,8 +32,10 @@ export async function PATCH(request: NextRequest) {
     }
 
     const token = authHeader.slice(7);
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
-    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+    const authClient = createClient(supabaseUrl, supabaseAnonKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+    const { data: { user }, error: authError } = await authClient.auth.getUser(token);
 
     if (authError || !user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -83,6 +86,7 @@ export async function PATCH(request: NextRequest) {
 
     updates.updated_at = new Date().toISOString();
 
+    const supabase = createUserScopedClient(token);
     const { data, error } = await supabase
       .from('user_profiles')
       .update(updates)

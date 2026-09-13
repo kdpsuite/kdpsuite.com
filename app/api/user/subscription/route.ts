@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { rateLimitResponse } from '@/lib/api-response';
 import { logger, generateRequestId, createLogContext } from '@/lib/logger';
+import { createUserScopedClient } from '@/lib/supabase/user-client';
 
 export async function GET(request: NextRequest) {
   const requestId = generateRequestId();
@@ -17,9 +18,9 @@ export async function GET(request: NextRequest) {
     }
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-    if (!supabaseUrl || !supabaseServiceKey) {
+    if (!supabaseUrl || !supabaseAnonKey) {
       logger.error({
         ...logContext,
         statusCode: 500,
@@ -28,21 +29,22 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
     const authHeader = request.headers.get('Authorization');
     if (!authHeader?.startsWith('Bearer ')) {
       return NextResponse.json({ error: 'Missing authorization' }, { status: 401 });
     }
 
     const token = authHeader.split(' ')[1];
-
-    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+    const authClient = createClient(supabaseUrl, supabaseAnonKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+    const { data: { user }, error: authError } = await authClient.auth.getUser(token);
 
     if (authError || !user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const supabase = createUserScopedClient(token);
     const { data, error } = await supabase
       .from('user_profiles')
       .select('stripe_customer_id, subscription_id, subscription_plan, subscription_status, subscription_start_date, subscription_end_date')

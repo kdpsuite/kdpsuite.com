@@ -26,3 +26,13 @@ GRANT UPDATE (
 
 -- If an older setup added public profile SELECT, remove it
 DROP POLICY IF EXISTS "Public profiles are viewable by everyone" ON public.user_profiles;
+
+-- ============================================================================
+-- Round 2 (applied via Supabase migration security_round2_* / security_round2b_*)
+-- ============================================================================
+-- - FORCE ROW LEVEL SECURITY on public app tables
+-- - Revoke client access to rate_limit_events / sessions
+-- - Strip TRUNCATE/TRIGGER/REFERENCES(/DELETE on analytics+batch) from authenticated
+-- - Column-limit INSERT on user_profiles (no billing/role/totp)
+-- - Re-scope authenticated SELECT to exclude totp_secret / reset_token*
+-- Privileged TOTP/secret writes must use the service role from the API.
